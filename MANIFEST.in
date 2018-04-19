@@ -1,0 +1,2 @@
+include *.txt *.ini *.cfg *.rst *.md LICENSE
+recursive-include packtools *.xsd *.sch *.xml *.ent *.dtd *.mod *.xslt *.json
