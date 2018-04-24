@@ -2,7 +2,13 @@
 <!DOCTYPE article PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Publishing DTD v1.1 20151215//EN" "http://jats.nlm.nih.gov/publishing/1.1/JATS-journalpublishing1.dtd">
 <article specific-use="eps-0.1" dtd-version="1.1">
   <front>
-    <journal-meta><journal-id journal-id-type="other">Journal</journal-id><publisher><publisher-name>Academic Publisher</publisher-name></publisher></journal-meta>
+    <journal-meta>
+      <journal-id journal-id-type="other">Journal</journal-id>
+      <issn>teste</issn>
+      <publisher>
+        <publisher-name>Academic Publisher</publisher-name>
+      </publisher>
+    </journal-meta>
     <article-meta>
       <title-group>
         <article-title>&#xC9;tudiante de Master recherche dans le programme d'&#xE9;cologie appliqu&#xE9;e &#xE0; l'Universit&#xE9; de S&#xE3;o Paulo, campus de l'&#xC9;cole sup&#xE9;rieur d'agriculture &#xAB; Luiz de Queiroz &#xBB; de Piracicaba, Rua do trabalho, 190, Vila Independ&#xEA;ncia, 13418-220 - Piracicaba, SP, Br&#xE9;sil, courriel : morgane.retiere@gmail.com Terena Peres de Castro</article-title>
@@ -17,14 +23,8 @@
         <contrib contrib-type="editor">
           <name><given-names>Morgane Reti&#xE8;re</given-names></name>
         </contrib>
-        
-        
       </contrib-group>
-      <abstract>
-        <p>Technicien de d&#xE9;veloppement agricole &#xE0; l'Universit&#xE9; de S&#xE3;o Paulo, campus de l'&#xC9;cole sup&#xE9;rieur d'agriculture &#xAB; Luiz de Queiroz &#xBB; de Piracicaba, Universidade de S&#xE3;o Paulo, Escola Superior de Agricultura Luiz de Queiroz, Departamento de Economia Administra&#xE7;&#xE3;o e Sociologia. , Avenida P&#xE1;dua Dias, 11, Agronomia, 13418-900 - Piracicaba, SP - Brasil Caixa-Postal : 9, courriel : addlucas@usp.br Au Br&#xE9;sil, les r&#xE9;centes avanc&#xE9;es du Programme national d'alimentation scolaire (PNAE), qui articule soutien &#xE0; l'agriculture familiale et s&#xE9;curit&#xE9; alimentaire des populations pr&#xE9;caires, vont dans le sens d'une relocalisation des circuits alimentaires. L'objectif de ce travail est de comprendre comment l'insertion d'un collectif de producteurs dans diff&#xE9;rentes formes de circuits courts, et notamment via ces politiques publiques de restauration collective, a permis de consolider un syst&#xE8;me agricole innovant, tant au point de vue productif, qu'en termes d'occupation du sol p&#xE9;riurbain, d'entretien du paysage et des ressources naturelles, d'organisation du travail et de valorisation sociale de l'activit&#xE9; agricole, en mobilisant notamment la multifonctionnalit&#xE9; de l'agriculture comme outil d'analyse. circuits courts de proximit&#xE9;, multifonctionnalit&#xE9; de l'agriculture, politiques publiques, restauration collective publique, agriculture p&#xE9;riurbaine In Brazil, recent improvements of the National School Feeding Programme (PNAE), which articulates support for the family farm and food security in vulnerable</p>
-      </abstract>
-    <aff id="aff0">
-          
+        <aff id="aff0">  
           <institution>Enseignant-chercheur en sociologie a&#x300; l'Universite&#x301; de Sa&#x303;o Paulo, campus de l'E&#x301;cole supe&#x301;rieur d'agriculture &#xAB; Luiz de Queiroz &#xBB; de Piracicaba, Universidade de Sa&#x303;o Paulo</institution>
           ,
           <addr-line>Escola Superior de Agricultura Luiz de Queiroz</addr-line>
@@ -32,12 +32,20 @@
           <institution>Departamento de Economia Administrac&#x327;a&#x303;o e Sociologia, Avenida Pa&#x301;dua Dias</institution>
           ,
           <addr-line>11, Agronomia, 13418-900, Piracicaba, SP, Bre&#x301;sil, Caixa Postal 9, courriel :</addr-line>
-        </aff><aff id="aff1">
+        </aff>
+      <aff id="aff1">
           
           <institution>E&#x301;tudiante de Master en ge&#x301;ographie humaine a&#x300; l'Universite&#x301; de Sa&#x303;o Paulo, Faculte&#x301; de Philosophie, de lettres et de sciences humaines, Universidade de Sa&#x303;o Paulo, Departamento de Geografia, Avenida Prof. Lineu Prestes</institution>
           ,
           <addr-line>338, Cidade Universita&#x301;ria, 05508-080 - Sa&#x303;o Paulo, SP, Bre&#x301;sil, Caixa Postal 72042, courriel :</addr-line>
-        </aff></article-meta>
+        </aff>
+      <pub-date>
+        <year>2015</year>
+      </pub-date>
+      <abstract>
+        <p>Technicien de d&#xE9;veloppement agricole &#xE0; l'Universit&#xE9; de S&#xE3;o Paulo, campus de l'&#xC9;cole sup&#xE9;rieur d'agriculture &#xAB; Luiz de Queiroz &#xBB; de Piracicaba, Universidade de S&#xE3;o Paulo, Escola Superior de Agricultura Luiz de Queiroz, Departamento de Economia Administra&#xE7;&#xE3;o e Sociologia. , Avenida P&#xE1;dua Dias, 11, Agronomia, 13418-900 - Piracicaba, SP - Brasil Caixa-Postal : 9, courriel : addlucas@usp.br Au Br&#xE9;sil, les r&#xE9;centes avanc&#xE9;es du Programme national d'alimentation scolaire (PNAE), qui articule soutien &#xE0; l'agriculture familiale et s&#xE9;curit&#xE9; alimentaire des populations pr&#xE9;caires, vont dans le sens d'une relocalisation des circuits alimentaires. L'objectif de ce travail est de comprendre comment l'insertion d'un collectif de producteurs dans diff&#xE9;rentes formes de circuits courts, et notamment via ces politiques publiques de restauration collective, a permis de consolider un syst&#xE8;me agricole innovant, tant au point de vue productif, qu'en termes d'occupation du sol p&#xE9;riurbain, d'entretien du paysage et des ressources naturelles, d'organisation du travail et de valorisation sociale de l'activit&#xE9; agricole, en mobilisant notamment la multifonctionnalit&#xE9; de l'agriculture comme outil d'analyse. circuits courts de proximit&#xE9;, multifonctionnalit&#xE9; de l'agriculture, politiques publiques, restauration collective publique, agriculture p&#xE9;riurbaine In Brazil, recent improvements of the National School Feeding Programme (PNAE), which articulates support for the family farm and food security in vulnerable</p>
+      </abstract>
+    </article-meta>
   </front>
   <body>
     <sec>
