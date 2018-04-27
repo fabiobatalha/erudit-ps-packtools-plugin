@@ -45,21 +45,124 @@ code for more information.
    Phases - sets of patterns.
    These are being used to help on tests isolation.
   -->
+
   <phase id="phase.journal-id">
     <active pattern="journal-id_notempty"/>
     <active pattern="journal-id_has_publisher-id"/>
     <active pattern="journal-id_values"/>
   </phase>
 
-    <phase id="phase.issn">
+  <phase id="phase.issn">
     <active pattern="issn_pub_type_epub_or_ppub"/>
     <active pattern="issn_isvalid"/>
     <active pattern="issn_notempty"/>
   </phase>
 
+  <phase id="phase.article-attrs">
+    <active pattern="article_attributes"/>
+    <active pattern="article_article-type-values"/>
+    <active pattern="article_specific-use-values"/>
+  </phase>
+
+  <phase id="phase.publisher">
+    <active pattern="publisher"/>
+    <active pattern="publisher_notempty"/>
+  </phase>
+
   <!--
    Patterns - sets of rules.
   -->
+
+  <pattern id="publisher">
+    <rule context="article/front/journal-meta">
+      <assert test="publisher">
+        Element 'journal-meta': Missing element publisher.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="publisher_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="article/front/journal-meta/publisher/publisher-name"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
+
+  <pattern id="article_attributes">
+    <title>
+      Make sure some attributes are present
+    </title>
+
+    <rule context="article">
+      <assert test="@article-type">
+        Element 'article': Missing attribute article-type.
+      </assert>
+      <assert test="@xml:lang">
+        Element 'article': Missing attribute xml:lang.
+      </assert>
+      <assert test="@dtd-version">
+        Element 'article': Missing attribute dtd-version.
+      </assert>
+      <assert test="@specific-use">
+        Element 'article': Missing EPS version at the attribute specific-use.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="article_article-type-values">
+    <title>
+      Allowed values for article/@article-type
+    </title>
+
+    <rule context="article[@article-type]">
+        <assert test="@article-type = 'addendum' or
+            @article-type = 'research-article' or
+            @article-type = 'review-article' or
+            @article-type = 'letter' or
+            @article-type = 'article-commentary' or
+            @article-type = 'brief-report' or
+            @article-type = 'rapid-communication' or
+            @article-type = 'oration' or
+            @article-type = 'discussion' or
+            @article-type = 'editorial' or
+            @article-type = 'interview' or
+            @article-type = 'correction' or
+            @article-type = 'guidelines' or
+            @article-type = 'other' or
+            @article-type = 'obituary' or
+            @article-type = 'case-report' or
+            @article-type = 'book-review' or
+            @article-type = 'reply' or
+            @article-type = 'retraction' or
+            @article-type = 'partial-retraction' or
+            @article-type = 'clinical-trial' or
+            @article-type = 'announcement' or
+            @article-type = 'calendar' or
+            @article-type = 'in-brief' or
+            @article-type = 'book-received' or
+            @article-type = 'news' or
+            @article-type = 'reprint' or
+            @article-type = 'meeting-report' or
+            @article-type = 'abstract' or
+            @article-type = 'product-review' or
+            @article-type = 'dissertation' or
+            @article-type = 'translation'">
+        Element 'article', attribute article-type: Invalid value '<value-of select="@article-type"/>'.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="article_specific-use-values">
+    <title>
+      The SPS version must be declared in article/@specific-use 
+    </title>
+
+    <rule context="article[@specific-use]">
+      <assert test="@specific-use = 'eps-0.1'">
+        Element 'article', attribute specific-use: Invalid value '<value-of select="@specific-use"/>'.
+      </assert>
+    </rule>
+  </pattern>
+
   <pattern id="journal-id_notempty" is-a="assert-not-empty">
     <param name="base_context" value="article/front/journal-meta/journal-id"/>
     <param name="assert_expr" value="text()"/>

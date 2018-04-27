@@ -316,3 +316,124 @@ class ISSNTests(PhaseBasedTestCase):
         sample = io.BytesIO(sample.encode('utf-8'))
 
         self.assertTrue(self._run_validation(sample))
+
+
+class ArticleAttributesTests(PhaseBasedTestCase):
+    """Tests for article element.
+    """
+    sch_phase = 'phase.article-attrs'
+
+    def test_allowed_article_types(self):
+        for art_type in [
+                'addendum', 'research-article', 'review-article',
+                'letter', 'article-commentary', 'brief-report', 'rapid-communication',
+                'oration', 'discussion', 'editorial', 'interview', 'correction',
+                'guidelines', 'other', 'obituary', 'case-report', 'book-review',
+                'reply', 'retraction', 'partial-retraction', 'clinical-trial',
+                'announcement', 'calendar', 'in-brief', 'book-received', 'news',
+                'reprint', 'meeting-report', 'abstract', 'product-review',
+                'dissertation', 'translation'
+        ]:
+
+            sample = u"""<article article-type="%s" xml:lang="en" dtd-version="1.1" specific-use="eps-0.1">
+                        </article>
+                     """ % art_type
+            sample = io.BytesIO(sample.encode('utf-8'))
+
+            self.assertTrue(self._run_validation(sample))
+
+    def test_disallowed_article_type(self):
+        sample = u"""<article article-type="invalid" dtd-version="1.1" specific-use="eps-0.1">
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_missing_article_type(self):
+        sample = u"""<article xml:lang="en" dtd-version="1.1" specific-use="eps-0.1">
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_missing_xmllang(self):
+        sample = u"""<article article-type="research-article" dtd-version="1.1" specific-use="eps-0.1">
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_missing_dtdversion(self):
+        sample = u"""<article article-type="research-article" xml:lang="en" specific-use="eps-0.1">
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_missing_sps_version(self):
+        sample = u"""<article article-type="research-article" dtd-version="1.1" xml:lang="en">
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_invalid_sps_version(self):
+        sample = u"""<article article-type="research-article" dtd-version="1.1" xml:lang="en" specific-use="sps-1.0">
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
+class PublisherTests(PhaseBasedTestCase):
+    """Tests for article/front/journal-meta/publisher elements.
+    """
+    sch_phase = 'phase.publisher'
+
+    def test_publisher_is_present(self):
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <publisher>
+                            <publisher-name>British Medical Journal</publisher-name>
+                          </publisher>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_publisher_is_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_publisher_is_empty(self):
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <publisher>
+                            <publisher-name></publisher-name>
+                          </publisher>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
