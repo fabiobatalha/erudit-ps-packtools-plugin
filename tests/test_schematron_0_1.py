@@ -437,3 +437,225 @@ class PublisherTests(PhaseBasedTestCase):
         sample = io.BytesIO(sample.encode('utf-8'))
 
         self.assertFalse(self._run_validation(sample))
+
+
+class JournalTitleGroupTests(PhaseBasedTestCase):
+    """Tests for article/front/journal-meta/journal-title-group elements.
+    """
+    sch_phase = 'phase.journal-title-group'
+
+    def test_journal_title_group_is_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case1(self):
+        """
+        A: presence(journal-title) is True
+        B: presence(abbrev-journal-title[@abbrev-type='publisher']) is True
+        A ^ B is True
+        """
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <journal-title-group>
+                            <journal-title>
+                              Revista de Saude Publica
+                            </journal-title>
+                            <abbrev-journal-title abbrev-type='erudit'>
+                              Rev. Saude Publica
+                            </abbrev-journal-title>
+                          </journal-title-group>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case2(self):
+        """
+        A: presence(journal-title) is True
+        B: presence(abbrev-journal-title[@abbrev-type='publisher']) is False
+        A ^ B is False
+        """
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <journal-title-group>
+                            <journal-title>
+                              Revista de Saude Publica
+                            </journal-title>
+                          </journal-title-group>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case3(self):
+        """
+        A: presence(journal-title) is False
+        B: presence(abbrev-journal-title[@abbrev-type='publisher']) is True
+        A ^ B is False
+        """
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <journal-title-group>
+                            <abbrev-journal-title abbrev-type='publisher'>
+                              Rev. Saude Publica
+                            </abbrev-journal-title>
+                          </journal-title-group>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case4(self):
+        """
+        A: presence(journal-title) is False
+        B: presence(abbrev-journal-title[@abbrev-type='publisher']) is False
+        A ^ B is False
+        """
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <journal-title-group>
+                          </journal-title-group>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_empty_journal_title(self):
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <journal-title-group>
+                            <journal-title></journal-title>
+                            <abbrev-journal-title abbrev-type='publisher'>Rev. Saude Publica</abbrev-journal-title>
+                          </journal-title-group>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_empty_abbrev_journal_title(self):
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <journal-title-group>
+                            <journal-title>Revista de Saude Publica</journal-title>
+                            <abbrev-journal-title abbrev-type='publisher'></abbrev-journal-title>
+                          </journal-title-group>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
+class TransTitleGroupTests(PhaseBasedTestCase):
+    sch_phase = 'phase.trans-title-group'
+
+    def test_lang_is_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <journal-title-group>
+                            <trans-title-group>
+                              <trans-title>
+                                Journal of the University of Moncton
+                              </trans-title>
+                            </trans-title-group>
+                          </journal-title-group>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_lang_is_present(self):
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <journal-title-group>
+                            <trans-title-group xml:lang="en">
+                              <trans-title>
+                                Journal of the University of Moncton
+                              </trans-title>
+                            </trans-title-group>
+                          </journal-title-group>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+
+class TransTitleTests(PhaseBasedTestCase):
+    sch_phase = 'phase.trans-title'
+
+    def test_lang_trans_title_is_present(self):
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <journal-title-group>
+                            <trans-title-group>
+                              <trans-title xml:lang="en">
+                                Journal of the University of Moncton
+                              </trans-title>
+                            </trans-title-group>
+                          </journal-title-group>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_lang_trans_title_is_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <journal-title-group>
+                            <trans-title-group>
+                              <trans-title>
+                                Journal of the University of Moncton
+                              </trans-title>
+                            </trans-title-group>
+                          </journal-title-group>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))

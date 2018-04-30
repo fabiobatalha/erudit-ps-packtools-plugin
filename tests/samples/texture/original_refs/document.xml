@@ -6,6 +6,10 @@
       <journal-id journal-id-type="publisher-id">rum</journal-id>
       <journal-title-group>
         <journal-title>Revue de l'Université de Moncton</journal-title>
+        <trans-title-group xml:lang="en">
+          <trans-title>Journal of the University of Moncton</trans-title>
+        </trans-title-group>
+        <abbrev-journal-title abbrev-type="erudit">RUM</abbrev-journal-title>
       </journal-title-group>
       <issn pub-type="epub">1712-2139</issn>
       <issn pub-type="ppub">0316-6368</issn>
