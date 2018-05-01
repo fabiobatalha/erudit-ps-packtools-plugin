@@ -3,7 +3,8 @@
 <article specific-use="eps-0.1" xml:lang="fr" article-type="research-article" dtd-version="1.1">
   <front>
     <journal-meta>
-      <journal-id journal-id-type="publisher-id">rum</journal-id>
+      <journal-id journal-id-type="erudit">rum</journal-id>
+      <journal-id journal-id-type="publisher">rum</journal-id>
       <journal-title-group>
         <journal-title>Revue de l'Université de Moncton</journal-title>
         <trans-title-group xml:lang="en">

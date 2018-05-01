@@ -242,7 +242,9 @@ code for more information.
 
   <pattern id="journal-id_values">
     <rule context="article/front/journal-meta/journal-id[@journal-id-type]">
-      <assert test="@journal-id-type = 'erudit'">
+      <assert test="@journal-id-type = 'erudit' or 
+                    @journal-id-type = 'publisher' or 
+                    @journal-id-type = 'doi'">
         Element 'journal-id', attribute journal-id-type: Invalid value "<value-of select="@journal-id-type"/>".
       </assert>
     </rule>
