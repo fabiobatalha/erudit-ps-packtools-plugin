@@ -42,34 +42,12 @@ class JournalIdTests(PhaseBasedTestCase):
     def test_case1(self):
         """
         presence(@nlm-ta) is True
-        presence(@publisher-id) is True
-        """
-        sample = u"""<article>
-                      <front>
-                        <journal-meta>
-                          <journal-id journal-id-type="nlm-ta">
-                            Rev Saude Publica
-                          </journal-id>
-                          <journal-id journal-id-type="publisher-id">
-                            RSP
-                          </journal-id>
-                        </journal-meta>
-                      </front>
-                    </article>
-                 """
-        sample = io.BytesIO(sample.encode('utf-8'))
-
-        self.assertTrue(self._run_validation(sample))
-
-    def test_case2(self):
-        """
-        presence(@nlm-ta) is True
         presence(@publisher-id) is False
         """
         sample = u"""<article>
                       <front>
                         <journal-meta>
-                          <journal-id journal-id-type="nlm-ta">
+                          <journal-id journal-id-type="publisher">
                             Rev Saude Publica
                           </journal-id>
                         </journal-meta>
@@ -80,7 +58,7 @@ class JournalIdTests(PhaseBasedTestCase):
 
         self.assertFalse(self._run_validation(sample))
 
-    def test_case3(self):
+    def test_case2(self):
         """
         presence(@nlm-ta) is False
         presence(@publisher-id) is True
@@ -88,7 +66,7 @@ class JournalIdTests(PhaseBasedTestCase):
         sample = u"""<article>
                       <front>
                         <journal-meta>
-                          <journal-id journal-id-type="publisher-id">
+                          <journal-id journal-id-type="erudit">
                             RSP
                           </journal-id>
                         </journal-meta>
@@ -99,9 +77,8 @@ class JournalIdTests(PhaseBasedTestCase):
 
         self.assertTrue(self._run_validation(sample))
 
-    def test_case4(self):
+    def test_case3(self):
         """
-        presence(@nlm-ta) is False
         presence(@publisher-id) is False
         """
         sample = u"""<article>
@@ -118,11 +95,11 @@ class JournalIdTests(PhaseBasedTestCase):
 
         self.assertFalse(self._run_validation(sample))
 
-    def test_publisher_id_cannot_be_empty(self):
+    def test_erudit_id_cannot_be_empty(self):
         sample = u"""<article>
                       <front>
                         <journal-meta>
-                          <journal-id journal-id-type="publisher-id"></journal-id>
+                          <journal-id journal-id-type="erudit"></journal-id>
                         </journal-meta>
                       </front>
                     </article>

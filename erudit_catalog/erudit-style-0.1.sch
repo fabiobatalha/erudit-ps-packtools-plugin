@@ -48,7 +48,7 @@ code for more information.
 
   <phase id="phase.journal-id">
     <active pattern="journal-id_notempty"/>
-    <active pattern="journal-id_has_publisher-id"/>
+    <active pattern="journal-id_has_erudit-id"/>
     <active pattern="journal-id_values"/>
   </phase>
 
@@ -228,22 +228,21 @@ code for more information.
     <param name="err_message" value="'Element cannot be empty.'"/>
   </pattern>
 
-  <pattern id="journal-id_has_publisher-id">
+  <pattern id="journal-id_has_erudit-id">
     <title>
-      There exists one journal-id[@journal-id-type='publisher-id'].
+      There exists one journal-id[@journal-id-type='erudit'].
     </title>
 
     <rule context="article/front/journal-meta">
-      <assert test="journal-id[@journal-id-type='publisher-id']">
-        Element 'journal-meta': Missing element journal-id with journal-id-type="publisher-id".
+      <assert test="journal-id[@journal-id-type='erudit']">
+        Element 'journal-meta': Missing element journal-id with journal-id-type="erudit".
       </assert>
     </rule>
   </pattern>
 
   <pattern id="journal-id_values">
     <rule context="article/front/journal-meta/journal-id[@journal-id-type]">
-      <assert test="@journal-id-type = 'nlm-ta' or
-                    @journal-id-type = 'publisher-id'">
+      <assert test="@journal-id-type = 'erudit'">
         Element 'journal-id', attribute journal-id-type: Invalid value "<value-of select="@journal-id-type"/>".
       </assert>
     </rule>
