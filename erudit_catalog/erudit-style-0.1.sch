@@ -28,16 +28,12 @@ code for more information.
    For more info, refer to the official ISO/IEC 19757-3:2006(E) standard.
   
    The implementation of the schematron patterns comes with the idea of EPS as a
-   set of constraints on top of JATS' Publishing Tag Set v1.1 (JPTS)[1]. To keep
+   set of constraints on top of JATS Publishing Tag Set v1.1 (JPTS)[1]. To keep
    consistency, please make sure:
   
      - DTD/XSD constraints are not duplicated here
-     - There is an issue at http://git.io/5EcR4Q with status `Aprovada`
-     - PMC-Style compatibility is desired[2]
   
-   Always double-check the JPTS and PMC-Style before editing.
-   [1] http://jats.nlm.nih.gov/publishing/tag-library/1.0/
-   [2] https://www.ncbi.nlm.nih.gov/pmc/pmcdoc/tagging-guidelines/article/tags.html
+   [1] http://jats.nlm.nih.gov/publishing/tag-library/1.1/
   *******************************************************************************
   </p>
 
