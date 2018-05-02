@@ -32,6 +32,145 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class ElementCitationTests(PhaseBasedTestCase):
+    """Tests for article/back/ref-list/ref element.
+    """
+    sch_phase = 'phase.element-citation'
+
+    def test_element_citation_has_styled_content(self):
+        sample = u"""<article>
+                      <back>
+                        <ref-list>
+                          <ref id="R57">
+                            <element-citation publication-type="journal">
+                              <styled-content specific-use="display">
+                                Traisnel, C. et Violette, I. (2010). Qui ça, nous? La question des identités multiples dans l'aménagement d'une représentation de la francophonie en Acadie du Nouveau-Brunswick. In Bélanger, N., Garant, N., Dalley, P. et Desabrais, P. (dir.). Produire et reproduire la francophonie en la nommant. Sudbury : Prise de parole. 101-122.
+                              </styled-content>
+                            </element-citation>
+                          </ref>
+                        </ref-list>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_element_citation_hasnot_styled_content(self):
+        sample = u"""<article>
+                      <back>
+                        <ref-list>
+                          <ref id="R57">
+                            <element-citation publication-type="journal">
+                            </element-citation>
+                          </ref>
+                        </ref-list>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
+class RefTests(PhaseBasedTestCase):
+    """Tests for article/back/ref-list/ref element.
+    """
+    sch_phase = 'phase.ref'
+
+    def test_element_citation(self):
+        sample = u"""<article>
+                      <back>
+                        <ref-list>
+                          <ref id="R57">
+                            <element-citation publication-type="journal">
+                              <styled-content specific-use="display">
+                                Traisnel, C. et Violette, I. (2010). Qui ça, nous? La question des identités multiples dans l'aménagement d'une représentation de la francophonie en Acadie du Nouveau-Brunswick. In Bélanger, N., Garant, N., Dalley, P. et Desabrais, P. (dir.). Produire et reproduire la francophonie en la nommant. Sudbury : Prise de parole. 101-122.
+                              </styled-content>
+                            </element-citation>
+                          </ref>
+                        </ref-list>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_element_citation_cannot_be_present_twice(self):
+        sample = u"""<article>
+                      <back>
+                        <ref-list>
+                          <ref id="R57">
+                            <element-citation publication-type="journal">
+                              <styled-content specific-use="display">
+                                Traisnel, C. et Violette, I. (2010). Qui ça, nous? La question des identités multiples dans l'aménagement d'une représentation de la francophonie en Acadie du Nouveau-Brunswick. In Bélanger, N., Garant, N., Dalley, P. et Desabrais, P. (dir.). Produire et reproduire la francophonie en la nommant. Sudbury : Prise de parole. 101-122.
+                              </styled-content>
+                            </element-citation>
+                            <element-citation publication-type="journal">
+                              <styled-content specific-use="display">
+                                Traisnel, C. et Violette, I. (2010). Qui ça, nous? La question des identités multiples dans l'aménagement d'une représentation de la francophonie en Acadie du Nouveau-Brunswick. In Bélanger, N., Garant, N., Dalley, P. et Desabrais, P. (dir.). Produire et reproduire la francophonie en la nommant. Sudbury : Prise de parole. 101-122.
+                              </styled-content>
+                            </element-citation>
+                          </ref>
+                        </ref-list>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_missing_element_citation(self):
+        sample = u"""<article>
+                      <back>
+                        <ref-list>
+                          <ref>
+                          </ref>
+                        </ref-list>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
+class AckTests(PhaseBasedTestCase):
+    """Tests for article/back/ack element.
+    """
+    sch_phase = 'phase.ack'
+
+    def test_with_sec(self):
+        sample = u"""<article>
+                      <back>
+                        <ack>
+                          <sec>
+                            <p>Some</p>
+                          </sec>
+                        </ack>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_without_sec(self):
+        sample = u"""<article>
+                      <back>
+                        <ack>
+                          <title>Acknowledgment</title>
+                          <p>Some text</p>
+                        </ack>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+
 class JournalIdTests(PhaseBasedTestCase):
     """Tests for article/front/journal-meta/journal-id elements.
 
@@ -48,7 +187,7 @@ class JournalIdTests(PhaseBasedTestCase):
                       <front>
                         <journal-meta>
                           <journal-id journal-id-type="publisher">
-                            Rev Saude Publica
+                            RUM
                           </journal-id>
                         </journal-meta>
                       </front>
@@ -67,7 +206,7 @@ class JournalIdTests(PhaseBasedTestCase):
                       <front>
                         <journal-meta>
                           <journal-id journal-id-type="erudit">
-                            RSP
+                            RUM
                           </journal-id>
                         </journal-meta>
                       </front>
@@ -124,10 +263,10 @@ class ISSNTests(PhaseBasedTestCase):
                       <front>
                         <journal-meta>
                           <issn pub-type="epub">
-                            0959-8138
+                            1712-2139
                           </issn>
                           <issn pub-type="ppub">
-                            0959-813X
+                            0316-6368
                           </issn>
                         </journal-meta>
                       </front>
@@ -147,7 +286,7 @@ class ISSNTests(PhaseBasedTestCase):
                       <front>
                         <journal-meta>
                           <issn pub-type="epub">
-                            0959-8138
+                            1712-2139
                           </issn>
                         </journal-meta>
                       </front>
@@ -167,7 +306,7 @@ class ISSNTests(PhaseBasedTestCase):
                       <front>
                         <journal-meta>
                           <issn pub-type="ppub">
-                            0959-813X
+                            0316-6368
                           </issn>
                         </journal-meta>
                       </front>
@@ -187,7 +326,7 @@ class ISSNTests(PhaseBasedTestCase):
                       <front>
                         <journal-meta>
                           <issn>
-                            0959-813X
+                            1712-2139
                           </issn>
                         </journal-meta>
                       </front>
@@ -207,7 +346,7 @@ class ISSNTests(PhaseBasedTestCase):
                       <front>
                         <journal-meta>
                           <issn>
-                            0959-813X
+                            0316-6368
                           </issn>
                         </journal-meta>
                       </front>
@@ -378,7 +517,7 @@ class PublisherTests(PhaseBasedTestCase):
                       <front>
                         <journal-meta>
                           <publisher>
-                            <publisher-name>British Medical Journal</publisher-name>
+                            <publisher-name>Revue de l'Université de Moncton</publisher-name>
                           </publisher>
                         </journal-meta>
                       </front>
@@ -436,7 +575,7 @@ class JournalTitleGroupTests(PhaseBasedTestCase):
     def test_case1(self):
         """
         A: presence(journal-title) is True
-        B: presence(abbrev-journal-title[@abbrev-type='publisher']) is True
+        B: presence(abbrev-journal-title[@abbrev-type='erudit']) is True
         A ^ B is True
         """
         sample = u"""<article>
@@ -444,10 +583,10 @@ class JournalTitleGroupTests(PhaseBasedTestCase):
                         <journal-meta>
                           <journal-title-group>
                             <journal-title>
-                              Revista de Saude Publica
+                              Revue de l'Université de Moncton
                             </journal-title>
                             <abbrev-journal-title abbrev-type='erudit'>
-                              Rev. Saude Publica
+                              Rev Univ Moncton
                             </abbrev-journal-title>
                           </journal-title-group>
                         </journal-meta>
@@ -461,7 +600,7 @@ class JournalTitleGroupTests(PhaseBasedTestCase):
     def test_case2(self):
         """
         A: presence(journal-title) is True
-        B: presence(abbrev-journal-title[@abbrev-type='publisher']) is False
+        B: presence(abbrev-journal-title[@abbrev-type='erudit']) is False
         A ^ B is False
         """
         sample = u"""<article>
@@ -469,7 +608,7 @@ class JournalTitleGroupTests(PhaseBasedTestCase):
                         <journal-meta>
                           <journal-title-group>
                             <journal-title>
-                              Revista de Saude Publica
+                              Revue de l'Université de Moncton
                             </journal-title>
                           </journal-title-group>
                         </journal-meta>
@@ -483,15 +622,15 @@ class JournalTitleGroupTests(PhaseBasedTestCase):
     def test_case3(self):
         """
         A: presence(journal-title) is False
-        B: presence(abbrev-journal-title[@abbrev-type='publisher']) is True
+        B: presence(abbrev-journal-title[@abbrev-type='erudit']) is True
         A ^ B is False
         """
         sample = u"""<article>
                       <front>
                         <journal-meta>
                           <journal-title-group>
-                            <abbrev-journal-title abbrev-type='publisher'>
-                              Rev. Saude Publica
+                            <abbrev-journal-title abbrev-type='erudit'>
+                              Rev Univ Moncton
                             </abbrev-journal-title>
                           </journal-title-group>
                         </journal-meta>
@@ -505,7 +644,7 @@ class JournalTitleGroupTests(PhaseBasedTestCase):
     def test_case4(self):
         """
         A: presence(journal-title) is False
-        B: presence(abbrev-journal-title[@abbrev-type='publisher']) is False
+        B: presence(abbrev-journal-title[@abbrev-type='erudit']) is False
         A ^ B is False
         """
         sample = u"""<article>
@@ -527,7 +666,7 @@ class JournalTitleGroupTests(PhaseBasedTestCase):
                         <journal-meta>
                           <journal-title-group>
                             <journal-title></journal-title>
-                            <abbrev-journal-title abbrev-type='publisher'>Rev. Saude Publica</abbrev-journal-title>
+                            <abbrev-journal-title abbrev-type='erudit'>Rev Univ Moncton</abbrev-journal-title>
                           </journal-title-group>
                         </journal-meta>
                       </front>
@@ -542,8 +681,8 @@ class JournalTitleGroupTests(PhaseBasedTestCase):
                       <front>
                         <journal-meta>
                           <journal-title-group>
-                            <journal-title>Revista de Saude Publica</journal-title>
-                            <abbrev-journal-title abbrev-type='publisher'></abbrev-journal-title>
+                            <journal-title>Revue de l'Université de Moncton</journal-title>
+                            <abbrev-journal-title abbrev-type='erudit'></abbrev-journal-title>
                           </journal-title-group>
                         </journal-meta>
                       </front>

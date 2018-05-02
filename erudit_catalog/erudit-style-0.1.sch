@@ -83,9 +83,72 @@ code for more information.
     <active pattern="trans-title_lang"/>
   </phase>
 
+  <phase id="phase.ack">
+    <active pattern="ack"/>
+  </phase>
+
+  <phase id="phase.ref">
+    <active pattern="ref_has_element-citation"/>
+    <!--active pattern="element-citation_cardinality"/-->
+  </phase>
+
+  <phase id="phase.element-citation">
+    <active pattern="element-citation_has_styled-content"/>
+  </phase>
+
+  <phase id="phase.styled-content">
+    <active pattern="styled-content_notempty"/>
+  </phase>  
+
   <!--
    Patterns - sets of rules.
   -->
+
+  <pattern id="element-citation_cardinality" is-a="occurs_once">
+    <param name="base_context" value="article/back/ref-list/ref"/>
+    <param name="element" value="element-citation"/>
+  </pattern>
+
+  <pattern id="styled-content_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="article/back/ref-list/ref/element-citation/styled-content"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
+
+  <pattern id="ref_has_element-citation">
+    <title>
+      element-citation is mandatory in ref.
+    </title>
+
+    <rule context="article/back/ref-list/ref">
+      <assert test="element-citation">
+        Element 'ref': Missing element element-citation.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="element-citation_has_styled-content">
+    <title>
+      styled-content is mandatory in element-citation.
+    </title>
+    <rule context="article/back/ref-list/ref/element-citation">
+      <assert test="styled-content">
+        Element 'element-citation': Missing element styled-content.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="ack">
+    <title>
+      Ack elements cannot be organized as sections (sec).
+    </title>
+
+    <rule context="article/back/ack">
+      <assert test="not(sec)">
+          Element 'ack': Unexpected element sec.
+      </assert>
+    </rule>
+  </pattern>
 
   <pattern id="trans-title_lang">
     <rule context="article/front/journal-meta/journal-title-group/trans-title-group/trans-title">
