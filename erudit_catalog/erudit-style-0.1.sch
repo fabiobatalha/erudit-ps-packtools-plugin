@@ -10,7 +10,6 @@ code for more information.
   <ns uri="http://www.w3.org/1999/xlink" prefix="xlink"/>
   <ns uri="http://exslt.org/regular-expressions" prefix="regexp"/>
 
-  <include href="common.sch"/>
   <p>
   *******************************************************************************
    THINGS TO BE SURE BEFORE EDITING THIS FILE!
@@ -85,7 +84,7 @@ code for more information.
 
   <phase id="phase.ref">
     <active pattern="ref_has_element-citation"/>
-    <!--active pattern="element-citation_cardinality"/-->
+    <active pattern="element-citation_cardinality"/>
   </phase>
 
   <phase id="phase.element-citation">
@@ -97,7 +96,39 @@ code for more information.
   </phase>  
 
   <!--
-   Patterns - sets of rules.
+    Abstract Patterns
+  -->
+
+  <pattern abstract="true" id="occurs_once">
+    <rule context="$base_context">
+      <assert test="count($element) = 1">
+        Element '<name/>': There must be only one element <value-of select="name($element)"/>.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern abstract="true" id="occurs_zero_or_once">
+    <rule context="$base_context">
+      <assert test="count($element) &lt; 2">
+        Element '<name/>': There must be zero or one element <value-of select="name($element)"/>.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="assert-not-empty" abstract="true" xmlns="http://purl.oclc.org/dsdl/schematron">
+    <title>
+      Check if the element's text is at least one character long.
+    </title>
+
+    <rule context="$base_context">
+      <assert test="string-length(normalize-space($assert_expr)) != 0">
+        Element '<name/>': <value-of select="$err_message"/>
+      </assert>
+    </rule>
+  </pattern>
+
+  <!--
+    Patterns - sets of rules.
   -->
 
   <pattern id="element-citation_cardinality" is-a="occurs_once">
