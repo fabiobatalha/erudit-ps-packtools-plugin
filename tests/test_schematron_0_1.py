@@ -555,15 +555,22 @@ class PublisherTests(PhaseBasedTestCase):
         self.assertFalse(self._run_validation(sample))
 
 
-class JournalTitleGroupTests(PhaseBasedTestCase):
-    """Tests for article/front/journal-meta/journal-title-group elements.
-    """
-    sch_phase = 'phase.journal-title-group'
+class JournalMetaTests(PhaseBasedTestCase):
 
-    def test_journal_title_group_is_absent(self):
+    """Tests for article/front/journal-meta elements.
+    """
+    sch_phase = 'phase.journal-meta'
+
+    def test_case1(self):
+        """
+        A: presence(journal-id[@journal-group-id="erudit"]) is False
+        B: presence(journal-title-group) is False
+        A ^ B is False
+        """
         sample = u"""<article>
                       <front>
                         <journal-meta>
+
                         </journal-meta>
                       </front>
                     </article>
@@ -572,45 +579,16 @@ class JournalTitleGroupTests(PhaseBasedTestCase):
 
         self.assertFalse(self._run_validation(sample))
 
-    def test_case1(self):
-        """
-        A: presence(journal-title) is True
-        B: presence(abbrev-journal-title[@abbrev-type='erudit']) is True
-        A ^ B is True
-        """
-        sample = u"""<article>
-                      <front>
-                        <journal-meta>
-                          <journal-title-group>
-                            <journal-title>
-                              Revue de l'Université de Moncton
-                            </journal-title>
-                            <abbrev-journal-title abbrev-type='erudit'>
-                              Rev Univ Moncton
-                            </abbrev-journal-title>
-                          </journal-title-group>
-                        </journal-meta>
-                      </front>
-                    </article>
-                 """
-        sample = io.BytesIO(sample.encode('utf-8'))
-
-        self.assertTrue(self._run_validation(sample))
-
     def test_case2(self):
         """
-        A: presence(journal-title) is True
-        B: presence(abbrev-journal-title[@abbrev-type='erudit']) is False
+        A: presence(journal-id[@journal-group-id="erudit"]) is True
+        B: presence(journal-title-group) is False
         A ^ B is False
         """
         sample = u"""<article>
                       <front>
                         <journal-meta>
-                          <journal-title-group>
-                            <journal-title>
-                              Revue de l'Université de Moncton
-                            </journal-title>
-                          </journal-title-group>
+                          <journal-id journal-id-type="erudit">rum</journal-id>
                         </journal-meta>
                       </front>
                     </article>
@@ -621,18 +599,14 @@ class JournalTitleGroupTests(PhaseBasedTestCase):
 
     def test_case3(self):
         """
-        A: presence(journal-title) is False
-        B: presence(abbrev-journal-title[@abbrev-type='erudit']) is True
+        A: presence(journal-id[@journal-group-id="erudit"]) is False
+        B: presence(journal-title-group) is True
         A ^ B is False
         """
         sample = u"""<article>
                       <front>
                         <journal-meta>
-                          <journal-title-group>
-                            <abbrev-journal-title abbrev-type='erudit'>
-                              Rev Univ Moncton
-                            </abbrev-journal-title>
-                          </journal-title-group>
+                          <journal-title-group></journal-title-group>
                         </journal-meta>
                       </front>
                     </article>
@@ -643,10 +617,66 @@ class JournalTitleGroupTests(PhaseBasedTestCase):
 
     def test_case4(self):
         """
-        A: presence(journal-title) is False
-        B: presence(abbrev-journal-title[@abbrev-type='erudit']) is False
-        A ^ B is False
+        A: presence(journal-id[@journal-group-id="erudit"]) is True
+        B: presence(journal-title-group) is True
+        A ^ B is True
         """
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <journal-id journal-id-type="erudit">rum</journal-id>
+                          <journal-title-group></journal-title-group>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case5(self):
+        """
+        A: presence(journal-id[@journal-group-id="erudit"]) is False
+        B: presence(journal-title-group) is True
+        A ^ B is True
+        """
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <journal-id journal-id-type="publisher">rum</journal-id>
+                          <journal-title-group></journal-title-group>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
+class JournalTitleGroupTests(PhaseBasedTestCase):
+    """Tests for article/front/journal-meta/journal-title-group elements.
+    """
+    sch_phase = 'phase.journal-title-group'
+
+    def test_case1(self):
+        sample = u"""<article>
+                      <front>
+                        <journal-meta>
+                          <journal-title-group>
+                            <journal-title xml:lang="fr">
+                              Revue de l'Université de Moncton
+                            </journal-title>
+                          </journal-title-group>
+                        </journal-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case2(self):
         sample = u"""<article>
                       <front>
                         <journal-meta>
@@ -665,8 +695,7 @@ class JournalTitleGroupTests(PhaseBasedTestCase):
                       <front>
                         <journal-meta>
                           <journal-title-group>
-                            <journal-title></journal-title>
-                            <abbrev-journal-title abbrev-type='erudit'>Rev Univ Moncton</abbrev-journal-title>
+                            <journal-title xml:lang="fr"></journal-title>
                           </journal-title-group>
                         </journal-meta>
                       </front>
@@ -676,13 +705,12 @@ class JournalTitleGroupTests(PhaseBasedTestCase):
 
         self.assertFalse(self._run_validation(sample))
 
-    def test_empty_abbrev_journal_title(self):
+    def test_journal_title_without_lang(self):
         sample = u"""<article>
                       <front>
                         <journal-meta>
                           <journal-title-group>
                             <journal-title>Revue de l'Université de Moncton</journal-title>
-                            <abbrev-journal-title abbrev-type='erudit'></abbrev-journal-title>
                           </journal-title-group>
                         </journal-meta>
                       </front>

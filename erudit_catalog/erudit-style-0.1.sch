@@ -41,6 +41,11 @@ code for more information.
    These are being used to help on tests isolation.
   -->
 
+  <phase id="phase.journal-meta">
+    <active pattern="journal-meta_has_journal-id"/>
+    <active pattern="journal-meta_has_journal-title-group"/>
+  </phase>
+
   <phase id="phase.journal-id">
     <active pattern="journal-id_notempty"/>
     <active pattern="journal-id_has_erudit-id"/>
@@ -65,9 +70,9 @@ code for more information.
   </phase>
 
   <phase id="phase.journal-title-group">
-    <active pattern="has_journal-title_and_abbrev-journal-title"/>
+    <active pattern="has_journal-title"/>
     <active pattern="journal-title_notempty"/>
-    <active pattern="abbrev-journal-title_notempty"/>
+    <active pattern="journal-id_notempty"/>
   </phase>
 
   <phase id="phase.trans-title-group">
@@ -131,6 +136,52 @@ code for more information.
     Patterns - sets of rules.
   -->
 
+  <pattern id="journal-meta_has_journal-id">
+    <rule context="article/front/journal-meta">
+      <assert test="journal-id[@journal-id-type='erudit']">
+        Element 'journal-meta': Missing element journal_id with attribute journal-id-type=erudit
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="journal-meta_has_journal-title-group">
+    <rule context="article/front/journal-meta">
+      <assert test="journal-title-group">
+        Element 'journal-meta': Missing element journal-title-group.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="has_journal-title">
+    <rule context="article/front/journal-meta/journal-title-group">
+      <assert test="journal-title">
+        Element 'journal-title-group': Missing element journal-title.
+      </assert>
+    </rule>
+    <rule context="article/front/journal-meta/journal-title-group/journal-title">
+      <assert test="@xml:lang">
+        Element 'jounrl-title': Missing attribute xml:lang.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="journal-title_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="article/front/journal-meta/journal-title-group/journal-title"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
+
+  <pattern id="abbrev-journal-title_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="article/front/journal-meta/journal-title-group/abbrev-journal-title"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
+
+  <pattern id="journal-id_cardinality" is-a="occurs_once">
+    <param name="base_context" value="article/front/journal-meta/journal-title-group"/>
+    <param name="element" value="journal-title"/>
+  </pattern>
+
   <pattern id="element-citation_cardinality" is-a="occurs_once">
     <param name="base_context" value="article/back/ref-list/ref"/>
     <param name="element" value="element-citation"/>
@@ -191,35 +242,6 @@ code for more information.
         Element 'trans-title-group': Missing attribute xml:lang.
       </assert>
     </rule>
-  </pattern>
-
-  <pattern id="has_journal-title_and_abbrev-journal-title">
-    <rule context="article/front/journal-meta">
-      <assert test="journal-title-group">
-        Element 'journal-meta': Missing element journal-title-group.
-      </assert>
-    </rule>
-
-    <rule context="article/front/journal-meta/journal-title-group">
-      <assert test="journal-title">
-        Element 'journal-title-group': Missing element journal-title.
-      </assert>
-      <assert test="abbrev-journal-title[@abbrev-type='erudit']">
-        Element 'journal-title-group': Missing element abbrev-journal-title with abbrev-type="erudit".
-      </assert>
-    </rule>
-  </pattern>
-
-  <pattern id="journal-title_notempty" is-a="assert-not-empty">
-    <param name="base_context" value="article/front/journal-meta/journal-title-group/journal-title"/>
-    <param name="assert_expr" value="text()"/>
-    <param name="err_message" value="'Element cannot be empty.'"/>
-  </pattern>
-
-  <pattern id="abbrev-journal-title_notempty" is-a="assert-not-empty">
-    <param name="base_context" value="article/front/journal-meta/journal-title-group/abbrev-journal-title"/>
-    <param name="assert_expr" value="text()"/>
-    <param name="err_message" value="'Element cannot be empty.'"/>
   </pattern>
 
   <pattern id="publisher">

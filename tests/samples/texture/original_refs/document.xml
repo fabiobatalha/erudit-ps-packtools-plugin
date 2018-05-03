@@ -4,9 +4,9 @@
   <front>
     <journal-meta>
       <journal-id journal-id-type="erudit">rum</journal-id>
-      <journal-id journal-id-type="publisher">rum</journal-id>
+      <journal-id journal-id-type="publisher">id_rum</journal-id>
       <journal-title-group>
-        <journal-title>Revue de l'Université de Moncton</journal-title>
+        <journal-title xml:lang="fr">Revue de l'Université de Moncton</journal-title>
         <trans-title-group xml:lang="en">
           <trans-title>Journal of the University of Moncton</trans-title>
         </trans-title-group>
@@ -297,21 +297,21 @@
     </fn-group>
     <ref-list>
       <ref id="R1">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
             Baillargeon, N.(le 28 janvier2013). Lisa LeBlanc : une étrange, mais rassurante familiarité. Voir [Blogues]. http://voir.ca
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R2">
-        <element-citation publication-type="journal">
+        <element-citation>
           <styled-content specific-use="display">
             Daigle, F.(le 12 mars 2013). Enseignement du français : trouver l'erreur.L'Acadie Nouvelle [Commentaire]. 6.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R3">
-        <element-citation publication-type="journal">
+        <element-citation>
           <styled-content specific-use="display">
             _________. (le 28 mai 2013). Une langue, ça s'entretient. L'actualité [Culture]. http://www.lactualite.com/culture/france-daigle-une-langueca-sentretient/
           </styled-content>
@@ -339,7 +339,7 @@
         </element-citation>
       </ref>
       <ref id="R7">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="website">
           <styled-content specific-use="display">
             Harel, P. (le 24 octobre 2012). Lisa la bombe. Canoe [Chronique]. http://fr.canoe.ca
           </styled-content>
@@ -388,14 +388,14 @@
         </element-citation>
       </ref>
       <ref id="R14">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="website">
           <styled-content specific-use="display">
             Pelletier, F.(le 31 octobre2012). Le cube de sucre. Le Huffington Post Québec [Accueil]. http://quebec.huffingtonpost.ca/francine-pelletier/ langue-quebec_b_2049714.html
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R15">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="website">
           <styled-content specific-use="display">
             Péloquin, A. (le 11 janvier 2013). Lisa LeBlanc et les critiques. Voir [Blogues]. http://voir.ca
           </styled-content>
@@ -454,42 +454,42 @@
         </element-citation>
       </ref>
       <ref id="R23">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
             Arrighi, L. et Urbain, É. (2012). Bilingual today, French tomorrow… Qui a peur du français sur les affiches? Communication au Colloque thématique et interdisciplinaire de la VALS-ASLA, les 1-3 février, Université de Lausanne (Suisse).
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R24">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
             Baugh, J. (2000). Beyond Ebonics : Linguistic Pride and RacialPrejudice. Oxford : Oxford University Press.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R25">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
             Bélanger, N., Garant, N., Dalley, P. et Desabrais, P. (dir.) (2010). Produire et reproduire la francophonie en la nommant. Sudbury : Prise de parole.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R26">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
             Bentolila, A. (1996). De l'illettrisme en général et à l'école en particulier. Paris : Plon.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R27">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
             _________. (2000). Le propre de l'homme : lire, parler, écrire. Paris : Plon.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R28">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="these">
           <styled-content specific-use="display">
             Bérubé, J. (2010). Discours et idéologies linguistiques en Acadie du Nouveau-Brunswick : l'exemple de la presse et du milieu scolaire. Thèse de doctorat inédite, Université de Moncton.
           </styled-content>
@@ -506,7 +506,7 @@
         </element-citation>
       </ref>
       <ref id="R30">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
             Blommaert, J. (1999). Language Ideological Debates. Berlin : Mouton de Gruyter.
           </styled-content>
@@ -516,35 +516,35 @@
         </element-citation>
       </ref>
       <ref id="R31">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="chapter">
           <styled-content specific-use="display">
             Blommaert, J. et Verschueren, J. (1998). The role of language in European nationalist ideologies. In Schieffelin, B., Woolard, K. et Kroskrity, P. (dir.). Language Ideologies : Practice and Theory. Oxford : Oxford University Press. 189-210.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R32">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
             Bouchard, C. (2002). La langue et le nombril. Une histoire sociolinguistique du Québec. Montréal : Fides.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R33">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
             Delage, G.(dir.) (2008). La langue française dans sa diversité. Québec : Direction des relations publiques du ministère de la Culture, des Communications et de la Condition féminine.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R34">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
             Duchêne, A. et Heller, M.(dir.) (2007). Discourses of Endangerment : Interest and Ideologies in the Defense of Languages. Londres et New York : Continuum.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R35">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
             _________. (dir.) (2012). Language in Late Capitalism : Pride and Profit. Londres : Routledge.
           </styled-content>
@@ -558,7 +558,7 @@
         </element-citation>
       </ref>
       <ref id="R37">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="chapter">
           <styled-content specific-use="display">
             Garric, N. et Léglise, I. (2012). Analyser le discours d'expert et d'expertise. In Léglise, I. et Garric, N.(dir.). Discours d'experts et d'expertise. Berne : Peter Lang. 1-16.
           </styled-content>
@@ -572,7 +572,7 @@
         </element-citation>
       </ref>
       <ref id="R39">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
             Heller, M. (2002). Éléments d'une sociolinguistique critique. Paris : Didier.
           </styled-content>
@@ -596,14 +596,14 @@
         </element-citation>
       </ref>
       <ref id="R42">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="chapter">
           <styled-content specific-use="display">
             Heller, M. et Duchêne, A. (2012). Pride and profit : changing discourses of language, capital and nation-state. In Duchêne, A. et Heller, M.(dir.). Language in Late Capitalism : Pride and Profit. Londres : Routledge. 1-21.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R43">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="chapter">
           <styled-content specific-use="display">
             Heller, M. et Labrie, N. (2003). Langue, pouvoir et identité : une étude de cas, une approche, une méthodologie. In Heller, M. et Labrie, N.(dir.). Discours et identités. La francité canadienne entre modernité et mondialisation. Cortil-Wodon : Éditions modulaires européennes. 9-39.
           </styled-content>
@@ -619,7 +619,7 @@
       <ref id="R45">
         <element-citation publication-type="journal">
           <styled-content specific-use="display">
-            Jaffe, A. (2008). Parlers et idéologies langagières. Ethnologie française. 3 : 38. 517-526.
+            Jaffe, A. (2008). Parlers et idéologies langagières. Ethnologie française. 3:38. 517-526.
           </styled-content>
           <pub-id pub-id-type="doi">
             https://doi.org/10.3917/ethn.083.0517
@@ -627,44 +627,44 @@
         </element-citation>
       </ref>
       <ref id="R46">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
-            Kertzer, D. et Arel, D.(dir.) (2002). Census and Identity : The Politics of Race, Ethnicity and Language in National Censuses. Cambridge : Cambridge University Press.
+            Kertzer, D. et Arel, D.(dir.) (2002). Census and Identity: The Politics of Race, Ethnicity and Language in National Censuses. Cambridge: Cambridge University Press.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R47">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
-            Klinkenberg, J.-M. (2001). La langue et le citoyen. Paris : Presses universitaires de France.
+            Klinkenberg, J.-M. (2001). La langue et le citoyen. Paris: Presses universitaires de France.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R48">
         <element-citation publication-type="journal">
           <styled-content specific-use="display">
-            Kroskrity, P., Schieffelin, B. et Woolard, K. (dir.) (1992). Language Ideologies. Pragmatics. 2 : 3.
+            Kroskrity, P., Schieffelin, B. et Woolard, K. (dir.) (1992). Language Ideologies. Pragmatics. 2:3.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R49">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="website">
           <styled-content specific-use="display">
             Labov, W. (1972). Academic ignorance and black intelligence. The Atlantic Monthly. Juin. http://www.theatlantic.com/past/docs/issues/ 95sep/ets/labo.htm
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R50">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="these">
           <styled-content specific-use="display">
-            Landry, J. (2012). Étude de représentations linguistiques de jeunes Acadiennes et Acadiens en milieu scolaire : vers un éveil à sa propre langue? Thèse de maîtrise inédite, Université de Moncton.
+            Landry, J. (2012). Étude de représentations linguistiques de jeunes Acadiennes et Acadiens en milieu scolaire: vers un éveil à sa propre langue? Thèse de maîtrise inédite, Université de Moncton.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R51">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
-            LeBlanc, M. (2009). “Bilinguals Only Need Apply?” : luttes et tensions dans un lieu de travail bilingue en Acadie du Nouveau-Brunswick. Francophonies d'Amérique. 27. 77-103.
+            LeBlanc, M. (2009). “Bilinguals Only Need Apply?”: luttes et tensions dans un lieu de travail bilingue en Acadie du Nouveau-Brunswick. Francophonies d'Amérique. 27. 77-103.
           </styled-content>
           <pub-id pub-id-type="doi">
             https://doi.org/10.7202/039825ar
@@ -672,16 +672,16 @@
         </element-citation>
       </ref>
       <ref id="R52">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
-            Léglise, I. et Garric, N.(dir.) (2012). Discours d'experts et d'expertise. Berne : Peter Lang.
+            Léglise, I. et Garric, N.(dir.) (2012). Discours d'experts et d'expertise. Berne: Peter Lang.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R53">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
-            Moïse, C. (2007). Protecting French : The view from France. In Duchêne, A. et Heller, M.(dir.). Discourse of Endangerment : Interest and Ideologies in the Defense of Languages. Londres et New York : Continuum. 216-241.
+            Moïse, C. (2007). Protecting French: The view from France. In Duchêne, A. et Heller, M.(dir.). Discourse of Endangerment: Interest and Ideologies in the Defense of Languages. Londres et New York: Continuum. 216-241.
           </styled-content>
         </element-citation>
       </ref>
@@ -696,30 +696,30 @@
         </element-citation>
       </ref>
       <ref id="R55">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
-            Rickford, J. (1999). African American Vernacular English : Features, Evolution, EducationalImplications. Londres : Blackwell.
+            Rickford, J. (1999). African American Vernacular English : Features, Evolution, EducationalImplications. Londres: Blackwell.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R56">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="book">
           <styled-content specific-use="display">
-            Schieffelin, B., Woolard, K. et Kroskrity, P. (dir.) (1998). Language Ideologies : Practice and Theory. Oxford : Oxford University Press.
+            Schieffelin, B., Woolard, K. et Kroskrity, P. (dir.) (1998). Language Ideologies: Practice and Theory. Oxford: Oxford University Press.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R57">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="chapter">
           <styled-content specific-use="display">
             Traisnel, C. et Violette, I. (2010). Qui ça, nous? La question des identités multiples dans l'aménagement d'une représentation de la francophonie en Acadie du Nouveau-Brunswick. In Bélanger, N., Garant, N., Dalley, P. et Desabrais, P. (dir.). Produire et reproduire la francophonie en la nommant. Sudbury : Prise de parole. 101-122.
           </styled-content>
         </element-citation>
       </ref>
       <ref id="R58">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="chapter">
           <styled-content specific-use="display">
-            Vincent, D. (2008). La valorisation de la variation : oui sans doute, peutêtre, mais quand même. In Delage, G. (dir.). La langue française dans sa diversité. Québec : Direction des relations publiques du ministère de la Culture, des Communications et de la Condition féminine. 129-140.
+            Vincent, D. (2008). La valorisation de la variation: oui sans doute, peutêtre, mais quand même. In Delage, G. (dir.). La langue française dans sa diversité. Québec: Direction des relations publiques du ministère de la Culture, des Communications et de la Condition féminine. 129-140.
           </styled-content>
         </element-citation>
       </ref>
@@ -731,9 +731,9 @@
         </element-citation>
       </ref>
       <ref id="R60">
-        <element-citation publication-type="journal">
+        <element-citation publication-type="chapter">
           <styled-content specific-use="display">
-            _________. (1998). Introduction : Language ideology as a field of inquiry. In Schieffelin, B., Woolard, K. et Kroskrity, P. (dir.). Language Ideologies : Practice and Theory. New York : Oxford University Press. 3-47.
+            _________. (1998). Introduction: Language ideology as a field of inquiry. In Schieffelin, B., Woolard, K. et Kroskrity, P. (dir.). Language Ideologies : Practice and Theory. New York: Oxford University Press. 3-47.
           </styled-content>
         </element-citation>
       </ref>
@@ -751,7 +751,7 @@
     <ack>
       <title>Remerciements</title>
       <p>Text to sampling acknoledgement content</p>
-      <p>More texts to sampling acknoledgement content</p>
+      <p>More texts Text to sampling acknoledgement content</p>
     </ack>
   </back>
 </article>
