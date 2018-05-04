@@ -98,7 +98,12 @@ code for more information.
 
   <phase id="phase.styled-content">
     <active pattern="styled-content_notempty"/>
-  </phase>  
+  </phase>
+
+  <phase id="phase.pub-id">
+    <active pattern="pub-id_has_pub-id-type"/>
+    <active pattern="pub-id_notempty"/>
+  </phase>
 
   <!--
     Abstract Patterns
@@ -135,6 +140,20 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="pub-id_has_pub-id-type">
+    <rule context="article/back/ref-list/ref/element-citation/pub-id">
+      <assert test="@pub-id-type">
+        Element 'pub-id': Missing attribute pub-id-type.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="pub-id_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="article/back/ref-list/ref/element-citation/pub-id"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
 
   <pattern id="journal-meta_has_journal-id">
     <rule context="article/front/journal-meta">

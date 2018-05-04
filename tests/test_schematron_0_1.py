@@ -32,6 +32,81 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class ElementPubIDTests(PhaseBasedTestCase):
+
+    sch_phase = 'phase.pub-id'
+
+    def test_case_1(self):
+        sample = u"""<article>
+                      <back>
+                        <ref-list>
+                          <ref id="R57">
+                            <element-citation publication-type="journal">
+                              <styled-content specific-use="display">
+                                Traisnel, C. et Violette, I. (2010). Qui ça, nous? La question des identités multiples dans l'aménagement d'une représentation de la francophonie en Acadie du Nouveau-Brunswick. In Bélanger, N., Garant, N., Dalley, P. et Desabrais, P. (dir.). Produire et reproduire la francophonie en la nommant. Sudbury : Prise de parole. 101-122.
+                              </styled-content>
+                              <pub-id pub-id-type="doi">
+                                anydoi.123
+                              </pub-id>
+                            </element-citation>
+                          </ref>
+                        </ref-list>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case_2(self):
+        """
+        pub-id must have @pub-id-type
+        """
+        sample = u"""<article>
+                      <back>
+                        <ref-list>
+                          <ref id="R57">
+                            <element-citation publication-type="journal">
+                              <styled-content specific-use="display">
+                                Traisnel, C. et Violette, I. (2010). Qui ça, nous? La question des identités multiples dans l'aménagement d'une représentation de la francophonie en Acadie du Nouveau-Brunswick. In Bélanger, N., Garant, N., Dalley, P. et Desabrais, P. (dir.). Produire et reproduire la francophonie en la nommant. Sudbury : Prise de parole. 101-122.
+                              </styled-content>
+                              <pub-id>
+                                anydoi.123
+                              </pub-id>
+                            </element-citation>
+                          </ref>
+                        </ref-list>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case_3(self):
+        """
+        pub-id must have content
+        """
+        sample = u"""<article>
+                      <back>
+                        <ref-list>
+                          <ref id="R57">
+                            <element-citation publication-type="journal">
+                              <styled-content specific-use="display">
+                                Traisnel, C. et Violette, I. (2010). Qui ça, nous? La question des identités multiples dans l'aménagement d'une représentation de la francophonie en Acadie du Nouveau-Brunswick. In Bélanger, N., Garant, N., Dalley, P. et Desabrais, P. (dir.). Produire et reproduire la francophonie en la nommant. Sudbury : Prise de parole. 101-122.
+                              </styled-content>
+                              <pub-id pub-id-type="doi">
+                              </pub-id>
+                            </element-citation>
+                          </ref>
+                        </ref-list>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
 class ElementCitationTests(PhaseBasedTestCase):
     """Tests for article/back/ref-list/ref element.
     """
