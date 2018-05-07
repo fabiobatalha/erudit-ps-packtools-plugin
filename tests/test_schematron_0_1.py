@@ -32,6 +32,124 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class fpage_OR_elocationTests(PhaseBasedTestCase):
+    """Tests for article/front/article-meta/fpage or elocation-id elements.
+    """
+    sch_phase = 'phase.fpage_or_elocation-id'
+
+    def test_case1(self):
+        """
+        fpage is True
+        elocation-id is True
+        fpage v elocation-id is True
+        """
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <fpage>01</fpage>
+                          <elocation-id>E27</elocation-id>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case2(self):
+        """
+        fpage is True
+        elocation-id is False
+        fpage v elocation-id is True
+        """
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <fpage>01</fpage>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case3(self):
+        """
+        fpage is False
+        elocation-id is True
+        fpage v elocation-id is True
+        """
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <elocation-id>E27</elocation-id>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case4(self):
+        """
+        fpage is False
+        elocation-id is False
+        fpage v elocation-id is False
+        """
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_empty_fpage(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <fpage></fpage>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_empty_lpage(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <fpage>33</fpage>
+                          <lpage></lpage>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_empty_elocationid(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <elocation-id></elocation-id>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class MonthTests(PhaseBasedTestCase):
     """Tests for //month elements.
     """

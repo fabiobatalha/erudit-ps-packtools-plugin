@@ -141,6 +141,13 @@ code for more information.
     <active pattern="month_cardinality_article-meta"/>
   </phase>
 
+  <phase id="phase.fpage_or_elocation-id">
+    <active pattern="fpage_or_elocation-id"/>
+    <active pattern="fpage_notempty"/>
+    <active pattern="lpage_notempty"/>
+    <active pattern="elocation-id_notempty"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -176,6 +183,32 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="fpage_or_elocation-id">
+    <rule context="article/front/article-meta">
+      <assert test="fpage or elocation-id">
+        Element 'article-meta': Missing elements fpage or elocation-id.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="fpage_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="article/front/article-meta/fpage"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
+
+  <pattern id="lpage_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="article/front/article-meta/lpage"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
+
+  <pattern id="elocation-id_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="article/front/article-meta/elocation-id"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
 
   <pattern id="month">
     <title>
