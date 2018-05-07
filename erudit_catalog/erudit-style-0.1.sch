@@ -83,10 +83,6 @@ code for more information.
     <active pattern="trans-title_lang"/>
   </phase>
 
-  <phase id="phase.ack">
-    <active pattern="ack"/>
-  </phase>
-
   <phase id="phase.ref">
     <active pattern="ref_has_element-citation"/>
     <active pattern="element-citation_cardinality"/>
@@ -105,6 +101,22 @@ code for more information.
     <active pattern="pub-id_notempty"/>
   </phase>
 
+  <phase id="phase.chapter-title">
+    <active pattern="xref-reftype-integrity-app"/>
+  </phase>
+
+  <phase id="phase.app">
+    <active pattern="app_has_id"/>
+  </phase>
+
+  <phase id="phase.ack">
+    <active pattern="ack"/>
+  </phase>
+
+  <phase id="phase.fn-group">
+    <active pattern="fn_has_id"/>
+    <active pattern="fn-group_has_fn"/>
+  </phase>
   <!--
     Abstract Patterns
   -->
@@ -140,6 +152,30 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="fn-group_has_fn">
+    <rule context="article/back/fn-group">
+      <assert test="fn">
+        Element 'fn-group': Missing element fn.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="fn_has_id">
+    <rule context="article/back/fn-group/fn">
+      <assert test="@id">
+        Element 'fn': Missing attribute @id.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="app_has_id">
+    <rule context="article/back/app-group/app">
+      <assert test="@id">
+        Element 'app': Missing attribute id.
+      </assert>
+    </rule>
+  </pattern>
 
   <pattern id="pub-id_has_pub-id-type">
     <rule context="article/back/ref-list/ref/element-citation/pub-id">
@@ -401,6 +437,27 @@ code for more information.
         Element 'issn': Invalid issn=([0-9]{4}-[0-9]{3}[0-9xX]).
       </assert>
     </rule>
+  </pattern>
+
+  <!--
+    XREFS CHECK
+  -->
+
+  <pattern abstract="true" id="xref-reftype-integrity-base">
+    <title>
+      Make sure all references to are reachable.
+    </title>
+
+    <rule context="//xref[@ref-type='$ref_type']">
+      <assert test="@rid = $ref_elements">
+        Element '<name/>', attribute rid: Mismatching id value '<value-of select="@rid"/>' of type '<value-of select="@ref-type"/>'.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="xref-reftype-integrity-app" is-a="xref-reftype-integrity-base">
+    <param name="ref_type" value="app"/>
+    <param name="ref_elements" value="//app/@id"/>
   </pattern>
 </schema>
 

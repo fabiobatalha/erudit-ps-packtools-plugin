@@ -32,6 +32,105 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class ElementFnGroupTests(PhaseBasedTestCase):
+    sch_phase = 'phase.fn-group'
+
+    def test_case_1(self):
+        """
+        fn have @id
+        """
+        sample = u"""<article>
+                      <back>
+                        <fn-group>
+                          <fn id="fn1">
+                            <title>Footnote Title</title>
+                            <p>Footnote Content</p>
+                          </fn>
+                        </fn-group>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case_2(self):
+        """
+        fn must have @id
+        """
+        sample = u"""<article>
+                      <back>
+                        <fn-group>
+                          <fn>
+                            <title>Footnote Title</title>
+                            <p>Footnote Content</p>
+                          </fn>
+                        </fn-group>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case_3(self):
+        """
+        fn-group must have at least one element fn
+        """
+        sample = u"""<article>
+                      <back>
+                        <fn-group>
+                        </fn-group>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
+class ElementAppTests(PhaseBasedTestCase):
+    sch_phase = 'phase.app'
+
+    def test_case_1(self):
+        """
+        app have @id
+        """
+        sample = u"""<article>
+                      <back>
+                        <app-group>
+                          <app id="app1">
+                            <title>Appendix Title</title>
+                            <p>Appendix Content</p>
+                          </app>
+                        </app-group>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case_2(self):
+        """
+        app must have @id
+        """
+        sample = u"""<article>
+                      <back>
+                        <app-group>
+                          <app>
+                            <title>Appendix Title</title>
+                            <p>Appendix Content</p>
+                          </app>
+                        </app-group>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class ElementPubIDTests(PhaseBasedTestCase):
 
     sch_phase = 'phase.pub-id'

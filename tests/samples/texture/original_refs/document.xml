@@ -236,6 +236,20 @@
     </sec>
   </body>
   <back>
+    <ack>
+      <title>Acknoledgement Title</title>
+      <p>Ack inserted for sampling purpose.</p>
+    </ack>
+    <app-group>
+      <app id="app1">
+        <title>Appendix 1 Title</title>
+        <p>Appendix inserted for sampling purpose.</p>
+      </app>
+      <app id="app2">
+        <title>Appendix 2 Title</title>
+        <p>Another appendix inserted for sampling purpose.</p>
+      </app>
+    </app-group>
     <fn-group>
       <fn id="fn1">
         <p>Ce débat n’est pas, loin s’en faut, spécifiquement acadien, ni même propre aux milieux minoritaires. Pour un exemple de son actualisation en France, voir Bentolina (1996, 2000), et pour une approche critique de celui-ci en ce même lieu, voir Moïse (2007). Pour le Québec, on peut consulter Vincent (2008). </p>
