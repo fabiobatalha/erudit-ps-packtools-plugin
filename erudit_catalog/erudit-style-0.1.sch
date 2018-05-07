@@ -117,6 +117,19 @@ code for more information.
     <active pattern="fn_has_id"/>
     <active pattern="fn-group_has_fn"/>
   </phase>
+
+  <phase id="phase.volume">
+    <active pattern="volume_notempty"/>
+    <active pattern="volume_cardinality_at_element-citation"/>
+    <active pattern="volume_cardinality_at_article-meta"/>
+    <active pattern="volume_cardinality_at_product"/>
+  </phase>
+  
+  <phase id="phase.issue">
+    <active pattern="issue_notempty"/>
+    <active pattern="issue_cardinality_at_element-citation"/>
+    <active pattern="issue_cardinality_at_article-meta"/>
+  </phase>
   <!--
     Abstract Patterns
   -->
@@ -152,6 +165,48 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="volume_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="article/front/article-meta/volume"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
+
+  <pattern id="volume_cardinality_at_element-citation" is-a="occurs_zero_or_once">
+    <param name="base_context" value="article/back/ref-list/ref/element-citation"/>
+    <param name="element" value="volume"/>
+  </pattern>
+
+  <pattern id="volume_cardinality_at_article-meta" is-a="occurs_zero_or_once">
+    <param name="base_context" value="article/front/article-meta"/>
+    <param name="element" value="volume"/>
+  </pattern>
+
+  <pattern id="volume_cardinality_at_product" is-a="occurs_zero_or_once">
+    <param name="base_context" value="article/front/article-meta/product"/>
+    <param name="element" value="volume"/>
+  </pattern>
+
+  <pattern id="issue_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="article/front/article-meta/issue"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
+
+  <pattern id="issue_cardinality_at_element-citation" is-a="occurs_zero_or_once">
+    <param name="base_context" value="article/back/ref-list/ref/element-citation"/>
+    <param name="element" value="issue"/>
+  </pattern>
+
+  <pattern id="issue_cardinality_at_article-meta" is-a="occurs_zero_or_once">
+    <param name="base_context" value="article/front/article-meta"/>
+    <param name="element" value="issue"/>
+  </pattern>
+
+  <pattern id="issue_cardinality_at_product" is-a="occurs_zero_or_once">
+    <param name="base_context" value="article/front/article-meta/product"/>
+    <param name="element" value="issue"/>
+  </pattern>
 
   <pattern id="fn-group_has_fn">
     <rule context="article/back/fn-group">

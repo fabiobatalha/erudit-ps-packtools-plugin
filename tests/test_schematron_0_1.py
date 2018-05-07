@@ -32,6 +32,126 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class IssueTests(PhaseBasedTestCase):
+    """Tests for:
+      - article/front/article-meta/issue
+      - article/back/ref-list/ref/element-citation/issue
+    """
+    sch_phase = 'phase.issue'
+
+    def test_absent_in_front(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_present_but_empty_in_front(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <issue></issue>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_present_in_front(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <issue>10</issue>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_present_in_front_cardinality_error(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <issue>10</issue>
+                          <issue>10</issue>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
+class VolumeTests(PhaseBasedTestCase):
+    """Tests for:
+      - article/front/article-meta/volume
+      - article/back/ref-list/ref/element-citation/volume
+    """
+    sch_phase = 'phase.volume'
+
+    def test_absent_in_front(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_present_but_empty_in_front(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <volume></volume>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_present_in_front(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <volume>10</volume>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_present_in_front_cardinality_error(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <volume>10</volume>
+                          <volume>10</volume>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class ElementFnGroupTests(PhaseBasedTestCase):
     sch_phase = 'phase.fn-group'
 
