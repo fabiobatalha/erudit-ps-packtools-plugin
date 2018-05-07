@@ -135,6 +135,12 @@ code for more information.
     <active pattern="pub-date_pub_type"/>
   </phase>
 
+  <phase id="phase.month">
+    <active pattern="month"/>
+    <active pattern="month_cardinality_element-citation"/>
+    <active pattern="month_cardinality_article-meta"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -170,6 +176,28 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="month">
+    <title>
+      Only integers between 1 and 12.
+    </title>
+
+    <rule context="//month">
+      <assert test="regexp:test(current(), '^(0?[1-9]{1}|[10-12]{2})$')">
+        Element 'month': Invalid value '<value-of select="current()"/>'.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="month_cardinality_element-citation" is-a="occurs_zero_or_once">
+    <param name="base_context" value="article/back/ref-list/ref/element-citation"/>
+    <param name="element" value="month"/>
+  </pattern>
+
+  <pattern id="month_cardinality_article-meta" is-a="occurs_zero_or_once">
+    <param name="base_context" value="article/front/article-meta/pub-date"/>
+    <param name="element" value="month"/>
+  </pattern>
 
   <pattern id="pub-date_pub_type">
     <title>

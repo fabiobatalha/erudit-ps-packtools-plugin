@@ -32,6 +32,126 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class MonthTests(PhaseBasedTestCase):
+    """Tests for //month elements.
+    """
+    sch_phase = 'phase.month'
+
+    def test_range_1_12(self):
+        for month in range(1, 13):
+            sample = u"""<article>
+                          <front>
+                            <article-meta>
+                              <pub-date>
+                                <month>%s</month>
+                              </pub-date>
+                            </article-meta>
+                          </front>
+                        </article>
+                     """ % month
+            sample = io.BytesIO(sample.encode('utf-8'))
+
+            self.assertTrue(self._run_validation(sample))
+
+    def test_range_01_12(self):
+        for month in range(1, 13):
+            sample = u"""<article>
+                          <front>
+                            <article-meta>
+                              <pub-date>
+                                <month>%02d</month>
+                              </pub-date>
+                            </article-meta>
+                          </front>
+                        </article>
+                     """ % month
+            sample = io.BytesIO(sample.encode('utf-8'))
+
+            self.assertTrue(self._run_validation(sample))
+
+    def test_out_of_range(self):
+
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <pub-date>
+                            <month>13</month>
+                          </pub-date>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_must_be_integer(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <pub-date>
+                            <month>January</month>
+                          </pub-date>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_is_present_in_elementcitation(self):
+        sample = u"""<article>
+                      <back>
+                        <ref-list>
+                          <ref>
+                            <element-citation>
+                              <month>02</month>
+                            </element-citation>
+                          </ref>
+                        </ref-list>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_is_present_twice_in_elementcitation(self):
+        sample = u"""<article>
+                      <back>
+                        <ref-list>
+                          <ref>
+                            <element-citation>
+                              <month>02</month>
+                              <month>02</month>
+                            </element-citation>
+                          </ref>
+                        </ref-list>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_is_absent_in_elementcitation(self):
+        sample = u"""<article>
+                      <back>
+                        <ref-list>
+                          <ref>
+                            <element-citation>
+                            </element-citation>
+                          </ref>
+                        </ref-list>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+
 class PubDateTests(PhaseBasedTestCase):
     """Tests for article/front/article-meta/pub-date elements.
     """
