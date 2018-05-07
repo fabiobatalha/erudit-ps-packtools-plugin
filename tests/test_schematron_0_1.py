@@ -32,6 +32,64 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class PubDateTests(PhaseBasedTestCase):
+    """Tests for article/front/article-meta/pub-date elements.
+    """
+    sch_phase = 'phase.pub-date'
+
+    def test_pub_type_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <pub-date>
+                            <day>17</day>
+                            <month>03</month>
+                            <year>2014</year>
+                          </pub-date>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_pub_type_allowed_values(self):
+        for pub_type in ['epub', 'epub-ppub']:
+            sample = u"""<article>
+                          <front>
+                            <article-meta>
+                              <pub-date pub-type="%s">
+                                <day>17</day>
+                                <month>03</month>
+                                <year>2014</year>
+                              </pub-date>
+                            </article-meta>
+                          </front>
+                        </article>
+                     """ % pub_type
+            sample = io.BytesIO(sample.encode('utf-8'))
+
+            self.assertTrue(self._run_validation(sample))
+
+    def test_pub_type_disallowed_value(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <pub-date pub-type="wtf">
+                            <day>17</day>
+                            <month>03</month>
+                            <year>2014</year>
+                          </pub-date>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class IssueTests(PhaseBasedTestCase):
     """Tests for:
       - article/front/article-meta/issue

@@ -130,6 +130,11 @@ code for more information.
     <active pattern="issue_cardinality_at_element-citation"/>
     <active pattern="issue_cardinality_at_article-meta"/>
   </phase>
+
+  <phase id="phase.pub-date">
+    <active pattern="pub-date_pub_type"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -165,6 +170,19 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="pub-date_pub_type">
+    <title>
+      Restrict the valid values of pub-date[@pub-type].
+    </title>
+
+    <rule context="article/front/article-meta/pub-date">
+      <assert test="@pub-type = 'epub' or
+                    @pub-type = 'epub-ppub'">
+        Element 'pub-date', attribute pub-type: Invalid value "<value-of select="@pub-type"/>".
+      </assert>
+    </rule>
+  </pattern>
 
   <pattern id="volume_notempty" is-a="assert-not-empty">
     <param name="base_context" value="article/front/article-meta/volume"/>
