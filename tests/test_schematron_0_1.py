@@ -32,6 +32,115 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class HistoryTests(PhaseBasedTestCase):
+    """Tests for:
+      - article/front/article-meta/history
+    """
+    sch_phase = 'phase.history'
+
+    def test_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_date_type_allowed_values(self):
+        for pub_type in ['accepted', 'corrected', 'published', 'preprint',
+                'retracted', 'received', 'review-received', 'review-requested']:
+            sample = u"""<article>
+                          <front>
+                            <article-meta>
+                              <history>
+                                <date date-type="%s">
+                                  <day>17</day>
+                                  <month>03</month>
+                                  <year>2014</year>
+                                </date>
+                              </history>
+                            </article-meta>
+                          </front>
+                        </article>
+                     """ % pub_type
+            sample = io.BytesIO(sample.encode('utf-8'))
+
+            self.assertTrue(self._run_validation(sample))
+
+    def test_date_type_disallowed_values(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <history>
+                            <date date-type="invalid">
+                              <day>17</day>
+                              <month>03</month>
+                              <year>2014</year>
+                            </date>
+                          </history>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_date_type_allowed_values_multi(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <history>
+                            <date date-type="received">
+                              <day>17</day>
+                              <month>03</month>
+                              <year>2014</year>
+                            </date>
+                            <date date-type="accepted">
+                              <day>17</day>
+                              <month>03</month>
+                              <year>2014</year>
+                            </date>
+                          </history>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_history_without_date(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <history>
+                          </history>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class fpage_OR_elocationTests(PhaseBasedTestCase):
     """Tests for article/front/article-meta/fpage or elocation-id elements.
     """

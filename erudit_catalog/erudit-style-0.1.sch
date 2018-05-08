@@ -148,6 +148,11 @@ code for more information.
     <active pattern="elocation-id_notempty"/>
   </phase>
 
+  <phase id="phase.history">
+    <active pattern="history"/>
+    <active pattern="history_has_date"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -183,6 +188,33 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="history_has_date">
+    <rule context="article/front/article-meta/history">
+      <assert test="date">
+        Element 'history': Missing elements date.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="history">
+    <title>
+      Restrict the valid values of history/date/[@date-type].
+    </title>
+
+    <rule context="article/front/article-meta/history/date">
+      <assert test="@date-type = 'received' or 
+                    @date-type = 'accepted' or
+                    @date-type = 'corrected' or
+                    @date-type = 'published' or
+                    @date-type = 'preprint' or
+                    @date-type = 'retracted' or
+                    @date-type = 'review-requested' or
+                    @date-type = 'review-received'">
+        Element 'date', attribute date-type: Invalid value "<value-of select="@date-type"/>".
+      </assert>
+    </rule>
+  </pattern>
 
   <pattern id="fpage_or_elocation-id">
     <rule context="article/front/article-meta">
