@@ -153,6 +153,12 @@ code for more information.
     <active pattern="history_has_date"/>
   </phase>
 
+  <phase id="phase.article-id">
+    <active pattern="article-id_notempty"/>
+    <active pattern="article-id_attributes"/>
+    <active pattern="article-id_values"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -188,6 +194,35 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="article-id_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="article/front/article-meta/article-id"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
+
+  <pattern id="article-id_attributes">
+    <title>
+      Mandatory attributes are present.
+    </title>
+    <rule context="article/front/article-meta/article-id">
+      <assert test="@pub-id-type">
+        Element 'article-id': Missing attribute @pub-id-type.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="article-id_values">
+    <title>
+      Values are known.
+    </title>
+    <rule context="article/front/article-meta/article-id[@pub-id-type]">
+      <assert test="@pub-id-type = 'doi' or 
+                    @pub-id-type = 'publisher-id'">
+        Element 'article-id', attribute pub-id-type: Invalid value "<value-of select="@pub-id-type"/>".
+      </assert>
+    </rule>
+  </pattern>
 
   <pattern id="history_has_date">
     <rule context="article/front/article-meta/history">
@@ -338,7 +373,7 @@ code for more information.
   <pattern id="app_has_id">
     <rule context="article/back/app-group/app">
       <assert test="@id">
-        Element 'app': Missing attribute id.
+        Element 'app': Missing attribute @id.
       </assert>
     </rule>
   </pattern>

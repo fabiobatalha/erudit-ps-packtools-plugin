@@ -32,6 +32,118 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class ArticleIdTests(PhaseBasedTestCase):
+    """Tests for article/front/article-meta/article-id elements.
+    """
+    sch_phase = 'phase.article-id'
+
+    def test_article_id_is_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_pub_id_type_doi_is_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <article-id pub-id-type='publisher-id'>
+                            128129ar
+                          </article-id>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_pub_id_type_doi(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <article-id pub-id-type='doi'>
+                            10.1590/1414-431X20143434
+                          </article-id>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_pub_id_type_doi_is_empty(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <article-id pub-id-type='doi'/>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_invalid_pub_id_type(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <article-id pub-id-type='unknown'>
+                            10.1590/1414-431X20143434
+                          </article-id>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_invalid_pub_id_type_case2(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <article-id pub-id-type='unknown'>
+                            10.1590/1414-431X20143434
+                          </article-id>
+                          <article-id pub-id-type='doi'>
+                            10.1590/1414-431X20143434
+                          </article-id>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_valid_pub_id_type_values(self):
+        for typ in ['doi', 'publisher-id']:
+            sample = u"""<article>
+                          <front>
+                            <article-meta>
+                              <article-id pub-id-type='%s'>
+                                10.1590/1414-431X20143433
+                              </article-id>
+                              <article-id pub-id-type='doi'>
+                                10.1590/1414-431X20143434
+                              </article-id>
+                            </article-meta>
+                          </front>
+                        </article>
+                     """ % typ
+            sample = io.BytesIO(sample.encode('utf-8'))
+            self.assertTrue(self._run_validation(sample))
+
+
 class HistoryTests(PhaseBasedTestCase):
     """Tests for:
       - article/front/article-meta/history
