@@ -126,20 +126,6 @@ class HistoryTests(PhaseBasedTestCase):
 
         self.assertTrue(self._run_validation(sample))
 
-    def test_history_without_date(self):
-        sample = u"""<article>
-                      <front>
-                        <article-meta>
-                          <history>
-                          </history>
-                        </article-meta>
-                      </front>
-                    </article>
-                 """
-        sample = io.BytesIO(sample.encode('utf-8'))
-
-        self.assertFalse(self._run_validation(sample))
-
 
 class fpage_OR_elocationTests(PhaseBasedTestCase):
     """Tests for article/front/article-meta/fpage or elocation-id elements.
