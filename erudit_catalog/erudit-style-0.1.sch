@@ -172,6 +172,11 @@ code for more information.
     <active pattern="kwd_notempty"/>
   </phase>
 
+  <phase id="phase.abstract">
+    <active pattern="abstract_lang"/>
+    <active pattern="abstract_has_p_or_sec"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -207,6 +212,30 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="abstract_has_p_or_sec">
+    <title>
+      Make sure all abstract elements must have element p or sec.
+    </title>
+
+    <rule context="article/front/article-meta/abstract">
+      <assert test="p or sec">
+        Element 'abstract': Missing element p or sec.
+      </assert>  
+    </rule>
+  </pattern>
+
+  <pattern id="abstract_lang">
+    <title>
+      Make sure all abstract elements have xml:lang attribute.
+    </title>
+
+    <rule context="article/front/article-meta/abstract">
+      <assert test="@xml:lang">
+        Element 'abstract': Missing attribute xml:lang.
+      </assert>  
+    </rule>
+  </pattern>
 
   <pattern id="kwd_notempty" is-a="assert-not-empty">
     <param name="base_context" value="article/front/article-meta/kwd-group/kwd"/>
