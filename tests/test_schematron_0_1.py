@@ -32,6 +32,127 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class KwdGroupLangTests(PhaseBasedTestCase):
+    """Tests for article/front/article-meta/kwd-group elements.
+    """
+    sch_phase = 'phase.kwd-group'
+
+    def test_missing_title(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <kwd-group xml:lang="fr">
+                            <kwd>francophonie minoritaire canadienne</kwd>
+                            <kwd>qualité de la langue</kwd>
+                          </kwd-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_single_occurence(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <kwd-group xml:lang="fr">
+                            <title>Mots-clés</title>
+                            <kwd>francophonie minoritaire canadienne</kwd>
+                            <kwd>qualité de la langue</kwd>
+                          </kwd-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_single_occurence_missing_lang(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <kwd-group>
+                            <title>Mots-clés</title>
+                            <kwd>francophonie minoritaire canadienne</kwd>
+                            <kwd>qualité de la langue</kwd>
+                          </kwd-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_many_occurencies(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <kwd-group xml:lang="en">
+                            <title>Keywords</title>
+                            <kwd>Canadian Francophone minority</kwd>
+                            <kwd>language quality</kwd>
+                          </kwd-group>
+                          <kwd-group xml:lang="ft">
+                            <title>Mots-clés</title>
+                            <kwd>francophonie minoritaire canadienne</kwd>
+                            <kwd>qualité de la langue</kwd>
+                          </kwd-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_many_occurencies_without_lang(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <kwd-group>
+                            <title>Keywords</title>
+                            <kwd>Canadian Francophone minority</kwd>
+                            <kwd>language quality</kwd>
+                          </kwd-group>
+                          <kwd-group>
+                            <title>Mots-clés</title>
+                            <kwd>francophonie minoritaire canadienne</kwd>
+                            <kwd>qualité de la langue</kwd>
+                          </kwd-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_some_occurencies_without_lang(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <kwd-group>
+                            <title>Keywords</title>
+                            <kwd>Canadian Francophone minority</kwd>
+                            <kwd>language quality</kwd>
+                          </kwd-group>
+                          <kwd-group xml:lang="ft">
+                            <title>Mots-clés</title>
+                            <kwd>francophonie minoritaire canadienne</kwd>
+                            <kwd>qualité de la langue</kwd>
+                          </kwd-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
 class ArticleIdTests(PhaseBasedTestCase):
     """Tests for article/front/article-meta/article-id elements.
     """

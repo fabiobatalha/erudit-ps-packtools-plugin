@@ -161,6 +161,11 @@ code for more information.
     <active pattern="article-id_doi_value"/>
   </phase>
 
+  <phase id="phase.kwd-group">
+    <active pattern="kwdgroup_lang"/>
+    <active pattern="kwdgroup_has_title"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -196,6 +201,26 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="kwdgroup_lang">
+    <title>
+      Make sure all kwd-group elements have xml:lang attribute.
+    </title>
+
+    <rule context="article/front/article-meta/kwd-group">
+      <assert test="@xml:lang">
+        Element 'kwd-group': Missing attribute xml:lang.
+      </assert>  
+    </rule>
+  </pattern>
+
+  <pattern id="kwdgroup_has_title">
+    <rule context="article/front/article-meta/kwd-group">
+      <assert test="title">
+        Element 'kwd-group': Missing elements title.
+      </assert>
+    </rule>
+  </pattern>
 
   <pattern id="article-id_doi_value">
     <title>
