@@ -32,6 +32,44 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class KwdTests(PhaseBasedTestCase):
+    """Tests for article/front/article-meta/kwd-group/kwd elements.
+    """
+    sch_phase = 'phase.kwd'
+
+    def test_ok(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <kwd-group xml:lang="fr">
+                            <kwd>francophonie minoritaire canadienne</kwd>
+                            <kwd>qualité de la langue</kwd>
+                          </kwd-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_missing_content(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <kwd-group xml:lang="fr">
+                            <kwd>francophonie minoritaire canadienne</kwd>
+                            <kwd></kwd>
+                          </kwd-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class KwdGroupLangTests(PhaseBasedTestCase):
     """Tests for article/front/article-meta/kwd-group elements.
     """

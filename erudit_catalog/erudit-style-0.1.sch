@@ -166,6 +166,10 @@ code for more information.
     <active pattern="kwdgroup_has_title"/>
   </phase>
 
+  <phase id="phase.kwd">
+    <active pattern="kwd_notempty"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -201,6 +205,12 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="kwd_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="article/front/article-meta/kwd-group/kwd"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
 
   <pattern id="kwdgroup_lang">
     <title>
