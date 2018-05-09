@@ -70,10 +70,48 @@ class KwdTests(PhaseBasedTestCase):
         self.assertFalse(self._run_validation(sample))
 
 
-class KwdGroupLangTests(PhaseBasedTestCase):
+class KwdGroupTests(PhaseBasedTestCase):
     """Tests for article/front/article-meta/kwd-group elements.
     """
     sch_phase = 'phase.kwd-group'
+
+    def test_unespected_nested_kwd(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <kwd-group xml:lang="fr">
+                            <kwd>francophonie minoritaire canadienne</kwd>
+                            <kwd>qualité de la langue</kwd>
+                            <nested-kwd>
+                                <kwd>nested keyword</kwd>
+                            </nested-kwd>
+                          </kwd-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_unespected_compounded_kwd(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <kwd-group xml:lang="fr">
+                            <kwd>francophonie minoritaire canadienne</kwd>
+                            <kwd>qualité de la langue</kwd>
+                            <compounded-kwd>
+                                <kwd>nested keyword</kwd>
+                            </compounded-kwd>
+                          </kwd-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
 
     def test_missing_title(self):
         sample = u"""<article>

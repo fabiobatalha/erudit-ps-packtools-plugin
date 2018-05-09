@@ -162,8 +162,10 @@ code for more information.
   </phase>
 
   <phase id="phase.kwd-group">
-    <active pattern="kwdgroup_lang"/>
-    <active pattern="kwdgroup_has_title"/>
+    <active pattern="kwd-group_lang"/>
+    <active pattern="kwd-group_has_title"/>
+    <active pattern="kwd-group_cannot_have_nested-kwd"/>
+    <active pattern="kwd-group_cannot_have_compounded-kwd"/>
   </phase>
 
   <phase id="phase.kwd">
@@ -212,7 +214,31 @@ code for more information.
     <param name="err_message" value="'Element cannot be empty.'"/>
   </pattern>
 
-  <pattern id="kwdgroup_lang">
+  <pattern id="kwd-group_cannot_have_nested-kwd">
+    <title>
+      kwd-group elements cannot have the element nested-kwd.
+    </title>
+
+    <rule context="article/front/article-meta/kwd-group">
+      <assert test="not(nested-kwd)">
+          Element 'kwd-group': Unexpected element nested-kwd.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="kwd-group_cannot_have_compounded-kwd">
+    <title>
+      kwd-group elements cannot have the element compounded-kwd.
+    </title>
+
+    <rule context="article/front/article-meta/kwd-group">
+      <assert test="not(compounded-kwd)">
+          Element 'kwd-group': Unexpected element compounded-kwd.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="kwd-group_lang">
     <title>
       Make sure all kwd-group elements have xml:lang attribute.
     </title>
@@ -224,7 +250,7 @@ code for more information.
     </rule>
   </pattern>
 
-  <pattern id="kwdgroup_has_title">
+  <pattern id="kwd-group_has_title">
     <rule context="article/front/article-meta/kwd-group">
       <assert test="title">
         Element 'kwd-group': Missing elements title.
