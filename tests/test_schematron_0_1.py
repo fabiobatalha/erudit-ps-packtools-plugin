@@ -53,9 +53,7 @@ class ArticleIdTests(PhaseBasedTestCase):
         sample = u"""<article>
                       <front>
                         <article-meta>
-                          <article-id pub-id-type='publisher-id'>
-                            128129ar
-                          </article-id>
+                          <article-id pub-id-type='publisher-id'>128129ar</article-id>
                         </article-meta>
                       </front>
                     </article>
@@ -68,9 +66,7 @@ class ArticleIdTests(PhaseBasedTestCase):
         sample = u"""<article>
                       <front>
                         <article-meta>
-                          <article-id pub-id-type='doi'>
-                            10.1590/1414-431X20143434
-                          </article-id>
+                          <article-id pub-id-type='doi'>10.1590/1414-431X20143434</article-id>
                         </article-meta>
                       </front>
                     </article>
@@ -96,9 +92,7 @@ class ArticleIdTests(PhaseBasedTestCase):
         sample = u"""<article>
                       <front>
                         <article-meta>
-                          <article-id pub-id-type='unknown'>
-                            10.1590/1414-431X20143434
-                          </article-id>
+                          <article-id pub-id-type='unknown'>10.1590/1414-431X20143434</article-id>
                         </article-meta>
                       </front>
                     </article>
@@ -111,12 +105,8 @@ class ArticleIdTests(PhaseBasedTestCase):
         sample = u"""<article>
                       <front>
                         <article-meta>
-                          <article-id pub-id-type='unknown'>
-                            10.1590/1414-431X20143434
-                          </article-id>
-                          <article-id pub-id-type='doi'>
-                            10.1590/1414-431X20143434
-                          </article-id>
+                          <article-id pub-id-type='unknown'>10.1590/1414-431X20143434</article-id>
+                          <article-id pub-id-type='doi'>10.1590/1414-431X20143434</article-id>
                         </article-meta>
                       </front>
                     </article>
@@ -130,18 +120,45 @@ class ArticleIdTests(PhaseBasedTestCase):
             sample = u"""<article>
                           <front>
                             <article-meta>
-                              <article-id pub-id-type='%s'>
-                                10.1590/1414-431X20143433
-                              </article-id>
-                              <article-id pub-id-type='doi'>
-                                10.1590/1414-431X20143434
-                              </article-id>
+                              <article-id pub-id-type='%s'>10.1590/1414-431X20143433</article-id>
+                              <article-id pub-id-type='doi'>10.1590/1414-431X20143434</article-id>
                             </article-meta>
                           </front>
                         </article>
                      """ % typ
             sample = io.BytesIO(sample.encode('utf-8'))
             self.assertTrue(self._run_validation(sample))
+
+    def test_invalid_doi(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <article-id pub-id-type='doi'>
+                            https://dx.doi.org/10.1590/1414-431X20143434
+                          </article-id>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+        self.assertFalse(self._run_validation(sample))
+
+    def test_doi_with_white_spaces_and_line_breaks(self):
+        """
+        DOI's must not have white spaces or line breaks
+        """
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <article-id pub-id-type='doi'>
+                            10.1590/1414-431X20143434
+                          </article-id>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+        self.assertTrue(self._run_validation(sample))
 
 
 class HistoryTests(PhaseBasedTestCase):
@@ -767,9 +784,7 @@ class ElementPubIDTests(PhaseBasedTestCase):
                               <styled-content specific-use="display">
                                 Traisnel, C. et Violette, I. (2010). Qui ça, nous? La question des identités multiples dans l'aménagement d'une représentation de la francophonie en Acadie du Nouveau-Brunswick. In Bélanger, N., Garant, N., Dalley, P. et Desabrais, P. (dir.). Produire et reproduire la francophonie en la nommant. Sudbury : Prise de parole. 101-122.
                               </styled-content>
-                              <pub-id pub-id-type="doi">
-                                anydoi.123
-                              </pub-id>
+                              <pub-id pub-id-type="doi">10.1019/anydoi.123</pub-id>
                             </element-citation>
                           </ref>
                         </ref-list>
@@ -792,9 +807,7 @@ class ElementPubIDTests(PhaseBasedTestCase):
                               <styled-content specific-use="display">
                                 Traisnel, C. et Violette, I. (2010). Qui ça, nous? La question des identités multiples dans l'aménagement d'une représentation de la francophonie en Acadie du Nouveau-Brunswick. In Bélanger, N., Garant, N., Dalley, P. et Desabrais, P. (dir.). Produire et reproduire la francophonie en la nommant. Sudbury : Prise de parole. 101-122.
                               </styled-content>
-                              <pub-id>
-                                anydoi.123
-                              </pub-id>
+                              <pub-id>10.1019/anydoi.123</pub-id>
                             </element-citation>
                           </ref>
                         </ref-list>
@@ -828,6 +841,7 @@ class ElementPubIDTests(PhaseBasedTestCase):
         sample = io.BytesIO(sample.encode('utf-8'))
 
         self.assertFalse(self._run_validation(sample))
+
 
 class ElementCitationTests(PhaseBasedTestCase):
     """Tests for article/back/ref-list/ref element.

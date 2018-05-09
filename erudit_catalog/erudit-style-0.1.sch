@@ -99,6 +99,7 @@ code for more information.
   <phase id="phase.pub-id">
     <active pattern="pub-id_has_pub-id-type"/>
     <active pattern="pub-id_notempty"/>
+    <active pattern="pub-id_doi_value"/>
   </phase>
 
   <phase id="phase.chapter-title">
@@ -156,7 +157,8 @@ code for more information.
   <phase id="phase.article-id">
     <active pattern="article-id_notempty"/>
     <active pattern="article-id_attributes"/>
-    <active pattern="article-id_values"/>
+    <active pattern="article-id_pub-id-type_values"/>
+    <active pattern="article-id_doi_value"/>
   </phase>
 
   <!--
@@ -195,6 +197,20 @@ code for more information.
     Patterns - sets of rules.
   -->
 
+  <pattern id="article-id_doi_value">
+    <title>
+      Only accept DOI's in its raw format.
+      regex: /^10.\d{4,9}/[-._;()/:A-Z0-9]+$/i
+      source: https://www.crossref.org/blog/dois-and-matching-regular-expressions/
+    </title>
+
+    <rule context="article/front/article-meta/article-id[@pub-id-type='doi']">
+      <assert test="regexp:test(current(), '(\s+|^)10.(\d{4}|\d{5}|\d{6}|\d{7}|\d{8}|\d{9})/[-._;()/:a-zA-Z0-9]+(\s+|$)')">
+        Element 'article-id[@pub-id-type="doi"]': Invalid value '<value-of select="current()"/>'.
+      </assert>
+    </rule>
+  </pattern>
+
   <pattern id="article-id_notempty" is-a="assert-not-empty">
     <param name="base_context" value="article/front/article-meta/article-id"/>
     <param name="assert_expr" value="text()"/>
@@ -212,7 +228,7 @@ code for more information.
     </rule>
   </pattern>
 
-  <pattern id="article-id_values">
+  <pattern id="article-id_pub-id-type_values">
     <title>
       Values are known.
     </title>
@@ -374,6 +390,20 @@ code for more information.
     <rule context="article/back/app-group/app">
       <assert test="@id">
         Element 'app': Missing attribute @id.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="pub-id_doi_value">
+    <title>
+      Only accept DOI's in its raw format.
+      regex: /^10.\d{4,9}/[-._;()/:A-Z0-9]+$/i
+      source: https://www.crossref.org/blog/dois-and-matching-regular-expressions/
+    </title>
+
+    <rule context="article/back/ref-list/ref/element-citation/pub-id[@pub-id-type='doi']">
+      <assert test="regexp:test(current(), '^10.(\d{4}|\d{5}|\d{6}|\d{7}|\d{8}|\d{9})/[-._;()/:a-zA-Z0-9]+$')">
+        Element 'pub-id[@pub-id-type="doi"]': Invalid value '<value-of select="current()"/>'.
       </assert>
     </rule>
   </pattern>
