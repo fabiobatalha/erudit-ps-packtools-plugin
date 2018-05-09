@@ -177,6 +177,10 @@ code for more information.
     <active pattern="abstract_has_p_or_sec"/>
   </phase>
 
+  <phase id="phase.trans-abstract">
+    <active pattern="trans-abstract_lang"/>
+    <active pattern="trans-abstract_has_p_or_sec"/>
+  </phase>
   <!--
     Abstract Patterns
   -->
@@ -212,6 +216,30 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="trans-abstract_has_p_or_sec">
+    <title>
+      Make sure all abstract elements must have element p or sec.
+    </title>
+
+    <rule context="article/front/article-meta/trans-abstract">
+      <assert test="p or sec">
+        Element 'trans-abstract': Missing element p or sec.
+      </assert>  
+    </rule>
+  </pattern>
+
+  <pattern id="trans-abstract_lang">
+    <title>
+      Make sure all abstract elements have xml:lang attribute.
+    </title>
+
+    <rule context="article/front/article-meta/trans-abstract">
+      <assert test="@xml:lang">
+        Element 'trans-abstract': Missing attribute xml:lang.
+      </assert>  
+    </rule>
+  </pattern>
 
   <pattern id="abstract_has_p_or_sec">
     <title>

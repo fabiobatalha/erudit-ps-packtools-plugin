@@ -32,6 +32,87 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class TransAbstractTests(PhaseBasedTestCase):
+    """Tests for article/front/article-meta/abstract elements.
+    """
+    sch_phase = 'phase.trans-abstract'
+
+    def test_is_present_with_p(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <trans-abstract xml:lang="fr">
+                            <p>Cet article a pour objectif d’analyser...</p>
+                          </trans-abstract>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_is_present_absense_of_p_or_sec(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <trans-abstract xml:lang="fr">
+                          </trans-abstract>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_is_present_with_sec(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <trans-abstract xml:lang="fr">
+                            <sec>
+                              <title>Sec Title</title>
+                              <p>Sec content</p>
+                            </sec>
+                          </trans-abstract>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_is_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_is_present_without_lang(self):
+        sample = u"""<?xml version="1.0" encoding="UTF-8"?>
+                    <article>
+                      <front>
+                        <article-meta>
+                          <trans-abstract>
+                            <p>Cet article a pour objectif d’analyser...</p>
+                          </trans-abstract>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class AbstractTests(PhaseBasedTestCase):
     """Tests for article/front/article-meta/abstract elements.
     """
