@@ -181,6 +181,11 @@ code for more information.
     <active pattern="trans-abstract_lang"/>
     <active pattern="trans-abstract_has_p_or_sec"/>
   </phase>
+
+  <phase id="phase.permissions">
+    <active pattern="permissions_must_exists"/>
+    <active pattern="permissions_has_license"/>
+  </phase>
   <!--
     Abstract Patterns
   -->
@@ -216,6 +221,30 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="permissions_has_license">
+    <title>
+      Make sure all permissions element must have license.
+    </title>
+
+    <rule context="article/front/article-meta/permissions">
+      <assert test="license">
+        Element 'permissions': Missing element license.
+      </assert>  
+    </rule>
+  </pattern>
+
+  <pattern id="permissions_must_exists">
+    <title>
+      Make sure all article-meta element must have permissions.
+    </title>
+
+    <rule context="article/front/article-meta">
+      <assert test="permissions">
+        Element 'article-meta': Missing element permissions.
+      </assert>  
+    </rule>
+  </pattern>
 
   <pattern id="trans-abstract_has_p_or_sec">
     <title>
