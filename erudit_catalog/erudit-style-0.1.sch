@@ -227,7 +227,7 @@ code for more information.
       Make sure all permissions element must have license.
     </title>
 
-    <rule context="article/front/article-meta/permissions">
+    <rule context="//permissions">
       <assert test="license">
         Element 'permissions': Missing element license.
       </assert>  
