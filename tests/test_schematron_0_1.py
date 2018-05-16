@@ -32,6 +32,59 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class ContribGroupTests(PhaseBasedTestCase):
+    """Tests for //name element.
+    """
+    sch_phase = 'phase.contrib-group'
+
+    def test_case_1(self):
+        """
+        valid @content-type in contrib-group
+        """
+        for data in ['author', 'editor']:
+            sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <front>
+                          <article-meta>
+                            <contrib-group content-type="%s">
+                              <contrib>
+                                <name>
+                                  <surname>Arrighi</surname>
+                                  <given-names>Laurence</given-names>
+                                </name>
+                              </contrib>
+                            </contrib-group>
+                          </article-meta>
+                        </front>
+                      </article>
+                   """ % data
+            sample = io.BytesIO(sample.encode('utf-8'))
+
+            self.assertTrue(self._run_validation(sample))
+
+    def test_case_2(self):
+        """
+        invalid @content-type in  contrib-group
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <contrib-group content-type="unknow">
+                            <contrib>
+                              <name>
+                                <surname>Arrighi</surname>
+                                <given-names>Laurence</given-names>
+                              </name>
+                            </contrib>
+                          </contrib-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class NameTests(PhaseBasedTestCase):
     """Tests for //name element.
     """

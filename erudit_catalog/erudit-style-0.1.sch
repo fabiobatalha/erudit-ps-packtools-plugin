@@ -193,6 +193,12 @@ code for more information.
     <active pattern="surname_notempty"/>
     <active pattern="given-names_notempty"/>
   </phase>
+
+  <phase id="phase.contrib-group">
+    <active pattern="contrib-group_content-type_values"/>
+  </phase>
+
+
   <!--
     Abstract Patterns
   -->
@@ -228,6 +234,18 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="contrib-group_content-type_values">
+    <title>
+      Make sure @content-type in contrib-group accepts only JATS4M values.
+    </title>
+    <rule context="article/front/article-meta/contrib-group[@content-type]">
+      <assert test="@content-type='author' or 
+                    @content-type='editor'">
+        Element 'contrib-group', attribute content-type: Invalid value "<value-of select="@content-type"/>". 
+      </assert>
+    </rule>
+  </pattern>
 
   <pattern id="prefix_notempty" is-a="assert-not-empty">
     <param name="base_context" value="//prefix"/>
