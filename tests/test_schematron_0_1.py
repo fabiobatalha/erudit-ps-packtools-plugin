@@ -84,6 +84,29 @@ class ContribGroupTests(PhaseBasedTestCase):
 
         self.assertFalse(self._run_validation(sample))
 
+    def test_case_3(self):
+        """
+        valid contrib-group without @content-type
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <contrib-group>
+                            <contrib>
+                              <name>
+                                <surname>Arrighi</surname>
+                                <given-names>Laurence</given-names>
+                              </name>
+                            </contrib>
+                          </contrib-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
 
 class NameTests(PhaseBasedTestCase):
     """Tests for //name element.
