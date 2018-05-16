@@ -186,6 +186,13 @@ code for more information.
     <active pattern="permissions_must_exists"/>
     <active pattern="permissions_has_license"/>
   </phase>
+
+  <phase id="phase.name">
+    <active pattern="prefix_notempty"/>
+    <active pattern="suffix_notempty"/>
+    <active pattern="surname_notempty"/>
+    <active pattern="given-names_notempty"/>
+  </phase>
   <!--
     Abstract Patterns
   -->
@@ -221,6 +228,30 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="prefix_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="//prefix"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
+
+  <pattern id="suffix_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="//suffix"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
+
+  <pattern id="surname_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="//surname"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
+
+  <pattern id="given-names_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="//given-names"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
 
   <pattern id="permissions_has_license">
     <title>
