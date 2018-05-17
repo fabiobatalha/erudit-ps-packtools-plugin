@@ -32,8 +32,134 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class ContribIdTests(PhaseBasedTestCase):
+    """Tests for //contrib-id element.
+    """
+    sch_phase = 'phase.contrib-id'
+
+    def test_case_1(self):
+        """
+        valid @contrib-id-type=orcid in contrib-id
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <contrib-group>
+                          <contrib contrib-type="person">
+                            <contrib-id contrib-id-type="orcid">0000-0003-2125-060X</contrib-id>
+                            <name>
+                              <surname>Arrighi</surname>
+                              <given-names>Laurence</given-names>
+                            </name>
+                          </contrib>
+                        </contrib-group>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case_2(self):
+        """
+        invalid contrib-id wihtout value
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <contrib-group>
+                          <contrib contrib-type="person">
+                            <contrib-id contrib-id-type="orcid"></contrib-id>
+                            <name>
+                              <surname>Arrighi</surname>
+                              <given-names>Laurence</given-names>
+                            </name>
+                          </contrib>
+                        </contrib-group>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case_3(self):
+        """
+        invalid contrib-id with contrib-id-type not allowed
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <contrib-group>
+                          <contrib contrib-type="person">
+                            <contrib-id contrib-id-type="xxx"></contrib-id>
+                            <name>
+                              <surname>Arrighi</surname>
+                              <given-names>Laurence</given-names>
+                            </name>
+                          </contrib>
+                        </contrib-group>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case_4(self):
+        """
+        invalid contrib-id with values that seems to be an URL
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <contrib-group>
+                          <contrib contrib-type="person">
+                            <contrib-id contrib-id-type="orcid">http://orcid.org/0000-0001-8528-2091</contrib-id>
+                            <name>
+                              <surname>Arrighi</surname>
+                              <given-names>Laurence</given-names>
+                            </name>
+                          </contrib>
+                        </contrib-group>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case_5(self):
+        """
+        invalid contrib-id without contrib-id-type.
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <contrib-group>
+                          <contrib contrib-type="person">
+                            <contrib-id>0000-0001-8528-2091</contrib-id>
+                            <name>
+                              <surname>Arrighi</surname>
+                              <given-names>Laurence</given-names>
+                            </name>
+                          </contrib>
+                        </contrib-group>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class ContribTests(PhaseBasedTestCase):
-    """Tests for //name element.
+    """Tests for //contrib element.
     """
     sch_phase = 'phase.contrib'
 
@@ -217,7 +343,7 @@ class ContribTests(PhaseBasedTestCase):
 
 
 class ContribGroupTests(PhaseBasedTestCase):
-    """Tests for //name element.
+    """Tests for //contrib-group element.
     """
     sch_phase = 'phase.contrib-group'
 

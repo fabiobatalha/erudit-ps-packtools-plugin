@@ -207,6 +207,13 @@ code for more information.
     <active pattern="contrib_cannot_have_aff-alternatives"/>
   </phase>
 
+  <phase id="phase.contrib-id">
+    <active pattern="contrib-id_notempty"/>
+    <active pattern="contrib-id_must_have_contrib-id-type"/>
+    <active pattern="contrib-id_contrib-id-type_values"/>
+    <active pattern="contrib-id_avoid_url_in_value"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -242,6 +249,49 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="contrib-id_must_have_contrib-id-type">
+    <title>
+      Make sure all contrib-id elements have contrib-id-type.
+    </title>
+
+    <rule context="//contrib-id">
+      <assert test="@contrib-id-type">
+        Element 'contrib-id': Missing attribute contrib-id-type.
+      </assert>  
+    </rule>
+  </pattern>
+
+  <pattern id="contrib-id_avoid_url_in_value">
+    <title>
+      Only accept ids that seems not to be an URL.
+    </title>
+
+    <rule context="//contrib-id">
+      <assert test="not(regexp:test(current(), 'http'))">
+        Element 'contrib-id': Invalid value '<value-of select="current()"/>'. Value can not be a URL.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="contrib-id_contrib-id-type_values">
+    <title>
+      Make sure @contrib-id-type in contrib-id accepted values.
+    </title>
+    <rule context="article/front/article-meta/contrib-group/contrib[@contrib-id-type]">
+      <assert test="@contrib-id-type='orcid' or 
+                    @contrib-id-type='researchid' or
+                    @contrib-id-type='scopus'">
+        Element 'contrib-id', attribute contrib-id-type: Invalid value "<value-of select="@contrib-id-type"/>". 
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="contrib-id_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="//contrib-id"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
 
   <pattern id="contrib-group_cannot_have_aff-alternatives">
     <title>
