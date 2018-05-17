@@ -196,11 +196,15 @@ code for more information.
 
   <phase id="phase.contrib-group">
     <active pattern="contrib-group_content-type_values"/>
+    <active pattern="contrib-group_cannot_have_aff"/>
+    <active pattern="contrib-group_cannot_have_aff-alternatives"/>
   </phase>
 
   <phase id="phase.contrib">
     <active pattern="contrib_contrib-type_values"/>
     <active pattern="contrib_contrib-type_group_must_have_collab"/>
+    <active pattern="contrib_cannot_have_aff"/>
+    <active pattern="contrib_cannot_have_aff-alternatives"/>
   </phase>
 
   <!--
@@ -238,6 +242,54 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="contrib-group_cannot_have_aff-alternatives">
+    <title>
+      contrib-group elements cannot have the element aff-alternatives.
+    </title>
+
+    <rule context="//contrib-group">
+      <assert test="not(aff-alternatives)">
+          Element 'contrib-group': Unexpected element aff-laternatives.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="contrib-group_cannot_have_aff">
+    <title>
+      contrib-group elements cannot have the element aff.
+    </title>
+
+    <rule context="//contrib-group">
+      <assert test="not(aff)">
+          Element 'contrib-group': Unexpected element aff.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="contrib_cannot_have_aff-alternatives">
+    <title>
+      contrib elements cannot have the element aff-alternatives.
+    </title>
+
+    <rule context="//contrib">
+      <assert test="not(aff-alternatives)">
+          Element 'contrib': Unexpected element aff-laternatives.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="contrib_cannot_have_aff">
+    <title>
+      contrib elements cannot have the element aff.
+    </title>
+
+    <rule context="//contrib">
+      <assert test="not(aff)">
+          Element 'contrib': Unexpected element aff.
+      </assert>
+    </rule>
+  </pattern>
 
   <pattern id="contrib_contrib-type_group_must_have_collab">
     <title>

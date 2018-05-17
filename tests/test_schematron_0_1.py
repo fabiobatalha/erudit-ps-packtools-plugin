@@ -164,6 +164,57 @@ class ContribTests(PhaseBasedTestCase):
 
         self.assertTrue(self._run_validation(sample))
 
+    def test_case_6(self):
+        """
+        invalid element aff not authorized in contrib
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <contrib-group>
+                            <contrib>
+                              <name>
+                                <surname>Arrighi</surname>
+                                <given-names>Laurence</given-names>
+                              </name>
+                              <aff>
+                              </aff>
+                            </contrib>
+                          </contrib-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case_7(self):
+        """
+        invalid element aff-alternatives not authorized in contrib
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <contrib-group>
+                            <contrib>
+                              <name>
+                                <surname>Arrighi</surname>
+                                <given-names>Laurence</given-names>
+                              </name>
+                              <aff-alternatives>
+                                <aff></aff>
+                              </aff-alternatives>
+                            </contrib>
+                          </contrib-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
 
 class ContribGroupTests(PhaseBasedTestCase):
     """Tests for //name element.
@@ -239,6 +290,57 @@ class ContribGroupTests(PhaseBasedTestCase):
         sample = io.BytesIO(sample.encode('utf-8'))
 
         self.assertTrue(self._run_validation(sample))
+
+    def test_case_4(self):
+        """
+        invalid element aff not authorized in contrib
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <contrib-group>
+                            <contrib>
+                              <name>
+                                <surname>Arrighi</surname>
+                                <given-names>Laurence</given-names>
+                              </name>
+                            </contrib>
+                            <aff>
+                            </aff>
+                          </contrib-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case_5(self):
+        """
+        invalid element aff-alternatives not authorized in contrib
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <contrib-group>
+                            <contrib>
+                              <name>
+                                <surname>Arrighi</surname>
+                                <given-names>Laurence</given-names>
+                              </name>
+                            </contrib>
+                            <aff-alternatives>
+                              <aff></aff>
+                            </aff-alternatives>
+                          </contrib-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
 
 
 class NameTests(PhaseBasedTestCase):
