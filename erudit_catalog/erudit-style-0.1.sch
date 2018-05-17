@@ -198,6 +198,10 @@ code for more information.
     <active pattern="contrib-group_content-type_values"/>
   </phase>
 
+  <phase id="phase.contrib">
+    <active pattern="contrib_contrib-type_values"/>
+    <active pattern="contrib_contrib-type_group_must_have_collab"/>
+  </phase>
 
   <!--
     Abstract Patterns
@@ -234,6 +238,30 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="contrib_contrib-type_group_must_have_collab">
+    <title>
+      Make sure contrib with @contrib-type=groub must have a collab inside according to JATS4M rules.
+      see: https://github.com/substance/dar/blob/master/DarArticle.md#contrib-group
+    </title>
+    <rule context="article/front/article-meta/contrib-group/contrib[@contrib-type='group']">
+      <assert test="collab">
+        Element 'contrib[@contrib-group="group"]': Missing element collab.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="contrib_contrib-type_values">
+    <title>
+      Make sure @contrib-type in contrib accepts only JATS4M values.
+    </title>
+    <rule context="article/front/article-meta/contrib-group/contrib[@contrib-type]">
+      <assert test="@contrib-type='person' or 
+                    @contrib-type='group'">
+        Element 'contrib', attribute contrib-type: Invalid value "<value-of select="@contrib-type"/>". 
+      </assert>
+    </rule>
+  </pattern>
 
   <pattern id="contrib-group_content-type_values">
     <title>

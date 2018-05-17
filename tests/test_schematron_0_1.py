@@ -32,6 +32,139 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class ContribTests(PhaseBasedTestCase):
+    """Tests for //name element.
+    """
+    sch_phase = 'phase.contrib'
+
+    def test_case_1(self):
+        """
+        valid @contrib-type=person in contrib
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <contrib-group>
+                          <contrib contrib-type="person">
+                            <name>
+                              <surname>Arrighi</surname>
+                              <given-names>Laurence</given-names>
+                            </name>
+                          </contrib>
+                        </contrib-group>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case_2(self):
+        """
+        valid @contrib-type=group in contrib
+
+        According to JATS4M contrib-type=group must have a element collab inside
+        see: https://github.com/substance/dar/blob/master/DarArticle.md#contrib-group
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <contrib-group>
+                          <contrib contrib-type="group">
+                            <collab>
+                              <contrib-group>
+                                <contrib>
+                                  <name>
+                                    <surname>Arrighi</surname>
+                                    <given-names>Laurence</given-names>
+                                  </name>
+                                </contrib>
+                              </contrib-group>
+                            </collab>
+                          </contrib>
+                        </contrib-group>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case_3(self):
+        """
+        invalid @contrib-type=group in contrib
+
+        According to JATS4M contrib-type=group must have a element collab inside
+        see: https://github.com/substance/dar/blob/master/DarArticle.md#contrib-group
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <contrib-group>
+                          <contrib contrib-type="group">
+                            <name>
+                              <surname>Arrighi</surname>
+                              <given-names>Laurence</given-names>
+                            </name>
+                          </contrib>
+                        </contrib-group>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case_4(self):
+        """
+        invalid @contrib-type in  contrib
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <contrib-group>
+                            <contrib contrib-type="unknow">
+                              <name>
+                                <surname>Arrighi</surname>
+                                <given-names>Laurence</given-names>
+                              </name>
+                            </contrib>
+                          </contrib-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case_5(self):
+        """
+        valid contrib without @contrib-type
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <contrib-group>
+                            <contrib>
+                              <name>
+                                <surname>Arrighi</surname>
+                                <given-names>Laurence</given-names>
+                              </name>
+                            </contrib>
+                          </contrib-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+
 class ContribGroupTests(PhaseBasedTestCase):
     """Tests for //name element.
     """
