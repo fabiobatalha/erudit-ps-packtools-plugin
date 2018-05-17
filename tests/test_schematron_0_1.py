@@ -2751,3 +2751,122 @@ class TransTitleTests(PhaseBasedTestCase):
         sample = io.BytesIO(sample.encode('utf-8'))
 
         self.assertTrue(self._run_validation(sample))
+
+
+class XrefRidTests(PhaseBasedTestCase):
+    """Tests for //xref[@rid]
+    """
+    sch_phase = 'phase.rid_integrity'
+
+    def test_mismatching_rid(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <contrib-group>
+                            <contrib>
+                              <xref ref-type="aff" rid="aff1">
+                                <sup>I</sup>
+                              </xref>
+                            </contrib>
+                          </contrib-group>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_matching_rid(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <contrib-group>
+                            <contrib>
+                              <xref ref-type="aff" rid="aff1">
+                                <sup>I</sup>
+                              </xref>
+                            </contrib>
+                          </contrib-group>
+                          <aff id="aff1">
+                            <label>I</label>
+                            <institution content-type="orgname">
+                              Secretaria Municipal de Saude de Belo Horizonte
+                            </institution>
+                            <addr-line>
+                              <named-content content-type="city">Belo Horizonte</named-content>
+                              <named-content content-type="state">MG</named-content>
+                            </addr-line>
+                            <country>Brasil</country>
+                            <institution content-type="original">
+                              Secretaria Municipal de Saude de Belo Horizonte. Belo Horizonte, MG, Brasil
+                            </institution>
+                          </aff>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_mismatching_reftype(self):
+        sample = u"""<article>
+                      <body>
+                        <sec>
+                          <table-wrap id="t01">
+                          </table-wrap>
+                        </sec>
+                        <sec>
+                          <p>
+                            <xref ref-type="aff" rid="t01">table 1</xref>
+                          </p>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
+class XrefRefTypeTests(PhaseBasedTestCase):
+    """Tests for //xref[@ref-type]
+    """
+    sch_phase = 'phase.xref_reftype_integrity'
+
+    def test_allowed_ref_types(self):
+        for reftype in ['aff', 'app', 'author-notes', 'bibr', 'contrib',
+                        'corresp', 'disp-formula', 'fig', 'fn', 'sec',
+                        'supplementary-material', 'table', 'table-fn',
+                        'boxed-text']:
+            sample = u"""<article>
+                          <body>
+                            <sec>
+                              <p>
+                                <xref ref-type="%s">foo</xref>
+                              </p>
+                            </sec>
+                          </body>
+                        </article>
+                     """ % reftype
+            sample = io.BytesIO(sample.encode('utf-8'))
+
+            self.assertTrue(self._run_validation(sample))
+
+    def test_disallowed_ref_types(self):
+        for reftype in ['chem', 'kwd', 'list', 'other', 'plate'
+                        'scheme', 'statement']:
+            sample = u"""<article>
+                          <body>
+                            <sec>
+                              <p>
+                                <xref ref-type="%s">foo</xref>
+                              </p>
+                            </sec>
+                          </body>
+                        </article>
+                     """ % reftype
+            sample = io.BytesIO(sample.encode('utf-8'))
+
+            self.assertFalse(self._run_validation(sample))

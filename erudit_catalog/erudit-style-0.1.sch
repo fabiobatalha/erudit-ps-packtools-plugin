@@ -102,10 +102,6 @@ code for more information.
     <active pattern="pub-id_doi_value"/>
   </phase>
 
-  <phase id="phase.chapter-title">
-    <active pattern="xref-reftype-integrity-app"/>
-  </phase>
-
   <phase id="phase.app">
     <active pattern="app_has_id"/>
   </phase>
@@ -219,6 +215,14 @@ code for more information.
     <active pattern="collab_must_have_named-content_notempty"/>
   </phase>
 
+  <phase id="phase.xref_reftype_integrity">
+    <active pattern="xref-reftype-values"/>
+  </phase>
+
+  <phase id="phase.rid_integrity">
+    <active pattern="xref-reftype-integrity-aff"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -239,7 +243,7 @@ code for more information.
     </rule>
   </pattern>
 
-  <pattern id="assert-not-empty" abstract="true" xmlns="http://purl.oclc.org/dsdl/schematron">
+  <pattern abstract="true" id="assert-not-empty" xmlns="http://purl.oclc.org/dsdl/schematron">
     <title>
       Check if the element's text is at least one character long.
     </title>
@@ -254,6 +258,108 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern abstract="true" id="xref-reftype-integrity-base">
+    <title>
+      Make sure all references to are reachable.
+    </title>
+
+    <rule context="//xref[@ref-type='$ref_type']">
+      <assert test="@rid = $ref_elements">
+        Element '<name/>', attribute rid: Mismatching id value '<value-of select="@rid"/>' of type '<value-of select="@ref-type"/>'.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern is-a="xref-reftype-integrity-base" id="xref-reftype-integrity-aff">
+    <param name="ref_type" value="aff"/>
+    <param name="ref_elements" value="//aff/@id"/>
+  </pattern>
+
+  <pattern is-a="xref-reftype-integrity-base" id="xref-reftype-integrity-app">
+    <param name="ref_type" value="app"/>
+    <param name="ref_elements" value="//app/@id"/>
+  </pattern>
+
+  <pattern is-a="xref-reftype-integrity-base" id="xref-reftype-integrity-author-notes">
+    <param name="ref_type" value="author-notes"/>
+    <param name="ref_elements" value="//author-notes/@id"/>
+  </pattern>
+
+  <pattern is-a="xref-reftype-integrity-base" id="xref-reftype-integrity-bibr">
+    <param name="ref_type" value="bibr"/>
+    <param name="ref_elements" value="//ref/@id | //element-citation/@id | //mixed-citation/@id"/>
+  </pattern>
+
+  <pattern is-a="xref-reftype-integrity-base" id="xref-reftype-integrity-contrib">
+    <param name="ref_type" value="contrib"/>
+    <param name="ref_elements" value="//contrib/@id"/>
+  </pattern>
+
+  <pattern is-a="xref-reftype-integrity-base" id="xref-reftype-integrity-corresp">
+    <param name="ref_type" value="corresp"/>
+    <param name="ref_elements" value="//corresp/@id"/>
+  </pattern>
+
+  <pattern is-a="xref-reftype-integrity-base" id="xref-reftype-integrity-disp-formula">
+    <param name="ref_type" value="disp-formula"/>
+    <param name="ref_elements" value="//disp-formula/@id"/>
+  </pattern>
+
+  <pattern is-a="xref-reftype-integrity-base" id="xref-reftype-integrity-fig">
+    <param name="ref_type" value="fig"/>
+    <param name="ref_elements" value="//fig/@id | //fig-group/@id"/>
+  </pattern>
+
+  <pattern is-a="xref-reftype-integrity-base" id="xref-reftype-integrity-fn">
+    <param name="ref_type" value="fn"/>
+    <param name="ref_elements" value="//fn/@id"/>
+  </pattern>
+
+  <pattern is-a="xref-reftype-integrity-base" id="xref-reftype-integrity-sec">
+    <param name="ref_type" value="sec"/>
+    <param name="ref_elements" value="//sec/@id"/>
+  </pattern>
+
+  <pattern is-a="xref-reftype-integrity-base" id="xref-reftype-integrity-supplementary-material">
+    <param name="ref_type" value="supplementary-material"/>
+    <param name="ref_elements" value="//supplementary-material/@id"/>
+  </pattern>
+
+  <pattern is-a="xref-reftype-integrity-base" id="xref-reftype-integrity-table">
+    <param name="ref_type" value="table"/>
+    <param name="ref_elements" value="//table-wrap/@id | //table-wrap-group/@id"/>
+  </pattern>
+
+  <pattern is-a="xref-reftype-integrity-base" id="xref-reftype-integrity-table-fn">
+    <param name="ref_type" value="table-fn"/>
+    <param name="ref_elements" value="//table-wrap-foot/fn/@id"/>
+  </pattern>
+
+  <pattern id="xref-reftype-values">
+    <title>
+      Validate the ref-type value against a list.
+    </title>
+
+    <rule context="//xref[@ref-type]">
+      <assert test="@ref-type = 'aff' or
+                    @ref-type = 'app' or
+                    @ref-type = 'author-notes' or
+                    @ref-type = 'bibr' or 
+                    @ref-type = 'contrib' or
+                    @ref-type = 'corresp' or
+                    @ref-type = 'disp-formula' or
+                    @ref-type = 'fig' or 
+                    @ref-type = 'fn' or
+                    @ref-type = 'sec' or
+                    @ref-type = 'supplementary-material' or
+                    @ref-type = 'table' or
+                    @ref-type = 'table-fn' or
+                    @ref-type = 'boxed-text'">
+        Element 'xref', attribute ref-type: Invalid value "<value-of select="@ref-type"/>".
+      </assert>
+    </rule>
+  </pattern>
 
   <pattern id="collab_must_have_named-content">
     <title>
@@ -1019,25 +1125,5 @@ code for more information.
     </rule>
   </pattern>
 
-  <!--
-    XREFS CHECK
-  -->
-
-  <pattern abstract="true" id="xref-reftype-integrity-base">
-    <title>
-      Make sure all references to are reachable.
-    </title>
-
-    <rule context="//xref[@ref-type='$ref_type']">
-      <assert test="@rid = $ref_elements">
-        Element '<name/>', attribute rid: Mismatching id value '<value-of select="@rid"/>' of type '<value-of select="@ref-type"/>'.
-      </assert>
-    </rule>
-  </pattern>
-
-  <pattern id="xref-reftype-integrity-app" is-a="xref-reftype-integrity-base">
-    <param name="ref_type" value="app"/>
-    <param name="ref_elements" value="//app/@id"/>
-  </pattern>
 </schema>
 
