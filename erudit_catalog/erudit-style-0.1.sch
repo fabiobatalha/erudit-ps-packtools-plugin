@@ -214,6 +214,11 @@ code for more information.
     <active pattern="contrib-id_avoid_url_in_value"/>
   </phase>
 
+  <phase id="phase.collab">
+    <active pattern="collab_must_have_named-content"/>
+    <active pattern="collab_must_have_named-content_notempty"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -249,6 +254,24 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="collab_must_have_named-content">
+    <title>
+      collab elements must have a named-content with @content-type=name.
+    </title>
+
+    <rule context="//collab">
+      <assert test="named-content[@content-type='name']">
+          Element 'collab': Missing Element named-content with @content-type=name.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="collab_must_have_named-content_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="//collab/named-content"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
 
   <pattern id="contrib-id_must_have_contrib-id-type">
     <title>

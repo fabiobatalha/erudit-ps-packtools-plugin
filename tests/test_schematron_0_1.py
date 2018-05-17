@@ -32,6 +32,55 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class CollabTests(PhaseBasedTestCase):
+    """Tests for //contrib-id element.
+    """
+    sch_phase = 'phase.collab'
+
+    def test_case_1(self):
+        """
+        valid minimum collab
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <contrib-group>
+                          <contrib contrib-type="group">
+                            <collab>
+                              <named-content content-type="name">The Mouse Fenome Sequening Consortium</named-content>
+                            </collab>
+                          </contrib>
+                        </contrib-group>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case_2(self):
+        """
+        invalid minimum collab with empty named-content
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <contrib-group>
+                          <contrib contrib-type="group">
+                            <collab>
+                              <named-content content-type="name"></named-content>
+                            </collab>
+                          </contrib>
+                        </contrib-group>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
 class ContribIdTests(PhaseBasedTestCase):
     """Tests for //contrib-id element.
     """
