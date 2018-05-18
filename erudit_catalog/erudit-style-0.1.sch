@@ -223,6 +223,11 @@ code for more information.
     <active pattern="xref-reftype-integrity-aff"/>
   </phase>
 
+  <phase id="phase.aff">
+    <active pattern="aff_must_have_id"/>
+    <active pattern="aff_must_have_institution_with_content-type_orgname"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -255,10 +260,6 @@ code for more information.
     </rule>
   </pattern>
 
-  <!--
-    Patterns - sets of rules.
-  -->
-
   <pattern abstract="true" id="xref-reftype-integrity-base">
     <title>
       Make sure all references to are reachable.
@@ -267,6 +268,33 @@ code for more information.
     <rule context="//xref[@ref-type='$ref_type']">
       <assert test="@rid = $ref_elements">
         Element '<name/>', attribute rid: Mismatching id value '<value-of select="@rid"/>' of type '<value-of select="@ref-type"/>'.
+      </assert>
+    </rule>
+  </pattern>
+
+  <!--
+    Patterns - sets of rules.
+  -->
+  <pattern id="aff_must_have_id">
+    <title>
+      aff elements must have attribute id.
+    </title>
+
+    <rule context="//aff">
+      <assert test="@id">
+          Element 'aff': Missing Attribute @id.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="aff_must_have_institution_with_content-type_orgname">
+    <title>
+      aff elements must have a institution with @content-type=orgname.
+    </title>
+
+    <rule context="//aff">
+      <assert test="institution[@content-type='orgname']">
+          Element 'aff': Missing Element institution with @content-type=orgname.
       </assert>
     </rule>
   </pattern>

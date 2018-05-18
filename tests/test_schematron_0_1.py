@@ -32,6 +32,100 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class AffTests(PhaseBasedTestCase):
+    """Tests for //contrib-id element.
+    """
+    sch_phase = 'phase.aff'
+
+    def test_case_1(self):
+        """
+        valid minimum aff
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <aff id="aff01">
+                          <institution content-type="orgname">German Primate Center GmbH</institution>
+                        </aff>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case_1(self):
+        """
+        invalid aff without @id
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <aff>
+                          <institution content-type="orgname">German Primate Center GmbH</institution>
+                        </aff>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case_3(self):
+        """
+        invalid aff without institution content-type=orgname
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <aff id="aff01">
+                        </aff>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case_4(self):
+        """
+        invalid aff without institution content-type=orgname
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <aff id="aff01">
+                          <institution>German Primate Center GmbH</institution>
+                        </aff>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case_5(self):
+        """
+        invalid aff without institution content-type=orgname
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <aff id="aff01">
+                          <institution content-type="orgdiv1">Division 1</institution>
+                        </aff>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
 class CollabTests(PhaseBasedTestCase):
     """Tests for //contrib-id element.
     """
