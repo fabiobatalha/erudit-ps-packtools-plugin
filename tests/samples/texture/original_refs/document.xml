@@ -67,6 +67,9 @@
       </contrib-group>
       <aff id="aff1">
         <institution content-type="orgname">Université de Moncton</institution>
+        <country country="CA">Canada</country>
+        <state>NB</state>
+        <city>Moncton</city>
       </aff>
       <pub-date pub-type="epub-ppub">
         <day>30</day>
