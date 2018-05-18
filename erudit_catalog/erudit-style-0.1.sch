@@ -228,6 +228,11 @@ code for more information.
     <active pattern="aff_must_have_institution_with_content-type_orgname"/>
   </phase>
 
+  <phase id="phase.institution">
+    <active pattern="institution_must_have_content-type"/>
+    <active pattern="institution_content-type_values"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -275,12 +280,40 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+  <pattern id="institution_content-type_values">
+    <title>
+      institution elements attribute content-type allowed values.
+    </title>
+
+    <rule context="article/front/article-meta/aff/institution[@content-type]">
+      <assert test="@content-type = 'orgname' or
+                    @content-type = 'orgdiv1' or
+                    @content-type = 'orgdiv2' or
+                    @content-type = 'orgdiv3' or
+                    @content-type = 'original'">
+        Element 'institution', attribute content-type: Invalid value "<value-of select="@content-type"/>".
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="institution_must_have_content-type">
+    <title>
+      institution elements must have attribute content-type.
+    </title>
+
+    <rule context="article/front/article-meta/aff/institution">
+      <assert test="@content-type">
+          Element 'institution': Missing Attribute @content-type.
+      </assert>
+    </rule>
+  </pattern>
+
   <pattern id="aff_must_have_id">
     <title>
       aff elements must have attribute id.
     </title>
 
-    <rule context="//aff">
+    <rule context="article/front/article-meta/aff">
       <assert test="@id">
           Element 'aff': Missing Attribute @id.
       </assert>
@@ -292,7 +325,7 @@ code for more information.
       aff elements must have a institution with @content-type=orgname.
     </title>
 
-    <rule context="//aff">
+    <rule context="article/front/article-meta//aff">
       <assert test="institution[@content-type='orgname']">
           Element 'aff': Missing Element institution with @content-type=orgname.
       </assert>

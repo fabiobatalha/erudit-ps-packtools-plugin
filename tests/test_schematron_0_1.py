@@ -32,6 +32,87 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class InstitutionTests(PhaseBasedTestCase):
+    """Tests for //contrib-id element.
+    """
+    sch_phase = 'phase.institution'
+
+    def test_case_1(self):
+        """
+        valid minimum institution
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <aff id="aff01">
+                          <institution content-type="orgname">German Primate Center GmbH</institution>
+                        </aff>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_case_2(self):
+        """
+        valid institution @content-type attribute values
+        """
+
+        for value in ['orgname', 'orgdiv1', 'orgdiv2', 'orgdiv3', 'original']:
+            sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <aff id="aff01">
+                            <institution content-type="%s">German Primate Center GmbH</institution>
+                          </aff>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """ % value
+            sample = io.BytesIO(sample.encode('utf-8'))
+
+            self.assertTrue(self._run_validation(sample))
+
+    def test_case_3(self):
+        """
+        invalid institution missing @content-type attribute
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <front>
+                      <article-meta>
+                        <aff id="aff01">
+                          <institution>German Primate Center GmbH</institution>
+                        </aff>
+                      </article-meta>
+                    </front>
+                  </article>
+               """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_case_4(self):
+        """
+        invalid institution @content-type attribute value invalid
+        """
+
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <front>
+                    <article-meta>
+                      <aff id="aff01">
+                        <institution content-type="xxx">German Primate Center GmbH</institution>
+                      </aff>
+                    </article-meta>
+                  </front>
+                </article>
+             """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class AffTests(PhaseBasedTestCase):
     """Tests for //contrib-id element.
     """
@@ -55,7 +136,7 @@ class AffTests(PhaseBasedTestCase):
 
         self.assertTrue(self._run_validation(sample))
 
-    def test_case_1(self):
+    def test_case_2(self):
         """
         invalid aff without @id
         """
