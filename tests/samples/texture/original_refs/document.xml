@@ -71,7 +71,12 @@
         <state>NB</state>
         <city>Moncton</city>
       </aff>
-      <pub-date pub-type="epub-ppub">
+      <pub-date publication-format="epub-ppub" date-type="pub">
+        <day>30</day>
+        <month>12</month>
+        <year>2013</year>
+      </pub-date>
+      <pub-date date-type="issue">
         <day>30</day>
         <month>12</month>
         <year>2013</year>

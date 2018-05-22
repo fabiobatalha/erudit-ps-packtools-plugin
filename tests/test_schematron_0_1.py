@@ -1811,13 +1811,16 @@ class PubDateTests(PhaseBasedTestCase):
     """
     sch_phase = 'phase.pub-date'
 
-    def test_pub_type_absent(self):
+    def test_date_type_absent(self):
         sample = u"""<article>
                       <front>
                         <article-meta>
-                          <pub-date>
+                          <pub-date publication-format="epub">
                             <day>17</day>
                             <month>03</month>
+                            <year>2014</year>
+                          </pub-date>
+                          <pub-date date-type="issue">
                             <year>2014</year>
                           </pub-date>
                         </article-meta>
@@ -1833,9 +1836,12 @@ class PubDateTests(PhaseBasedTestCase):
             sample = u"""<article>
                           <front>
                             <article-meta>
-                              <pub-date pub-type="%s">
+                              <pub-date publication-format="%s" date-type="pub">
                                 <day>17</day>
                                 <month>03</month>
+                                <year>2014</year>
+                              </pub-date>
+                             <pub-date date-type="issue">
                                 <year>2014</year>
                               </pub-date>
                             </article-meta>
@@ -1846,13 +1852,80 @@ class PubDateTests(PhaseBasedTestCase):
 
             self.assertTrue(self._run_validation(sample))
 
-    def test_pub_type_disallowed_value(self):
+    def test_date_type_disallowed_value(self):
         sample = u"""<article>
                       <front>
                         <article-meta>
-                          <pub-date pub-type="wtf">
+                          <pub-date publication-format="epub" date-type="xxx">
                             <day>17</day>
                             <month>03</month>
+                            <year>2014</year>
+                          </pub-date>
+                          <pub-date date-type="issue">
+                            <year>2014</year>
+                          </pub-date>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_pub_type_not_available(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_publication_format_disallowed_value(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <pub-date publication-format="xxx" date-type="pub">
+                            <day>17</day>
+                            <month>03</month>
+                            <year>2014</year>
+                          </pub-date>
+                          <pub-date date-type="issue">
+                            <year>2014</year>
+                          </pub-date>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_date_type_issue_not_available(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <pub-date publication-format="epub" date-type="pub">
+                            <day>17</day>
+                            <month>03</month>
+                            <year>2014</year>
+                          </pub-date>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_date_type_pub_not_available(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <pub-date date-type="issue">
                             <year>2014</year>
                           </pub-date>
                         </article-meta>

@@ -129,7 +129,12 @@ code for more information.
   </phase>
 
   <phase id="phase.pub-date">
-    <active pattern="pub-date_pub_type"/>
+    <active pattern="pub-date_publication_format"/>
+    <active pattern="pub-date_date_type"/>
+    <active pattern="pub-date_must_have_date-type"/>
+    <active pattern="pub-date_with_date-type_equal_pub_must_have_publication-format"/>
+    <active pattern="pub-date_must_have_date-type_pub"/>
+    <active pattern="pub-date_must_have_date-type_issue"/>
   </phase>
 
   <phase id="phase.month">
@@ -831,15 +836,76 @@ code for more information.
     <param name="element" value="month"/>
   </pattern>
 
-  <pattern id="pub-date_pub_type">
+  <pattern id="pub-date_must_have_date-type_pub">
     <title>
-      Restrict the valid values of pub-date[@pub-type].
+      Element pub-date must have one occurrence with @pub-type=pub.
+    </title>
+
+    <rule context="article/front/article-meta">
+      <assert test="pub-date[@date-type='pub']">
+          Element 'article-meta': Expected element pub-date with attribute date-type=pub.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="pub-date_must_have_date-type_issue">
+    <title>
+      Element pub-date must have one occurrence with pub-type=issue.
+    </title>
+
+    <rule context="article/front/article-meta">
+      <assert test="pub-date[@date-type='issue']">
+          Element 'article-meta': Expected element pub-date with attribute date-type=issue.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="pub-date_with_date-type_equal_pub_must_have_publication-format">
+    <title>
+      pub-date elements with attribute date-type=pub must have attribute publication-format.
+    </title>
+
+    <rule context="article/front/article-meta/pub-date[@date-type='pub']">
+      <assert test="@publication-format">
+          Element 'pub-date': Missing Attribute @publication-format.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="pub-date_must_have_date-type">
+    <title>
+      pub-date elements must have attribute date-type.
     </title>
 
     <rule context="article/front/article-meta/pub-date">
-      <assert test="@pub-type = 'epub' or
-                    @pub-type = 'epub-ppub'">
-        Element 'pub-date', attribute pub-type: Invalid value "<value-of select="@pub-type"/>".
+      <assert test="@date-type">
+          Element 'pub-date': Missing Attribute @date-type.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="pub-date_publication_format">
+    <title>
+      Restrict the valid values of pub-date[@publication-format].
+    </title>
+
+    <rule context="article/front/article-meta/pub-date[@date-type='pub']">
+      <assert test="@publication-format = 'epub' or
+                    @publication-format = 'epub-ppub'">
+        Element 'pub-date', attribute publication-format: Invalid value "<value-of select="@publication-format"/>".
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="pub-date_date_type">
+    <title>
+      Restrict the valid values of pub-date[@date-type]. They are all the suggested values in JATS 1.1 plus the value "issue" requested by Érudit PS.
+    </title>
+
+    <rule context="article/front/article-meta/pub-date">
+      <assert test="@date-type = 'pub' or
+                    @date-type = 'issue'">
+        Element 'pub-date', attribute date-type: Invalid value "<value-of select="@date-type"/>".
       </assert>
     </rule>
   </pattern>
