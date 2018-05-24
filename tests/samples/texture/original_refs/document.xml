@@ -22,8 +22,15 @@
     <article-meta>
       <article-id pub-id-type="publisher-id">1031001ar</article-id>
       <article-id pub-id-type="doi">10.7202/1031001ar</article-id>
+      <article-categories>
+        <subj-group>
+          <subject>Articles</subject>
+        </subj-group>
+      </article-categories>
       <title-group>
-        <article-title xml:lang="fr">De la préservation linguistique et nationale: la qualité de la langue de la jeunesse acadienne, un débat linguistique idéologique</article-title>
+        <article-title xml:lang="fr">
+          De la préservation linguistique et nationale: la qualité de la langue de la jeunesse acadienne, un débat linguistique idéologique
+        </article-title>
       </title-group>
       <contrib-group content-type="author">
         <contrib contrib-type="person">
@@ -51,6 +58,7 @@
           <email>albert@einstein.org</email>
           <role>researcher</role>
           <xref ref-type="aff" rid="aff1"/>
+          <on-behalf-of>Back to the Future Company</on-behalf-of>
         </contrib>
         <contrib contrib-type="group">
           <collab>
@@ -129,6 +137,12 @@
         <kwd>linguistic nationalism</kwd>
         <kwd>language ideology</kwd>
       </kwd-group>
+      <funding-group>
+        <award-group>
+          <funding-source>Funding Agency Name</funding-source>
+          <award-id>1234</award-id>
+        </award-group>
+      </funding-group>
     </article-meta>
   </front>
   <body>
