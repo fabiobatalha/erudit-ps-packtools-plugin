@@ -84,6 +84,12 @@
         <state>NB</state>
         <city>Moncton</city>
       </aff>
+      <author-notes>
+        <corresp id="c01"><bold>Correspondence:</bold> Address for correspondence <email>user@foo.com</email></corresp>
+        <fn fn-type="conflict">
+            <p>Conflict of interest: none</p>
+        </fn>
+      </author-notes>
       <pub-date publication-format="epub-ppub" date-type="pub">
         <day>30</day>
         <month>12</month>
