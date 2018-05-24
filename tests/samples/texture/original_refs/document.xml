@@ -143,6 +143,10 @@
           <award-id>1234</award-id>
         </award-group>
       </funding-group>
+      <counts>
+        <ref-count count="76"/>
+        <page-count count="34"/>
+      </counts>
     </article-meta>
   </front>
   <body>
