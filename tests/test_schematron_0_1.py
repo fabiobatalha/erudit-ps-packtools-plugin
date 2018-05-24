@@ -32,6 +32,386 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class CountsTests(PhaseBasedTestCase):
+    """Tests for article/front/article-meta/counts elements.
+    """
+    sch_phase = 'phase.counts'
+
+    def test_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <fpage>0</fpage>
+                          <lpage>0</lpage>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_table_is_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <counts>
+                            <ref-count count="0"/>
+                            <fig-count count="0"/>
+                            <equation-count count="0"/>
+                            <page-count count="0"/>
+                          </counts>
+                          <fpage>0</fpage>
+                          <lpage>0</lpage>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_ref_is_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <counts>
+                            <table-count count="0"/>
+                            <fig-count count="0"/>
+                            <equation-count count="0"/>
+                            <page-count count="0"/>
+                          </counts>
+                          <fpage>0</fpage>
+                          <lpage>0</lpage>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_fig_is_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <counts>
+                            <table-count count="0"/>
+                            <ref-count count="0"/>
+                            <equation-count count="0"/>
+                            <page-count count="0"/>
+                          </counts>
+                          <fpage>0</fpage>
+                          <lpage>0</lpage>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_equation_is_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <counts>
+                            <table-count count="0"/>
+                            <ref-count count="0"/>
+                            <fig-count count="0"/>
+                            <page-count count="0"/>
+                          </counts>
+                          <fpage>0</fpage>
+                          <lpage>0</lpage>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_page_is_absent(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <counts>
+                            <table-count count="0"/>
+                            <ref-count count="0"/>
+                            <fig-count count="0"/>
+                            <equation-count count="0"/>
+                          </counts>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_tables(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <counts>
+                            <table-count count="1"/>
+                            <ref-count count="0"/>
+                            <fig-count count="0"/>
+                            <equation-count count="0"/>
+                            <page-count count="0"/>
+                          </counts>
+                          <fpage>0</fpage>
+                          <lpage>0</lpage>
+                        </article-meta>
+                      </front>
+                      <body>
+                        <sec>
+                          <p>
+                            <table-wrap>
+                              <table frame="hsides" rules="groups">
+                                <colgroup width="25%"><col/><col/><col/><col/></colgroup>
+                                <thead>
+                                  <tr>
+                                    <th style="font-weight:normal" align="left">Modelo</th>
+                                    <th style="font-weight:normal">Estrutura</th>
+                                    <th style="font-weight:normal">Processos</th>
+                                    <th style="font-weight:normal">Resultados</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td valign="top">SIPA<sup>1,2</sup></td>
+                                    <td valign="top">Urgência e hospitalar.</td>
+                                    <td valign="top">Realiza triagem para fragilidade.</td>
+                                    <td valign="top">Maior gasto comunitário, menor gasto.</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </table-wrap>
+                          </p>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_tables_as_graphic(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <counts>
+                            <table-count count="1"/>
+                            <ref-count count="0"/>
+                            <fig-count count="0"/>
+                            <equation-count count="0"/>
+                            <page-count count="0"/>
+                          </counts>
+                          <fpage>0</fpage>
+                          <lpage>0</lpage>
+                        </article-meta>
+                      </front>
+                      <body>
+                        <sec>
+                          <p>
+                            <table-wrap id="t01">
+                              <graphic mimetype="image"
+                                       xlink:href="1414-431X-bjmbr-1414-431X20142875-gt001">
+                              </graphic>
+                            </table-wrap>
+                          </p>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_ref(self):
+        sample = u"""<article>
+                      <front>
+                        <article-meta>
+                          <counts>
+                            <table-count count="0"/>
+                            <ref-count count="1"/>
+                            <fig-count count="0"/>
+                            <equation-count count="0"/>
+                            <page-count count="0"/>
+                          </counts>
+                          <fpage>0</fpage>
+                          <lpage>0</lpage>
+                        </article-meta>
+                      </front>
+                      <back>
+                        <ref-list>
+                          <title>REFERÊNCIAS</title>
+                          <ref id="B1">
+                            <label>1</label>
+                            <mixed-citation>
+                              Béland F, Bergman H, Lebel P, Clarfield AM, Tousignant P, ...
+                            </mixed-citation>
+                          </ref>
+                        </ref-list>
+                      </back>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_fig(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <counts>
+                            <table-count count="0"/>
+                            <ref-count count="0"/>
+                            <fig-count count="1"/>
+                            <equation-count count="0"/>
+                            <page-count count="0"/>
+                          </counts>
+                          <fpage>0</fpage>
+                          <lpage>0</lpage>
+                        </article-meta>
+                      </front>
+                      <body>
+                        <sec>
+                          <p>
+                            <fig id="f01">
+                              <label>Figura 1</label>
+                              <caption>
+                                <title>Modelo das cinco etapas da pesquisa translacional.</title>
+                              </caption>
+                              <graphic xlink:href="0034-8910-rsp-48-2-0347-gf01"/>
+                            </fig>
+                          </p>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_equation(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <counts>
+                            <table-count count="0"/>
+                            <ref-count count="0"/>
+                            <fig-count count="0"/>
+                            <equation-count count="1"/>
+                            <page-count count="0"/>
+                          </counts>
+                          <fpage>0</fpage>
+                          <lpage>0</lpage>
+                        </article-meta>
+                      </front>
+                      <body>
+                        <sec>
+                          <disp-formula>
+                            <tex-math id="M1">
+                            </tex-math>
+                          </disp-formula>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_page(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <counts>
+                            <table-count count="0"/>
+                            <ref-count count="0"/>
+                            <fig-count count="0"/>
+                            <equation-count count="0"/>
+                            <page-count count="11"/>
+                          </counts>
+                          <fpage>140</fpage>
+                          <lpage>150</lpage>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_page_wrong_count(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <counts>
+                            <table-count count="0"/>
+                            <ref-count count="0"/>
+                            <fig-count count="0"/>
+                            <equation-count count="0"/>
+                            <page-count count="50"/>
+                          </counts>
+                          <fpage>140</fpage>
+                          <lpage>150</lpage>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_non_digit_pages(self):
+        """Non-digit page interval cannot be checked automatically.
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <counts>
+                            <table-count count="0"/>
+                            <ref-count count="0"/>
+                            <fig-count count="0"/>
+                            <equation-count count="0"/>
+                            <page-count count="11"/>
+                          </counts>
+                          <fpage>A140</fpage>
+                          <lpage>A150</lpage>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_elocationid_pages(self):
+        """Electronic pagination cannot be checked automatically.
+        """
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <counts>
+                            <table-count count="0"/>
+                            <ref-count count="0"/>
+                            <fig-count count="0"/>
+                            <equation-count count="0"/>
+                            <page-count count="11"/>
+                          </counts>
+                          <elocation-id>A140</elocation-id>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+
 class InstitutionTests(PhaseBasedTestCase):
     """Tests for //contrib-id element.
     """
