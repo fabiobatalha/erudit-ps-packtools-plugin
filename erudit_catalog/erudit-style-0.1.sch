@@ -246,6 +246,17 @@ code for more information.
     <active pattern="counts_pages"/>
   </phase>
 
+  <phase id="phase.seclabel">
+    <active pattern="seclabel_has_once"/>
+    <active pattern="seclabel_notempty"/>
+  </phase>
+
+  <phase id="phase.fig">
+    <active pattern="fig_has_id"/>
+    <active pattern="fig_has_label"/>
+    <active pattern="fig_has_graphic"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -293,6 +304,39 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="fig_has_id">
+    <title>
+      fig elements must have attribute id.
+    </title>
+
+    <rule context="//fig">
+      <assert test="@id">
+          Element 'fig': Missing Attribute @id.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="fig_has_graphic" is-a="occurs_once">
+    <param name="base_context" value="//fig"/>
+    <param name="element" value="graphic"/>
+  </pattern>
+
+  <pattern id="fig_has_label" is-a="occurs_once">
+    <param name="base_context" value="//fig"/>
+    <param name="element" value="label"/>
+  </pattern>
+
+  <pattern id="seclabel_has_once" is-a="occurs_once">
+    <param name="base_context" value="//sec"/>
+    <param name="element" value="label"/>
+  </pattern>
+
+  <pattern id="seclabel_notempty" is-a="assert-not-empty">
+    <param name="base_context" value="//sec/label"/>
+    <param name="assert_expr" value="text()"/>
+    <param name="err_message" value="'Element cannot be empty.'"/>
+  </pattern>
 
   <pattern id="counts_tables">
     <title>

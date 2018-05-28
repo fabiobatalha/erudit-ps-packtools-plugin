@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 VERSION = '1.0'
 
 INSTALL_REQUIRES = [
-   'packtools>=2.4.0'
+ 'packtools>=2.4.0'
 ]
 
 setup(
@@ -28,5 +28,6 @@ setup(
     entry_points="""
     [packtools.catalog]
     packtools_catalog=erudit_catalog:catalog
+    packtools_checks=erudit_catalog.checks:StyleCheckingPipeline
     """,
 )

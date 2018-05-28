@@ -32,6 +32,154 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class FigTests(PhaseBasedTestCase):
+    """Tests for:
+      - article//fig
+    """
+    sch_phase = 'phase.fig'
+
+    def test_figure_valid(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <body>
+                        <sec>
+                          <title>Introduction</title>
+                          <p>
+                            <fig id="f1">
+                              <label>Fig 1</label>
+                              <caption>
+                                <title>Sample Figure Title</title>
+                                <p>Sample figure text</p>
+                              </caption>
+                              <graphic xlink:href="sample_figure.tiff"/>
+                            </fig>
+                          </p>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_figure_without_id(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <body>
+                        <sec>
+                          <title>Introduction</title>
+                          <p>
+                            <fig>
+                              <label>Fig 1</label>
+                              <caption>
+                                <title>Sample Figure Title</title>
+                                <p>Sample figure text</p>
+                              </caption>
+                              <graphic xlink:href="sample_figure.tiff"/>
+                            </fig>
+                          </p>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_figure_without_label(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <body>
+                        <sec>
+                          <title>Introduction</title>
+                          <p>
+                            <fig id="f1">
+                              <caption>
+                                <title>Sample Figure Title</title>
+                                <p>Sample figure text</p>
+                              </caption>
+                              <graphic xlink:href="sample_figure.tiff"/>
+                            </fig>
+                          </p>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_figure_without_graphic(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <body>
+                        <sec>
+                          <title>Introduction</title>
+                          <p>
+                            <fig id="f1">
+                              <label>Fig 1</label>
+                              <caption>
+                                <title>Sample Figure Title</title>
+                                <p>Sample figure text</p>
+                              </caption>
+                            </fig>
+                          </p>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
+class SecLabelTests(PhaseBasedTestCase):
+    """Tests for:
+      - article//sec/label
+    """
+    sch_phase = 'phase.seclabel'
+
+    def test_absent(self):
+        sample = u"""<article>
+                      <body>
+                        <sec>
+                          <title>Introduction</title>
+                          <p>Foo bar</p>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_has_label(self):
+        sample = u"""<article>
+                      <body>
+                        <sec>
+                          <label>1</label>
+                          <title>Introduction</title>
+                          <p>Foo bar</p>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_has_empty_label(self):
+        sample = u"""<article>
+                      <body>
+                        <sec>
+                          <label></label>
+                          <title>Introduction</title>
+                          <p>Foo bar</p>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class CountsTests(PhaseBasedTestCase):
     """Tests for article/front/article-meta/counts elements.
     """
