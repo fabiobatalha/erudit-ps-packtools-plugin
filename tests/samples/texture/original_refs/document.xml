@@ -156,8 +156,9 @@
         <copyright-statement>Tous droits réservés © Revue de l’Université de Moncton</copyright-statement>
         <copyright-year>2015</copyright-year>
         <copyright-holder>Revue de l’Université de Moncton</copyright-holder>
-        <license>
-          <license-p>Tous droits réservés © Revue de l’Université de Moncton, 2015</license-p>
+        <license license-type="open-access" xlink:href="http://creativecommons.org/licenses/by-nc-sa/4.0/" xml:lang="en">
+          <license-p>This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. <graphic xlink:href="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" />
+          </license-p>
         </license>
       </permissions>
       <abstract xml:lang="fr" abstract-type="summary">
