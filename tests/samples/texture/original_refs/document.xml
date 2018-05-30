@@ -13,6 +13,45 @@
         </trans-title-group>
         <abbrev-journal-title abbrev-type="erudit">RUM</abbrev-journal-title>
       </journal-title-group>
+      <contrib-group content-type="manager">
+        <contrib contrib-type="person">
+          <name>
+            <surname>Jolicoeur</surname>
+            <given-names>Serge</given-names>
+          </name>
+          <role>director</role>
+        </contrib>
+      </contrib-group>
+      <contrib-group content-type="editor">
+        <contrib contrib-type="person">
+          <name>
+            <surname>Léger</surname>
+            <given-names>Catherine</given-names>
+          </name>
+          <role>redacteur chef</role>
+        </contrib>
+        <contrib contrib-type="person">
+          <name>
+            <surname>LeBlanc</surname>
+            <given-names>Matthieu</given-names>
+          </name>
+          <role>redacteur chef</role>
+        </contrib>
+        <contrib contrib-type="person">
+          <name>
+            <surname>Arrighi</surname>
+            <given-names>Laurence</given-names>
+          </name>
+          <role>redacteur chef</role>
+        </contrib>
+        <contrib contrib-type="person">
+          <name>
+            <surname>Violette</surname>
+            <given-names>Isabelle</given-names>
+          </name>
+          <role>redacteur chef</role>
+        </contrib>
+      </contrib-group>
       <issn pub-type="epub">1712-2139</issn>
       <issn pub-type="ppub">0316-6368</issn>
       <publisher>
@@ -360,6 +399,7 @@
     </app-group>
     <fn-group>
       <fn id="fn1">
+        <label>1</label>
         <p>Ce débat n’est pas, loin s’en faut, spécifiquement acadien, ni même propre aux milieux minoritaires. Pour un exemple de son actualisation en France, voir Bentolina (1996, 2000), et pour une approche critique de celui-ci en ce même lieu, voir Moïse (2007). Pour le Québec, on peut consulter Vincent (2008). </p>
       </fn>
       <fn id="fn2">

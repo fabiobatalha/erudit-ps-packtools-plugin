@@ -164,7 +164,6 @@ code for more information.
 
   <phase id="phase.kwd-group">
     <active pattern="kwd-group_lang"/>
-    <active pattern="kwd-group_has_title"/>
     <active pattern="kwd-group_cannot_have_nested-kwd"/>
     <active pattern="kwd-group_cannot_have_compounded-kwd"/>
   </phase>
@@ -826,14 +825,6 @@ code for more information.
       <assert test="@xml:lang">
         Element 'kwd-group': Missing attribute xml:lang.
       </assert>  
-    </rule>
-  </pattern>
-
-  <pattern id="kwd-group_has_title">
-    <rule context="article/front/article-meta/kwd-group">
-      <assert test="title">
-        Element 'kwd-group': Missing elements title.
-      </assert>
     </rule>
   </pattern>
 

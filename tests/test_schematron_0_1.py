@@ -1756,22 +1756,6 @@ class KwdGroupTests(PhaseBasedTestCase):
 
         self.assertFalse(self._run_validation(sample))
 
-    def test_missing_title(self):
-        sample = u"""<article>
-                      <front>
-                        <article-meta>
-                          <kwd-group xml:lang="fr">
-                            <kwd>francophonie minoritaire canadienne</kwd>
-                            <kwd>qualité de la langue</kwd>
-                          </kwd-group>
-                        </article-meta>
-                      </front>
-                    </article>
-                 """
-        sample = io.BytesIO(sample.encode('utf-8'))
-
-        self.assertFalse(self._run_validation(sample))
-
     def test_single_occurence(self):
         sample = u"""<article>
                       <front>
