@@ -1123,6 +1123,30 @@ class ContribGroupTests(PhaseBasedTestCase):
 
             self.assertTrue(self._run_validation(sample))
 
+    def test_case_6(self):
+        """
+        valid @content-type in contrib-group in journal-meta
+        """
+        for data in ['manager', 'editor']:
+            sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <front>
+                          <journal-meta>
+                            <contrib-group content-type="%s">
+                              <contrib>
+                                <name>
+                                  <surname>Arrighi</surname>
+                                  <given-names>Laurence</given-names>
+                                </name>
+                              </contrib>
+                            </contrib-group>
+                          </journal-meta>
+                        </front>
+                      </article>
+                   """ % data
+            sample = io.BytesIO(sample.encode('utf-8'))
+
+            self.assertTrue(self._run_validation(sample))
+
     def test_case_2(self):
         """
         invalid @content-type in  contrib-group

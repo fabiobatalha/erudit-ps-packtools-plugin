@@ -195,7 +195,8 @@ code for more information.
   </phase>
 
   <phase id="phase.contrib-group">
-    <active pattern="contrib-group_content-type_values"/>
+    <active pattern="contrib-group_content-type_values_in_article-meta"/>
+    <active pattern="contrib-group_content-type_values_in_journal-meta"/>
     <active pattern="contrib-group_cannot_have_aff"/>
     <active pattern="contrib-group_cannot_have_aff-alternatives"/>
   </phase>
@@ -678,7 +679,19 @@ code for more information.
     </rule>
   </pattern>
 
-  <pattern id="contrib-group_content-type_values">
+  <pattern id="contrib-group_content-type_values_in_journal-meta">
+    <title>
+      Make sure @content-type in contrib-group accepts only JATS4M values.
+    </title>
+    <rule context="article/front/journal-meta/contrib-group[@content-type]">
+      <assert test="@content-type='manager' or 
+                    @content-type='editor'">
+        Element 'contrib-group', attribute content-type: Invalid value "<value-of select="@content-type"/>". 
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="contrib-group_content-type_values_in_article-meta">
     <title>
       Make sure @content-type in contrib-group accepts only JATS4M values.
     </title>
