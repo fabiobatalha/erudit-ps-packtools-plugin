@@ -257,6 +257,16 @@ code for more information.
     <active pattern="fig_has_graphic"/>
   </phase>
 
+  <phase id="phase.xhtml-table">
+    <active pattern="xhtml-table"/>
+  </phase>
+
+  <phase id="phase.table-wrap">
+    <active pattern="table-wrap_has_id"/>
+    <active pattern="table-wrap_has_label"/>
+    <active pattern="table-wrap_caption_has_title"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -304,6 +314,47 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="table-wrap_caption_has_title" is-a="occurs_once">
+    <param name="base_context" value="//table-wrap/caption"/>
+    <param name="element" value="title"/>
+  </pattern>
+
+  <pattern id="table-wrap_has_label" is-a="occurs_once">
+    <param name="base_context" value="//table-wrap"/>
+    <param name="element" value="label"/>
+  </pattern>
+
+  <pattern id="table-wrap_has_id">
+    <title>
+      table-wrap elements must have attribute id.
+    </title>
+
+    <rule context="//table-wrap">
+      <assert test="@id">
+          Element 'table-wrap': Missing Attribute @id.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="xhtml-table">
+    <title>
+      Tables should be fully tagged. tr elements are not supposed to be declared
+      at toplevel.
+    </title>
+
+    <rule context="//table">
+      <assert test="not(tr)">
+        Element 'table': Unexpected element tr.
+      </assert>
+      <assert test="not(tbody//th)">
+        Element 'table': Unexpected element th inside tbody.
+      </assert>
+      <assert test="not(thead//td)">
+        Element 'table': Unexpected element td inside thead.
+      </assert>
+    </rule>
+  </pattern>
 
   <pattern id="fig_has_id">
     <title>

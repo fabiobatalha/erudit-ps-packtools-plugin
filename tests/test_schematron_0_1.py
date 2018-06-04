@@ -32,6 +32,113 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class XHTMLTableTests(PhaseBasedTestCase):
+    """Tests for //table elements.
+    """
+    sch_phase = 'phase.xhtml-table'
+
+    def test_valid_toplevel(self):
+        for elem in ['caption', 'summary', 'col', 'colgroup', 'thead', 'tfoot', 'tbody']:
+
+            sample = u"""<article>
+                          <body>
+                            <sec>
+                              <p>
+                                <table>
+                                  <%s></%s>
+                                </table>
+                              </p>
+                            </sec>
+                          </body>
+                        </article>
+                     """ % (elem, elem)
+            sample = io.BytesIO(sample.encode('utf-8'))
+
+            self.assertTrue(self._run_validation(sample))
+
+    def test_invalid_toplevel(self):
+        for elem in ['tr']:
+
+            sample = u"""<article>
+                          <body>
+                            <sec>
+                              <p>
+                                <table>
+                                  <%s></%s>
+                                </table>
+                              </p>
+                            </sec>
+                          </body>
+                        </article>
+                     """ % (elem, elem)
+            sample = io.BytesIO(sample.encode('utf-8'))
+
+            self.assertFalse(self._run_validation(sample))
+
+    def test_tbody_upon_th(self):
+        sample = u"""<article>
+                      <body>
+                        <sec>
+                          <p>
+                            <table>
+                              <tbody>
+                                <tr>
+                                  <th>Foo</th>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </p>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_thead_upon_th(self):
+        sample = u"""<article>
+                      <body>
+                        <sec>
+                          <p>
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>Foo</th>
+                                </tr>
+                              </thead>
+                            </table>
+                          </p>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_thead_upon_td(self):
+        sample = u"""<article>
+                      <body>
+                        <sec>
+                          <p>
+                            <table>
+                              <thead>
+                                <tr>
+                                  <td>Foo</td>
+                                </tr>
+                              </thead>
+                            </table>
+                          </p>
+                        </sec>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class FigTests(PhaseBasedTestCase):
     """Tests for:
       - article//fig

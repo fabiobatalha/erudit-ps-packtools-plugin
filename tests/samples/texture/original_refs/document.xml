@@ -205,10 +205,15 @@
       <fig id="f1">
         <label>Fig 1</label>
         <caption>
-          <title>Sample Figure Title</title>
+          <title>Sample Figure with simple use license</title>
           <p>Sample figure text</p>
         </caption>
         <graphic xlink:href="sample_figure_1.png"/>
+        <permissions>
+          <license>
+            <license-p>Tous droits réservés © Revue de l’Université de Moncton, 2015</license-p>
+          </license>
+        </permissions>
       </fig>
       <p>Dans un premier temps, nous présentons les procédés argumentatifs dont se servent les différents contributeurs au débat pour assoir leur autorité et leur légitimité. Il s’agit de souligner au nom de qui et de quoi, de quelle valeur, vertu ou principe les débatteurs prennent la parole et s’attribuent une expertise sur la langue des jeunes. Dans un second temps, nous tâchons de démontrer que les logiques d’autorité et de légitimité en matière d’évaluation de la qualité de la langue sont largement tributaires du paradigme de l’État-nation dans lequel les idéologies de l’unilinguisme et du standard sont imbriquées. Cependant, avant d’entrer dans le cœur de l’analyse, nous présentons plus en détail le débat, notre corpus et l’approche critique qui a servi à son éclairage.</p>
       <p>Sample figure linking (<xref rid="f1" ref-type="fig">Figure 1</xref>)</p>
@@ -217,12 +222,43 @@
       <label>2</label>
       <title>Débat, corpus et approche critique</title>
       <p>Le discours sur l’avenir des nations présente ceci de commun avec le discours sur l’avenir des langues : il prend souvent la jeunesse comme horizon, comme porte-étendard et aussi corollairement comme bouc émissaire. La jeunesse serait particulièrement responsable de la dégradation de la langue, dégradation qui ne peut qu’entraîner la disparition du peuple dont l’existence même tiendrait à sa distinction linguistique (<xref rid="R47" ref-type="bibr">Klinkenberg, 2001</xref>). Cet ancien motif, <inline-graphic xlink:href="sample_inline_graphic.png" />sans cesse redéployé, reflue périodiquement. De ce fait, à la faveur de la parution d’une chronique sur la qualité de la langue de jeunes artistes acadiens évoquée en introduction, professeurs et autres « experts » entendent dénoncer la piètre qualité de langue dans les établissements d’enseignement acadiens (en l’occurrence essentiellement au niveau universitaire). Des citoyens en profitent pour tancer publiquement le manque de tenue linguistique de tel ou tel représentant de la jeune relève artistique. Par ailleurs, des porte-paroles de cette jeunesse expliquent pourquoi il est important de bien parler français. Tout cela se donne à lire dans les médias. Ainsi, de texte en texte, que le chroniqueur pose que les jeunes chanteurs acadiens et le reste de la jeunesse qui les adule feraient « plus de mal à la loi 101 que tous les allophones réfractaires » (<xref rid="R7" ref-type="bibr">Harel, le 24 octobre 2012</xref>), que le professeur argumente que « l’élite acadienne a le devoir de […] rappeler à l’ordre [les jeunes] quand ils […] font [du chiac] leur seul et unique mode de communication » (<xref rid="R20" ref-type="bibr">Villard, le 6 novembre 2012</xref>), que le citoyen dise son inquiétude sur la décrépitude de la langue actuelle, que le jeune<xref ref-type="fn" rid="fn4"/> rappelle à ses pairs que « le français est un trésor qu’il ne faut pas perdre de vue » (<xref rid="R12" ref-type="bibr">Morin, le 12 avril 2013</xref>), c’est bien la question d’un devoir collectif de sauvegarde de la qualité de la langue qui est en jeu. Si le devoir est collectif, chacun doit individuellement faire sa part.</p>
+      <fig id="f2">
+        <label>Fig 2</label>
+        <caption>
+          <title>Sample Figure with tagged copyright holder and year</title>
+          <p>Sample figure text</p>
+        </caption>
+        <graphic xlink:href="sample_figure_2.png"/>
+        <permissions>
+          <copyright-year>2015</copyright-year>
+          <copyright-holder>Revue de l’Université de Moncton</copyright-holder>
+          <license>
+            <license-p>Tous droits réservés © Revue de l’Université de Moncton, 2015</license-p>
+          </license>
+        </permissions>
+      </fig>
       <p>Ces textes présentent ainsi des parentés idéologiques et argumentatives fortes, et ce, au-delà des profils des participants, des formes de prises de parole choisies (chronique, lettre ouverte, entretien, etc.) et d’une certaine diversité de surface des propos. L’unité et la prédominance de ces discours au sein du débat sur la langue des jeunes francophones nous ont conduites à les rassembler sous forme de corpus. En raison cependant de la récurrence et de l’envergure du débat linguistique idéologique dont il est question, notre corpus ne peut être considéré comme ni exhaustif ni fermé. Puisqu’il existe maints prétextes pour critiquer la langue des jeunes<xref ref-type="fn" rid="fn5"/>, il importe de souligner que cet ensemble de discours se prête difficilement à une délimitation dont les paramètres temporels et matériels seraient clairement identifiables. Aux fins de notre analyse, nous nous sommes arrêtées aux productions discursives qui traitent de la qualité de la langue des jeunes en Acadie entre octobre 2012 et mai 2013, telles qu’exprimées sur différentes plateformes médiatiques acadiennes et québécoises. Accessoirement, et pour montrer que le débat déborde ce cadre établi, nous avons également eu recours à des textes publiés antérieurement qui s’inscrivent dans les mêmes termes. Notre corpus regroupe une cinquantaine de textes, parmi lesquels une vingtaine sont cités (voir la bibliographie). </p>
       <p>Nous proposons d’appréhender ces productions discursives à partir d’une approche sociolinguistique critique qui consiste à cerner les rapports sociaux de pouvoir inscrits dans la pratique de la langue, et ce, afin d’en détailler les mécanismes de fonctionnement et de reproduction (<xref rid="R39" ref-type="bibr">Heller, 2002</xref>). Ce qui frappe dans notre corpus, c’est l’assurance avec laquelle les débatteurs s’arrogent un pouvoir de jugement et de sanction. Nous nous sommes interrogées sur ce qui rend leurs discours admissibles et recevables au sein de l’espace public nonobstant l’importante violence symbolique dont nombre d’entre eux font preuve. Alors que les catégorisations basées sur l’ethnie, la race et la classe sont généralement problématisées comme antidémocratiques dans le contexte de la modernité avancée, celles basées sur la langue demeurent largement mobilisées et acceptées comme façon de qualifier des groupes et des individus (Cameron, 1995). Le courant d’analyse des idéologies linguistiques, issu de la tradition anthropologique américaine (<xref rid="R48" ref-type="bibr">Kroskrity, Schieffelin et Woolard, 1992</xref>; Woolard, 1992, 1998; <xref rid="R61" ref-type="bibr">Woolard et Schieffelin, 1994</xref>), se veut complémentaire à l’approche critique en montrant justement que les croyances et les convictions entretenues à l’égard de la langue sont intimement liées à des enjeux politiques et socioéconomiques plus larges : « Ideologies of language are therefore not about language alone, but are always socially situated and tied to questions of identity and power in societies » (<xref ref-type="bibr" rid="R29">Blackledge, 2000, p. 27</xref>). Les idéologies linguistiques fonctionnent comme un cadre de référence commun qui se manifeste sous la forme de présupposés implicites et qui oriente, souvent de manière inconsciente, les prises de position et leurs interprétations partagées. Elles concourent ainsi à reproduire un certain ordre social et moral en naturalisant et en normalisant des liens entre, d’une part, des pratiques linguistiques et, d’autre part, des attributs politiques (ethnicité, nationalité, citoyenneté) ou des qualités individuelles (authenticité, loyauté, intelligence) : </p>
       <disp-quote>
         <p>Rather, they [language ideologies] envision and enact ties of language to identity, to aesthetics, to morality, and to epistemology. Through such linkages, they underpin not only linguistic form and use but also the very notion of the person and the social group, as well as such fundamental social institutions as religious ritual, child socialization, gender relations, the nation-state, schooling, and law. (Woolard, 1998, p. 3).</p>
       </disp-quote>
       <p>Suivant cette approche sociolinguistique critique, notre ambition est de montrer que c’est la concordance des discours sur la qualité de la langue des jeunes aux discours sur l’avenir de la communauté acadienne qui procure aux premiers leur bien-fondé assurant leur déploiement et leur réception. Il est donc utile de préciser que notre objectif d’analyse est moins de proposer une lecture thématique du corpus (par exemple, en catégorisant les types de jugements énoncés sur la langue des jeunes) que de cerner les mécanismes discursifs formels et idéologiques par lesquels les discours gagnent en autorité et en légitimité.</p>
+      <fig id="f3">
+        <label>Fig 3</label>
+        <caption>
+          <title>Sample Figure with tagged copyright holder, year and statement</title>
+          <p>Sample figure text</p>
+        </caption>
+        <graphic xlink:href="sample_figure_3.png"/>
+        <permissions>
+          <copyright-statement>Tous droits réservés © Revue de l’Université de Moncton</copyright-statement>
+          <copyright-year>2015</copyright-year>
+          <copyright-holder>Revue de l’Université de Moncton</copyright-holder>
+          <license>
+            <license-p>Tous droits réservés © Revue de l’Université de Moncton, 2015</license-p>
+          </license>
+        </permissions>
+      </fig>
     </sec>
     <sec>
       <label>3</label>
@@ -237,6 +273,23 @@
         <label>3.1</label>
         <title>Construire son ethos à partir de son vécu</title>
         <p>Nombre de participants avancent un ou plusieurs éléments de leur vécu (une longue expérience, un fait ponctuel considéré comme révélateur, une anecdote tenue pour significative), qui leur permettent de tenir un discours informé sur l’état de la langue et, plus précisément, sur les raisons qui expliquent cet état de fait, les risques encourus faute de réaction prompte et efficace ainsi que les pistes de solution à explorer. Dans notre corpus, le participant type produit généralement cet effet en prenant la peine, dans son texte, de fournir des commentaires sur sa personne (bâtie autour de ses motivations, de sa raison de prendre part au débat, du fait qu’il exerce une profession qui convient à la situation, de son expérience directe de la situation). Texte après texte, nous assistons à une sorte de mise en scène discursive de soi, une construction de l’ethos, considérée dès la rhétorique ancienne comme ce qui permet au locuteur de susciter l’adhésion de l’auditoire (Amossy, 1999; Charaudeau, 2005). Cette présentation de soi pose certaines qualités et dit une certaine expérience qui concourt à conférer autorité et expertise au participant au débat. Nous verrons ci-dessous (voir section 2.3) l’appel à l’expérience professionnelle. Pour bien traduire cette construction de l’ethos qui donne au discours tout son poids, nous aurons recours à une des meilleures illustrations de notre corpus dans le long développement que propose une étudiante au sein d’un article intitulé « La Francophonie : un trésor à protéger » (<xref rid="R12" ref-type="bibr">Morin, le 12 avril 2013</xref>). Publié dans un cahier spécial du quotidien <italic>L’Acadie Nouvelle</italic> dédié au jeune lectorat, l’article tout entier est le récit d’expériences qui ont ouvert les yeux de l’auteure sur les conséquences de comportements linguistiques jugés laxistes de la part des francophones. Sur le respect sans faille et la primauté absolue qu’il faut donner au français, elle confesse qu’elle n’a « pas toujours été aussi éveillée sur le sujet » (<xref rid="R12" ref-type="bibr">Morin, le 12 avril 2013</xref>). Ce n’est que suite à une série d’expériences qu’elle a réalisé « qu’il faudrait peut-être que nous soyons plus inquiets face au futur de la Francophonie dans notre province […,] [qu’]il était important de conserver notre culture […] [et qu’]il serait désastreux qu’elle disparaisse » (<xref rid="R12" ref-type="bibr">Morin, le 12 avril 2013</xref>)<xref ref-type="fn" rid="fn7"/>. Ici, l’appel à une expérience initiatique comme fondement de l’expertise constitue également une stratégie pour construire une image sympathique susceptible de susciter l’assentiment des destinataires du discours, à savoir les autres jeunes. L’étudiante se met elle-même en défaut, atténuant ainsi l’impression de condescendance qui peut découler de son discours, tout en se gardant de s’inclure dans le groupe des « fautifs » ciblés, soit les élèves francophones qui s’expriment en anglais (elle fait référence à « un certain nombre de jeunes », à « certaines personnes »). En fait, elle avoue avoir été complice par passivité et, ce faisant, avoir péché par aveuglement. Bien qu’adoptant une position de surplomb, elle la consacre par la voie d’un éveil de conscience conçu comme étant accessible à tous<xref ref-type="fn" rid="fn8"/>. Cet exemple nous montre comment l’expérience donne autorité à la parole et comment elle constitue l’un des ingrédients du discours d’expertise. Plus encore, il souligne le fait que la construction de l’ethos à partir du vécu se greffe, dans le débat étudié, à un processus de conscientisation sociale, ce qui lui donne alors un poids moral. La faute est associée ici à un manque de fierté (« Pourquoi certaines personnes ne sont-elles pas fières de leur langue? ») et renvoie à un imaginaire collectif autour de ce qui constitue un « bon élève » en milieu minoritaire et, plus largement, comme nous le verrons dans la section 2.2, à la représentation du bon citoyen.</p>
+        <fig id="f4">
+          <label>Fig 4</label>
+          <caption>
+            <title>Sample Figure with tagged copyright holder, year, statement and Creative Commons usage license</title>
+            <p>Sample figure text</p>
+          </caption>
+          <graphic xlink:href="sample_figure_4.png"/>
+          <permissions>
+            <copyright-statement>Tous droits réservés © Revue de l’Université de Moncton</copyright-statement>
+            <copyright-year>2015</copyright-year>
+            <copyright-holder>Revue de l’Université de Moncton</copyright-holder>
+            <license license-type="open-access" xlink:href="http://creativecommons.org/licenses/by-nc-sa/4.0/" xml:lang="en">
+              <license-p>This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. <graphic xlink:href="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" />
+              </license-p>
+            </license>
+          </permissions>
+        </fig>
       </sec>
       <sec>
         <label>3.2</label>
@@ -279,6 +332,35 @@
       <label>4</label>
       <title>Du discours d’autorité à celui des valeurs: les fondements axiologiques du discours sur la qualité de la langue des jeunes</title>
       <p>Dans cette partie, il sera question d’apporter un éclairage explicatif sur le discours tenu à l’égard de la langue des jeunes en interrogeant les sources idéologiques de son autorité et de sa légitimité, à savoir ce qui le rend recevable, bien fondé et « vrai ». Comme il a précédemment été établi, ce discours s’appuie sur des stratégies discursives formelles qui investissent le champ de l’expertise et qui présentent plus particulièrement la langue comme étant une responsabilité citoyenne. Il importe désormais de montrer que cette conception de la langue en tant que bien collectif s’inscrit dans une construction idéologique tirée du nationalisme politique moderne qui tient langue, territoire, identité et culture comme étant « naturellement » imbriqués. Ce faisant, les formes et les usages de la langue sont directement pris comme baromètres de l’avenir et de la santé du groupe. Nous poserons tout d’abord le rôle central que joue la langue dans le nationalisme moderne pour ensuite souligner comment ces sous-entendus idéologiques s’actualisent dans le débat sur la qualité de la langue des jeunes à partir des motifs imbriqués de la « fierté » et du « mérite ».</p>
+      <table-wrap id="t1">
+        <label>Table 1</label>
+        <caption>
+          <title>Table as Table</title>
+        </caption>
+        <table>
+          <thead>
+            <tr>
+              <th>Column 1</th>
+              <th>Column 2</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Value 1.1</td>
+              <td>Value 1.2</td>
+            </tr>
+            <tr>
+              <td>Value 2.1</td>
+              <td>Value 2.2</td>
+            </tr>
+          </tbody>
+        </table>
+        <table-wrap-foot>
+          <fn id="tfn1">
+            <p>Table footnote 1</p>
+          </fn>
+        </table-wrap-foot>
+      </table-wrap>
       <sec>
         <label>4.1</label>
         <title>Du rôle de la langue dans la construction idéologique des États-nations</title>
@@ -299,6 +381,18 @@
           <p>Toujours est-il qu’il m’arrive d’imaginer que ces chansons que l’on entend même en France représentent l’avenir de la langue française au Canada. […] [C]haque fois que je débarque à Dorval et que j’entends les jeunes Québécois passer de l’anglais au français avec la même jubilation perverse, je me dis que ce créole pourrait représenter l’avenir du français chez nous. (<xref rid="R17" ref-type="bibr">Rioux, le 26 octobre 2012</xref>).</p>
         </disp-quote>
         <p>Le nationalisme est envisagé comme un combat pour maintenir le groupe pur, à l’abri des contaminations externes. Dans une logique où chaque individu a d’abord une langue à laquelle il doit fidélité et par laquelle s’expriment sa culture et son identité authentiques, les contacts de langues menacent la légitimité ethnonationale de la collectivité tout entière, d’où leur dimension problématique. Un taux élevé de mélange linguistique devient synonyme de faiblesse, de paresse envers « sa » langue et de trahison envers « son » groupe. Si la notion de pureté en termes ethniques et raciaux a été mise à mal dans la seconde moitié du 20e siècle en raison des dérives meurtrières auxquelles elle a présidé, elle demeure généralement acceptée sur le plan linguistique, notamment du fait que l’acquisition et la maîtrise d’une langue sont investies d’une aura démocratique et méritocratique. Le nationalisme moderne est en effet producteur d’un discours sur la fierté (Heller et Duchêne, <xref rid="R42" ref-type="bibr">2012</xref>) qui modèle une conscience nationale commune au cœur de laquelle se trouve la langue comme voie d’inclusion démocratique, et ce, alors même que la démocratie actuelle fait appel au devoir et à la responsabilité individuelle face aux chances égales qu’elle offre à tous les citoyens. Ainsi, le débat sur la qualité linguistique peut tout autant s’appuyer sur le motif de la fierté à brandir, laquelle est impérative pour être reconnu comme membre à part entière de la communauté, que sur celui du soin à apporter à la langue comme devoir individuel (selon l’idée qu’acquérir une langue « de qualité » est à la portée de tout citoyen méritant). Ces motifs agissent comme neutralisateurs des différences sociales entre citoyens d’une même nation en créant un sentiment commun d’investissement et d’appartenance.</p>
+        <table-wrap id="t2">
+          <label>Table 2</label>
+          <caption>
+            <title>Table as Image</title>
+          </caption>
+          <graphic xlink:href="sample_table_2_figure_1.png"/>
+          <table-wrap-foot>
+            <fn id="tfn2">
+              <p>Table footnote 2</p>
+            </fn>
+          </table-wrap-foot>
+        </table-wrap>
       </sec>
       <sec>
         <label>4.2</label>
