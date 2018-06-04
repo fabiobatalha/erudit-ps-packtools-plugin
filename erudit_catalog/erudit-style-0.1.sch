@@ -267,6 +267,10 @@ code for more information.
     <active pattern="table-wrap_caption_has_title"/>
   </phase>
 
+  <phase id="phase.caption">
+    <active pattern="caption_title"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -274,7 +278,7 @@ code for more information.
   <pattern abstract="true" id="occurs_once">
     <rule context="$base_context">
       <assert test="count($element) = 1">
-        Element '<name/>': There must be only one element <value-of select="name($element)"/>.
+        Element '<name/>': There must be one element <value-of select="name($element)"/>.
       </assert>
     </rule>
   </pattern>
@@ -314,6 +318,17 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+  <pattern id="caption_title">
+    <title>
+      Make sure all captions have a title element.
+    </title>
+
+    <rule context="//caption">
+      <assert test="title and string-length(title) > 0">
+        Element 'caption': Missing element title with content.
+      </assert>
+    </rule>
+  </pattern>
 
   <pattern id="table-wrap_caption_has_title" is-a="occurs_once">
     <param name="base_context" value="//table-wrap/caption"/>
