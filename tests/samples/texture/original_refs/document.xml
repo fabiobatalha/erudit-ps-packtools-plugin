@@ -104,9 +104,15 @@
             <contrib-group>
               <contrib>
                 <name>
-                  <surname>Colomb</surname>
-                  <given-names>Christophe</given-names>
+                  <surname>Fernandes Zarco</surname>
+                  <given-names>Salvador</given-names>
                 </name>
+                <name-alternatives>
+                  <name>
+                    <surname>Christophe</surname>
+                    <given-names>Colomb</given-names>
+                  </name>
+                </name-alternatives>
                 <xref ref-type="aff" rid="aff1"/>
               </contrib>
             </contrib-group>
