@@ -32,6 +32,38 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class ExtLinkTests(PhaseBasedTestCase):
+    """Tests for //ext-link
+    """
+    sch_phase = 'phase.ext-link'
+
+    def test_with_link(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <body>
+                        <p>
+                          <ext-link xlink:href="link" />
+                        </p>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_without_link(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <body>
+                        <p>
+                          <ext-link>http://</ext-link>
+                        </p>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class CaptionTests(PhaseBasedTestCase):
     """Tests for //caption
     """

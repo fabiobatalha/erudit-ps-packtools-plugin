@@ -271,6 +271,10 @@ code for more information.
     <active pattern="caption_title"/>
   </phase>
 
+  <phase id="phase.ext-link">
+    <active pattern="ext-link_has_xlinkhref"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -318,6 +322,15 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="ext-link_has_xlinkhref">
+    <rule context="//ext-link">
+      <assert test="@xlink:href">
+        Element 'ext-link': Missing attribute xlink:href.
+      </assert>
+    </rule>
+  </pattern>
+
   <pattern id="caption_title">
     <title>
       Make sure all captions have a title element.
