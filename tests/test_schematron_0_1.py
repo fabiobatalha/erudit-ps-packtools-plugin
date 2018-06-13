@@ -32,6 +32,279 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class TableWrapTests(PhaseBasedTestCase):
+    """Tests for //table-wrap
+    """
+    sch_phase = 'phase.table-wrap'
+
+    def test_empty(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <body>
+                        <p>
+                          <table-wrap>
+                          </table-wrap>
+                        </p>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_valid_with_table(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <body>
+                        <p>
+                          <table-wrap id="t5">
+                            <label>Table 5</label>
+                            <caption>
+                              <title>The values for suppliers</title>
+                            </caption>
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th rowspan="3">Proposed rage for 2018</th>
+                                </tr>
+                                <tr>
+                                  <th>Incoming in 12 months</th>
+                                  <th>Annexe I - Comercial</th>
+                                  <th>Annexe II - Industry</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>from $225,000.01 to $450,000.00</td>
+                                  <td>4.00%</td>
+                                  <td>4.50%</td>
+                                </tr>
+                                <tr>
+                                  <td>from $450,000.01 to $900,000.00</td>
+                                  <td>8.25%</td>
+                                  <td>8.00%</td>
+                                </tr>
+                                <tr>
+                                  <td>from $900.000,01 to $1.800.000,00</td>
+                                  <td>11.25%</td>
+                                  <td>12.25%</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <table-wrap-foot>
+                              <fn id="TFN1">
+                                 <p>the annexe 2 information is meaningfull</p>
+                              </fn>
+                            </table-wrap-foot>
+                          </table-wrap>
+                        </p>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_valid_with_graphic(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <body>
+                        <p>
+                          <table-wrap id="t5">
+                            <label>Table 5</label>
+                            <caption>
+                              <title>The values for suppliers</title>
+                            </caption>
+                            <graphic xlink:href="sample_table_2_figure_1.png"/>
+                            <table-wrap-foot>
+                              <fn id="TFN1">
+                                 <p>the annexe 2 information is meaningfull</p>
+                              </fn>
+                            </table-wrap-foot>
+                          </table-wrap>
+                        </p>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_invalid_without_label(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <body>
+                        <p>
+                          <table-wrap id="t5">
+                            <caption>
+                              <title>The values for suppliers</title>
+                            </caption>
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th rowspan="3">Proposed rage for 2018</th>
+                                </tr>
+                                <tr>
+                                  <th>Incoming in 12 months</th>
+                                  <th>Annexe I - Comercial</th>
+                                  <th>Annexe II - Industry</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>from $225,000.01 to $450,000.00</td>
+                                  <td>4.00%</td>
+                                  <td>4.50%</td>
+                                </tr>
+                                <tr>
+                                  <td>from $450,000.01 to $900,000.00</td>
+                                  <td>8.25%</td>
+                                  <td>8.00%</td>
+                                </tr>
+                                <tr>
+                                  <td>from $900.000,01 to $1.800.000,00</td>
+                                  <td>11.25%</td>
+                                  <td>12.25%</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <table-wrap-foot>
+                              <fn id="TFN1">
+                                 <p>the annexe 2 information is meaningfull</p>
+                              </fn>
+                            </table-wrap-foot>
+                          </table-wrap>
+                        </p>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_invalid_without_id(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <body>
+                        <p>
+                          <table-wrap>
+                            <label>Table 5</label>
+                            <caption>
+                              <title>The values for suppliers</title>
+                            </caption>
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th rowspan="3">Proposed rage for 2018</th>
+                                </tr>
+                                <tr>
+                                  <th>Incoming in 12 months</th>
+                                  <th>Annexe I - Comercial</th>
+                                  <th>Annexe II - Industry</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>from $225,000.01 to $450,000.00</td>
+                                  <td>4.00%</td>
+                                  <td>4.50%</td>
+                                </tr>
+                                <tr>
+                                  <td>from $450,000.01 to $900,000.00</td>
+                                  <td>8.25%</td>
+                                  <td>8.00%</td>
+                                </tr>
+                                <tr>
+                                  <td>from $900.000,01 to $1.800.000,00</td>
+                                  <td>11.25%</td>
+                                  <td>12.25%</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <table-wrap-foot>
+                              <fn id="TFN1">
+                                 <p>the annexe 2 information is meaningfull</p>
+                              </fn>
+                            </table-wrap-foot>
+                          </table-wrap>
+                        </p>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_invalid_caption_without_title(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <body>
+                        <p>
+                          <table-wrap id="t5">
+                            <label>Table 5</label>
+                            <caption>
+                            </caption>
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th rowspan="3">Proposed rage for 2018</th>
+                                </tr>
+                                <tr>
+                                  <th>Incoming in 12 months</th>
+                                  <th>Annexe I - Comercial</th>
+                                  <th>Annexe II - Industry</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>from $225,000.01 to $450,000.00</td>
+                                  <td>4.00%</td>
+                                  <td>4.50%</td>
+                                </tr>
+                                <tr>
+                                  <td>from $450,000.01 to $900,000.00</td>
+                                  <td>8.25%</td>
+                                  <td>8.00%</td>
+                                </tr>
+                                <tr>
+                                  <td>from $900.000,01 to $1.800.000,00</td>
+                                  <td>11.25%</td>
+                                  <td>12.25%</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <table-wrap-foot>
+                              <fn id="TFN1">
+                                 <p>the annexe 2 information is meaningfull</p>
+                              </fn>
+                            </table-wrap-foot>
+                          </table-wrap>
+                        </p>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+    def test_invalid_without_one_of_table_graphic(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <body>
+                        <p>
+                          <table-wrap id="t5">
+                            <label>Table 5</label>
+                            <caption>
+                              <title>The values for suppliers</title>
+                            </caption>
+                            <table-wrap-foot>
+                              <fn id="TFN1">
+                                 <p>the annexe 2 information is meaningfull</p>
+                              </fn>
+                            </table-wrap-foot>
+                          </table-wrap>
+                        </p>
+                      </body>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class ExtLinkTests(PhaseBasedTestCase):
     """Tests for //ext-link
     """
