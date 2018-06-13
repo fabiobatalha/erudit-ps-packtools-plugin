@@ -265,6 +265,7 @@ code for more information.
     <active pattern="table-wrap_has_id"/>
     <active pattern="table-wrap_has_label"/>
     <active pattern="table-wrap_caption_has_title"/>
+    <active pattern="table-wrap_has_one_of_table_or_graphic"/>
   </phase>
 
   <phase id="phase.caption">
@@ -322,6 +323,19 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="table-wrap_has_one_of_table_or_graphic">
+    <title>
+      - Make sure name, etal and collab are not child of element-citation.
+      - element-citation can be only child of ref elements.
+    </title>
+
+    <rule context="//table-wrap">
+      <assert test="table or graphic">
+        Element 'table-wrap': Must have one of table or graphic elements.
+      </assert>
+    </rule>
+  </pattern>
 
   <pattern id="ext-link_has_xlinkhref">
     <rule context="//ext-link">
