@@ -32,6 +32,42 @@ class PhaseBasedTestCase(unittest.TestCase):
         return schematron.validate(etree.parse(sample))
 
 
+class IssueTitleTests(PhaseBasedTestCase):
+    """Tests for article/front/article-meta/issue-title
+    """
+    sch_phase = 'phase.issue-title'
+
+    def test_valid(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <issue-title xml:lang="en">
+                            Issue Title or Theme
+                          </issue-title>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_invalid_without_lang(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <issue-title>
+                            Issue Title or Theme
+                          </issue-title>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class TableWrapTests(PhaseBasedTestCase):
     """Tests for //table-wrap
     """
