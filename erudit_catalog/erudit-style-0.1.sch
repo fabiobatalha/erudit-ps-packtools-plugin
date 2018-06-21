@@ -276,6 +276,10 @@ code for more information.
     <active pattern="ext-link_has_xlinkhref"/>
   </phase>
 
+  <phase id="phase.issue-title">
+    <active pattern="issue-title_has_lang"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -323,6 +327,14 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="issue-title_has_lang">
+    <rule context="article/front/article-meta/issue-title">
+      <assert test="@xml:lang">
+        Element 'issue-title': Missing attribute xml:lang.
+      </assert>
+    </rule>
+  </pattern>
 
   <pattern id="table-wrap_has_one_of_table_or_graphic">
     <title>
