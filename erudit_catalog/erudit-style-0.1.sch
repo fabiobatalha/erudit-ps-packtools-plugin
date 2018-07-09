@@ -280,6 +280,11 @@ code for more information.
     <active pattern="issue-title_has_lang"/>
   </phase>
 
+  <phase id="phase.list">
+    <active pattern="list_attributes"/>
+    <active pattern="list_list-type-values"/>
+  </phase>
+
   <!--
     Abstract Patterns
   -->
@@ -327,6 +332,35 @@ code for more information.
   <!--
     Patterns - sets of rules.
   -->
+
+  <pattern id="list_attributes">
+    <title>
+      Make sure some attributes are present
+    </title>
+
+    <rule context="//list">
+      <assert test="@list-type">
+        Element 'list': Missing attribute list-type.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="list_list-type-values">
+    <title>
+      Allowed values for list/@list-type
+    </title>
+
+    <rule context="//list[@list-type]">
+      <assert test="@list-type = 'order' or
+                    @list-type = 'bullet' or
+                    @list-type = 'alpha' or
+                    @list-type = 'roman' or
+                    @list-type = 'simple'">
+        Element 'list', attribute list-type: Invalid value '<value-of select="@list-type"/>'.
+      </assert>
+    </rule>
+  </pattern>
+
 
   <pattern id="issue-title_has_lang">
     <rule context="article/front/article-meta/issue-title">
