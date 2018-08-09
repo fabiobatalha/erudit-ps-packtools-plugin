@@ -3,7 +3,11 @@ from setuptools import setup, find_packages
 VERSION = '1.0'
 
 INSTALL_REQUIRES = [
- 'packtools>=2.4.0'
+    'packtools'
+]
+
+DEPENDENCY_LINKS = [
+    'git+https://github.com/scieloorg/packtools.git#egg=packtools'
 ]
 
 setup(
@@ -25,6 +29,7 @@ setup(
     ],
     test_suite='tests',
     install_requires=INSTALL_REQUIRES,
+    dependency_links=DEPENDENCY_LINKS,
     entry_points="""
     [packtools.catalog]
     packtools_catalog=erudit_catalog:catalog
