@@ -10,6 +10,7 @@ DEPENDENCY_LINKS = [
     'git+https://github.com/scieloorg/packtools.git#egg=packtools'
 ]
 
+
 setup(
     name='EruditCatalog',
     version=VERSION,
