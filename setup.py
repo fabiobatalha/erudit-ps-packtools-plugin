@@ -3,6 +3,7 @@ from setuptools import setup, find_packages
 VERSION = '1.0'
 
 INSTALL_REQUIRES = [
+    'packtools>=2.4.1'
 ]
 
 DEPENDENCY_LINKS = [
