@@ -3,11 +3,11 @@ from setuptools import setup, find_packages
 VERSION = '1.0'
 
 INSTALL_REQUIRES = [
-    'packtools>=2.4.1'
+    'packtools'
 ]
 
 DEPENDENCY_LINKS = [
-    'git+https://github.com/scieloorg/packtools.git#egg=packtools-master'
+    'git+https://github.com/scieloorg/packtools.git#egg=packtools'
 ]
 
 
