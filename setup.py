@@ -7,7 +7,7 @@ INSTALL_REQUIRES = [
 ]
 
 DEPENDENCY_LINKS = [
-    'git+https://github.com/scieloorg/packtools.git#egg=packtools'
+    'git+https://github.com/scieloorg/packtools.git#egg=packtools-master'
 ]
 
 
