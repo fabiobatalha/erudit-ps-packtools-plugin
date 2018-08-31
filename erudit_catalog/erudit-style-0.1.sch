@@ -264,7 +264,6 @@ code for more information.
   <phase id="phase.table-wrap">
     <active pattern="table-wrap_has_id"/>
     <active pattern="table-wrap_has_label"/>
-    <active pattern="table-wrap_caption_has_title"/>
     <active pattern="table-wrap_has_one_of_table_or_graphic"/>
   </phase>
 
@@ -385,11 +384,6 @@ code for more information.
         Element 'ext-link': Missing attribute xlink:href.
       </assert>
     </rule>
-  </pattern>
-
-  <pattern id="table-wrap_caption_has_title" is-a="occurs_once">
-    <param name="base_context" value="//table-wrap/caption"/>
-    <param name="element" value="title"/>
   </pattern>
 
   <pattern id="table-wrap_has_label" is-a="occurs_once">
