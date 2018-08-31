@@ -268,10 +268,6 @@ code for more information.
     <active pattern="table-wrap_has_one_of_table_or_graphic"/>
   </phase>
 
-  <phase id="phase.caption">
-    <active pattern="caption_title"/>
-  </phase>
-
   <phase id="phase.ext-link">
     <active pattern="ext-link_has_xlinkhref"/>
   </phase>
@@ -387,18 +383,6 @@ code for more information.
     <rule context="//ext-link">
       <assert test="@xlink:href">
         Element 'ext-link': Missing attribute xlink:href.
-      </assert>
-    </rule>
-  </pattern>
-
-  <pattern id="caption_title">
-    <title>
-      Make sure all captions have a title element.
-    </title>
-
-    <rule context="//caption">
-      <assert test="title and string-length(title) > 0">
-        Element 'caption': Missing element title with content.
       </assert>
     </rule>
   </pattern>

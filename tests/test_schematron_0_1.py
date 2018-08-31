@@ -554,25 +554,6 @@ class CaptionTests(PhaseBasedTestCase):
 
         self.assertTrue(self._run_validation(sample))
 
-    def test_without_title(self):
-        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
-                      <body>
-                        <fig id="f03">
-                          <label>Figura 3</label>
-                          <caption>
-                            <label>
-                              Percentual de atividade mitocondrial.
-                            </label>
-                          </caption>
-                          <graphic xlink:href="1234-5678-rctb-45-05-0110-gf01.tif"/>
-                        </fig>
-                      </body>
-                    </article>
-                 """
-        sample = io.BytesIO(sample.encode('utf-8'))
-
-        self.assertFalse(self._run_validation(sample))
-
     def test_with_title_and_more(self):
         sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
                       <body>
