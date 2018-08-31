@@ -168,10 +168,6 @@ code for more information.
     <active pattern="kwd-group_cannot_have_compounded-kwd"/>
   </phase>
 
-  <phase id="phase.kwd">
-    <active pattern="kwd_notempty"/>
-  </phase>
-
   <phase id="phase.abstract">
     <active pattern="abstract_lang"/>
     <active pattern="abstract_has_p_or_sec"/>
@@ -916,12 +912,6 @@ code for more information.
     </rule>
   </pattern>
 
-  <pattern id="kwd_notempty" is-a="assert-not-empty">
-    <param name="base_context" value="article/front/article-meta/kwd-group/kwd"/>
-    <param name="assert_expr" value="text()"/>
-    <param name="err_message" value="'Element cannot be empty.'"/>
-  </pattern>
-
   <pattern id="kwd-group_cannot_have_nested-kwd">
     <title>
       kwd-group elements cannot have the element nested-kwd.
@@ -1264,11 +1254,6 @@ code for more information.
     <rule context="article/front/journal-meta/journal-title-group">
       <assert test="journal-title">
         Element 'journal-title-group': Missing element journal-title.
-      </assert>
-    </rule>
-    <rule context="article/front/journal-meta/journal-title-group/journal-title">
-      <assert test="@xml:lang">
-        Element 'jounrl-title': Missing attribute xml:lang.
       </assert>
     </rule>
   </pattern>
