@@ -447,6 +447,38 @@ class TableWrapTests(PhaseBasedTestCase):
         self.assertFalse(self._run_validation(sample))
 
 
+class SelfURITests(PhaseBasedTestCase):
+    """Tests for //self-uri
+    """
+    sch_phase = 'phase.self-uri'
+
+    def test_with_link(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <self-uri xlink:href="link" />
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertTrue(self._run_validation(sample))
+
+    def test_without_link(self):
+        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <front>
+                        <article-meta>
+                          <self-uri>http://</self-uri>
+                        </article-meta>
+                      </front>
+                    </article>
+                 """
+        sample = io.BytesIO(sample.encode('utf-8'))
+
+        self.assertFalse(self._run_validation(sample))
+
+
 class ExtLinkTests(PhaseBasedTestCase):
     """Tests for //ext-link
     """

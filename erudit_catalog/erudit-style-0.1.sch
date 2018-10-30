@@ -263,6 +263,10 @@ code for more information.
     <active pattern="table-wrap_has_one_of_table_or_graphic"/>
   </phase>
 
+  <phase id="phase.self-uri">
+    <active pattern="self-uri_has_xlinkhref"/>
+  </phase>
+
   <phase id="phase.ext-link">
     <active pattern="ext-link_has_xlinkhref"/>
   </phase>
@@ -370,6 +374,14 @@ code for more information.
     <rule context="//table-wrap">
       <assert test="table or graphic">
         Element 'table-wrap': Must have one of table or graphic elements.
+      </assert>
+    </rule>
+  </pattern>
+
+  <pattern id="self-uri_has_xlinkhref">
+    <rule context="//self-uri">
+      <assert test="@xlink:href">
+        Element 'self-uri': Missing attribute xlink:href.
       </assert>
     </rule>
   </pattern>
