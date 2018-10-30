@@ -143,8 +143,7 @@ code for more information.
     <active pattern="month_cardinality_article-meta"/>
   </phase>
 
-  <phase id="phase.fpage_or_elocation-id">
-    <active pattern="fpage_or_elocation-id"/>
+  <phase id="phase.pages">
     <active pattern="fpage_notempty"/>
     <active pattern="lpage_notempty"/>
     <active pattern="elocation-id_notempty"/>
@@ -1026,14 +1025,6 @@ code for more information.
                     @date-type = 'review-requested' or
                     @date-type = 'review-received'">
         Element 'date', attribute date-type: Invalid value "<value-of select="@date-type"/>".
-      </assert>
-    </rule>
-  </pattern>
-
-  <pattern id="fpage_or_elocation-id">
-    <rule context="article/front/article-meta">
-      <assert test="fpage or elocation-id">
-        Element 'article-meta': Missing elements fpage or elocation-id.
       </assert>
     </rule>
   </pattern>

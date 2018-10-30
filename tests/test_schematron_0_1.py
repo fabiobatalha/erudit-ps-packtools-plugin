@@ -2724,7 +2724,7 @@ class HistoryTests(PhaseBasedTestCase):
 class fpage_OR_elocationTests(PhaseBasedTestCase):
     """Tests for article/front/article-meta/fpage or elocation-id elements.
     """
-    sch_phase = 'phase.fpage_or_elocation-id'
+    sch_phase = 'phase.pages'
 
     def test_case1(self):
         """
@@ -2780,23 +2780,6 @@ class fpage_OR_elocationTests(PhaseBasedTestCase):
         sample = io.BytesIO(sample.encode('utf-8'))
 
         self.assertTrue(self._run_validation(sample))
-
-    def test_case4(self):
-        """
-        fpage is False
-        elocation-id is False
-        fpage v elocation-id is False
-        """
-        sample = u"""<article>
-                      <front>
-                        <article-meta>
-                        </article-meta>
-                      </front>
-                    </article>
-                 """
-        sample = io.BytesIO(sample.encode('utf-8'))
-
-        self.assertFalse(self._run_validation(sample))
 
     def test_empty_fpage(self):
         sample = u"""<article>
