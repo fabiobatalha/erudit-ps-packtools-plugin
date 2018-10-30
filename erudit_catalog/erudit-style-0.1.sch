@@ -179,7 +179,6 @@ code for more information.
 
   <phase id="phase.permissions">
     <active pattern="permissions_must_exists"/>
-    <active pattern="permissions_has_license"/>
   </phase>
 
   <phase id="phase.name">
@@ -849,18 +848,6 @@ code for more information.
     <param name="base_context" value="//given-names"/>
     <param name="assert_expr" value="text()"/>
     <param name="err_message" value="'Element cannot be empty.'"/>
-  </pattern>
-
-  <pattern id="permissions_has_license">
-    <title>
-      Make sure all permissions element must have license.
-    </title>
-
-    <rule context="//permissions">
-      <assert test="license">
-        Element 'permissions': Missing element license.
-      </assert>  
-    </rule>
   </pattern>
 
   <pattern id="permissions_must_exists">

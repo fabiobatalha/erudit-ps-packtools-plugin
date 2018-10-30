@@ -2019,21 +2019,6 @@ class PermissionsTests(PhaseBasedTestCase):
 
         self.assertFalse(self._run_validation(sample))
 
-    def test_missing_license(self):
-        sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
-                      <front>
-                        <article-meta>
-                          <permissions>
-                          </permissions>
-                        </article-meta>
-                      </front>
-                    </article>
-                 """
-        sample = io.BytesIO(sample.encode('utf-8'))
-
-        self.assertFalse(self._run_validation(sample))
-
-
     def test_permissions_within_elements_of_the_body(self):
         sample = u"""<article xmlns:xlink="http://www.w3.org/1999/xlink">
                       <front>
