@@ -133,7 +133,6 @@ code for more information.
     <active pattern="pub-date_date_type"/>
     <active pattern="pub-date_must_have_date-type"/>
     <active pattern="pub-date_with_date-type_equal_pub_must_have_publication-format"/>
-    <active pattern="pub-date_must_have_date-type_pub"/>
     <active pattern="pub-date_must_have_date-type_collection"/>
   </phase>
 
@@ -1054,18 +1053,6 @@ code for more information.
   <pattern id="month_cardinality_article-meta" is-a="occurs_zero_or_once">
     <param name="base_context" value="article/front/article-meta/pub-date"/>
     <param name="element" value="month"/>
-  </pattern>
-
-  <pattern id="pub-date_must_have_date-type_pub">
-    <title>
-      Element pub-date must have one occurrence with @pub-type=pub.
-    </title>
-
-    <rule context="article/front/article-meta">
-      <assert test="pub-date[@date-type='pub']">
-          Element 'article-meta': Expected element pub-date with attribute date-type=pub.
-      </assert>
-    </rule>
   </pattern>
 
   <pattern id="pub-date_must_have_date-type_collection">
