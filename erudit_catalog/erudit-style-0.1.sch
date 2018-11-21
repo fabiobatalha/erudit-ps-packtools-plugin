@@ -1055,6 +1055,24 @@ code for more information.
     <param name="element" value="month"/>
   </pattern>
 
+  <pattern id="pub-date_with_date-type_pub_must_have_day_month_year">
+    <title>
+      Element pub-date must have one occurrence with pub-type=collection.
+    </title>
+
+    <rule context="article/front/article-meta/pub-date[@date-type='pub']">
+      <assert test="day">
+          Element 'pub-date' with @date-type='pub': Expected element day.
+      </assert>
+      <assert test="month">
+          Element 'pub-date' with @date-type='pub': Expected element month.
+      </assert>
+      <assert test="year">
+          Element 'pub-date' with @date-type='pub': Expected element year.
+      </assert>
+    </rule>
+  </pattern>
+
   <pattern id="pub-date_must_have_date-type_collection">
     <title>
       Element pub-date must have one occurrence with pub-type=collection.
