@@ -2953,7 +2953,7 @@ class PubDateTests(PhaseBasedTestCase):
         self.assertFalse(self._run_validation(sample))
 
     def test_pub_type_allowed_values(self):
-        for pub_type in ['epub', 'epub-ppub']:
+        for pub_type in ['epub', 'ppub']:
             sample = u"""<article>
                           <front>
                             <article-meta>
@@ -2962,7 +2962,7 @@ class PubDateTests(PhaseBasedTestCase):
                                 <month>03</month>
                                 <year>2014</year>
                               </pub-date>
-                             <pub-date date-type="issue">
+                              <pub-date date-type="collection">
                                 <year>2014</year>
                               </pub-date>
                             </article-meta>

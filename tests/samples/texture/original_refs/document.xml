@@ -134,13 +134,14 @@
             <p>Conflict of interest: none</p>
         </fn>
       </author-notes>
-      <pub-date publication-format="epub-ppub" date-type="pub">
+      <pub-date publication-format="epub" date-type="pub">
         <day>30</day>
         <month>12</month>
         <year>2013</year>
       </pub-date>
-      <pub-date date-type="issue">
-        <year>2013</year>
+      <pub-date date-type="collection">
+        <season>printemps</season>
+        <year>2012</year>
       </pub-date>
       <volume>44</volume>
       <issue>2</issue>

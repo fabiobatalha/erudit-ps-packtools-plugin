@@ -134,7 +134,7 @@ code for more information.
     <active pattern="pub-date_must_have_date-type"/>
     <active pattern="pub-date_with_date-type_equal_pub_must_have_publication-format"/>
     <active pattern="pub-date_must_have_date-type_pub"/>
-    <active pattern="pub-date_must_have_date-type_issue"/>
+    <active pattern="pub-date_must_have_date-type_collection"/>
   </phase>
 
   <phase id="phase.month">
@@ -1068,14 +1068,14 @@ code for more information.
     </rule>
   </pattern>
 
-  <pattern id="pub-date_must_have_date-type_issue">
+  <pattern id="pub-date_must_have_date-type_collection">
     <title>
-      Element pub-date must have one occurrence with pub-type=issue.
+      Element pub-date must have one occurrence with pub-type=collection.
     </title>
 
     <rule context="article/front/article-meta">
-      <assert test="pub-date[@date-type='issue']">
-          Element 'article-meta': Expected element pub-date with attribute date-type=issue.
+      <assert test="pub-date[@date-type='collection']">
+          Element 'article-meta': Expected element pub-date with attribute date-type=collection.
       </assert>
     </rule>
   </pattern>
@@ -1111,7 +1111,7 @@ code for more information.
 
     <rule context="article/front/article-meta/pub-date[@date-type='pub']">
       <assert test="@publication-format = 'epub' or
-                    @publication-format = 'epub-ppub'">
+                    @publication-format = 'ppub'">
         Element 'pub-date', attribute publication-format: Invalid value "<value-of select="@publication-format"/>".
       </assert>
     </rule>
@@ -1119,12 +1119,12 @@ code for more information.
 
   <pattern id="pub-date_date_type">
     <title>
-      Restrict the valid values of pub-date[@date-type]. They are all the suggested values in JATS 1.1 plus the value "issue" requested by Érudit PS.
+      Restrict the valid values of pub-date[@date-type]. They are all the suggested values in JATS 1.1 plus the value "collection" requested by Érudit PS.
     </title>
 
     <rule context="article/front/article-meta/pub-date">
       <assert test="@date-type = 'pub' or
-                    @date-type = 'issue'">
+                    @date-type = 'collection'">
         Element 'pub-date', attribute date-type: Invalid value "<value-of select="@date-type"/>".
       </assert>
     </rule>
